@@ -3,8 +3,8 @@
     android:id="@+id/toolAction"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/actionBarSize"
     android:background="@color/BackgroundForMyApp"
+    android:minHeight="?attr/actionBarSize"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 

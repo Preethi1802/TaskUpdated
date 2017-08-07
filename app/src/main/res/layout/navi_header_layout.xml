@@ -5,37 +5,38 @@
     android:background="@color/BackgroundForMyApp">
 
     <TextView
+        android:id="@+id/NaviHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_home_black_24dp"
-        android:id="@+id/NaviHead"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:drawableLeft="@drawable/ic_home_black_24dp" />
+
     <TextView
+        android:id="@+id/NaviHeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Home"
-        android:textColor="#fff"
-        android:textSize="20dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="22dp"
         android:layout_marginStart="22dp"
-        android:id="@+id/NaviHeaderText"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/NaviHead" />
+        android:layout_toRightOf="@+id/NaviHead"
+        android:text="@string/Home"
+        android:textColor="#fff"
+        android:textSize="20dp" />
 
     <ImageView
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        android:paddingRight="20dp"
-        android:src="@drawable/logo"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentTop="true"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/logo" />
 
 </RelativeLayout>
