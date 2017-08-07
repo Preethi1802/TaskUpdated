@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/offers"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Offers"></item>
+
+    <item android:id="@+id/electronics"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Electronics"></item>
+
+    <item android:id="@+id/fashion"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Fashion"></item>
+
+    <item android:id="@+id/mobile"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Mobiles"></item>
+
+    <item android:id="@+id/TV"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="TV"></item>
+
+    <item android:id="@+id/book"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Books"></item>
+
+    <item android:id="@+id/notify"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Notifications"></item>
+
+    <item android:id="@+id/rewards"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="rewards"></item>
+
+    <item android:id="@+id/settings"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Settings"></item>
+
+    <item android:id="@+id/wishlist"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Whislist"></item>
+
+
+
+</menu>

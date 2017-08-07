@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Task1</string>
+    <string name="title">Flipkart</string>
+    <string name="Offers">Offers</string>
+    <string name="Electronics">Electronics</string>
+    <string name="Home">Home</string>
+    <string name="Book">Book</string>
+    <string name="More">More</string>
+    <string name="RedmiNote">RedmiNote</string>
+    <string name="Tab_New">Tab_New</string>
+    <string name="Deals">Deals of the Day</string>
+    <string name="ViewButton">View All</string>
+    <string name="Deals2">Deals of the Day</string>
+    <string name="ViewButton2">View All</string>
+    <string name="iphone">Apple iPhone 4s</string>
+    <string name="s1_mob1">Lenova Vibe K5</string>
+    <string name="s1_mob2">Alcatel OneTouch XL</string>
+    <string name="s1_mob3">Apple iPhone</string>
+    <string name="s1_mob4">LG V20</string>
+    <string name="s2_toptext">Mobiles</string>
+    <string name="s2_sort">Sort</string>
+    <string name="s2_filter">Filter</string>
+    <string name="Watch_text">Top Branded Watches</string>
+    <string name="Coolers_text">Rayban Glass</string>
+    <string name="Saree_text">Cotton Sarees</string>
+    <string name="Bag_text">Sling Bags</string>
+    <string name="AddToCart">Add To Cart</string>
+    <string name="BuyNow">Buy Now</string>
+
+    <string name="NoCostEmiMore">No Cost EMI &amp; more</string>
+    <string name="rs">\u20B9 10,799</string>
+    <string name="offer">70% off</string>
+
+
+    <string-array name="MobileName">
+        <item>"Lenova Vibe K5 3GB"</item>
+        <item>"Moto_E"</item>
+        <item>"iPhone s6"</item>
+        <item>"LG"</item>
+
+    </string-array>
+
+    <string-array name="Version">
+        <item>"model_s4"</item>
+        <item>"model_s1"</item>
+        <item>"NewVersion_s6"</item>
+        <item>"V20"</item>
+
+    </string-array>
+
+    <string-array name="mobilePrize">
+        <item>"\u20B9 7,499"</item>
+        <item>"\u20B9 8,099"</item>
+        <item>"\u20B9 10,599"</item>
+        <item>"\u20B9 6,999"</item>
+
+    </string-array>
+
+    <string-array name="mobileRating">
+        <item>"4.0"</item>
+        <item>"4.4"</item>
+        <item>"4.6"</item>
+        <item>"3.0"</item>
+    </string-array>
+
+    <string-array name="ratingInwords">
+        <item>"150 ratings &amp; 14 reviews"</item>
+        <item>"210 ratings &amp; 30 reviews"</item>
+        <item>"70 ratings &amp; 35 reviews"</item>
+        <item>"55 ratings &amp; 12 reviews"</item>
+    </string-array>
+
+
+
+    <string name="open">Open</string>
+    <string name="close">close</string>
+</resources>
