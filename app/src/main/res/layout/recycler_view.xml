@@ -6,7 +6,7 @@
     android:background="@drawable/image_border"
     android:orientation="vertical"
     android:paddingBottom="16dp"
-    tools:context="com.example.admin.task1.MobileProducts">
+    tools:context="com.example.admin.task1.ProductsActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

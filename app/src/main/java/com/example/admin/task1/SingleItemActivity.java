@@ -8,11 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class SingleItemDesc extends AppCompatActivity {
+public class SingleItemActivity extends AppCompatActivity {
 
-    private static final String TAG = "SingleItemDesc";
+    private static final String TAG = "SingleItemActivity";
 
     ImageView imageView, imageView1, imageView2, imageView3, imageView4;
     TextView mobName, mobVersion, mobPrize, mobRating, ratingInWords;
@@ -23,7 +22,7 @@ public class SingleItemDesc extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_item_desc);
+        setContentView(R.layout.single_item_desc);
 
         imageView = (ImageView) findViewById(R.id.product1);
         imageView1 = (ImageView) findViewById(R.id.view1);
@@ -43,7 +42,7 @@ public class SingleItemDesc extends AppCompatActivity {
 
         position = intent.getIntExtra(Constants.KEY_POSITION, 0);
 
-        productList = intent.getParcelableArrayListExtra("itemList");
+        productList = intent.getParcelableArrayListExtra(Constants.STORED_ITEMS);
 
         Log.i(TAG, "size" + productList.size());
 

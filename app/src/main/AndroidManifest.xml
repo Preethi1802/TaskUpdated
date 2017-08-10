@@ -23,16 +23,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".MobileProducts">
+        <activity android:name=".ProductsActivity">
             <intent_filter>
-                <action android:name="com.example.admin.task1.MobileProducts" />
+                <action android:name="com.example.admin.task1.ProductsActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".SingleItemDesc">
+        <activity android:name=".SingleItemActivity">
             <intent_filter>
-                <action android:name="com.example.admin.task1.SingleItemDesc" />
+                <action android:name="com.example.admin.task1.SingleItemActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>

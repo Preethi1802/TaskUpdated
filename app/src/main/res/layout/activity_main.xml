@@ -511,7 +511,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/navi_header_layout"
-        app:menu="@menu/navi_items">
+        app:menu="@menu/menu_navi_drawer">
 
     </android.support.design.widget.NavigationView>
 

@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class Products implements Parcelable {
     private String version, mobileName, mobilePrize, mobileRating, ratingInWords;
-    private int image, imgView1, imgView2, imgView3,imgView4;
+    private int image, imgView1, imgView2, imgView3, imgView4;
 
 
     @Override
