@@ -1,42 +1,66 @@
 package com.example.admin.task1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SingleItemDesc extends AppCompatActivity
-{
-    ImageView imageView, imageView1,imageView2, imageView3, imageView4;
-    TextView mobName,mobVersion ,mobPrize,mobRating,ratingInWords;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SingleItemDesc extends AppCompatActivity {
+
+    private static final String TAG = "SingleItemDesc";
+
+    ImageView imageView, imageView1, imageView2, imageView3, imageView4;
+    TextView mobName, mobVersion, mobPrize, mobRating, ratingInWords;
+    ArrayList<Products> productList;
+
+    int position;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_item_desc);
 
-        imageView = (ImageView)findViewById(R.id.product1);
-        imageView1= (ImageView)findViewById(R.id.view1);
-        imageView2= (ImageView)findViewById(R.id.view2);
-        imageView3= (ImageView)findViewById(R.id.view3);
-        imageView4= (ImageView)findViewById(R.id.view4);
-        mobName =(TextView)findViewById(R.id.productName1);
-        mobVersion = (TextView)findViewById(R.id.modelName);
-        mobPrize =(TextView)findViewById(R.id.prize);
-        mobRating =(TextView)findViewById(R.id.rating);
-        ratingInWords =(TextView)findViewById(R.id.ratingInWords);
+        imageView = (ImageView) findViewById(R.id.product1);
+        imageView1 = (ImageView) findViewById(R.id.view1);
+        imageView2 = (ImageView) findViewById(R.id.view2);
+        imageView3 = (ImageView) findViewById(R.id.view3);
+        imageView4 = (ImageView) findViewById(R.id.view4);
+        mobName = (TextView) findViewById(R.id.productName1);
+        mobVersion = (TextView) findViewById(R.id.modelName);
+        mobPrize = (TextView) findViewById(R.id.prize);
+        mobRating = (TextView) findViewById(R.id.rating);
+        ratingInWords = (TextView) findViewById(R.id.ratingInWords);
 
-        imageView.setImageResource(getIntent().getIntExtra("imageView",00));
-        imageView1.setImageResource(getIntent().getIntExtra("imageview1",11));
-        imageView2.setImageResource(getIntent().getIntExtra("imageview2",22));
-        imageView3.setImageResource(getIntent().getIntExtra("imageview3",33));
-        imageView4.setImageResource(getIntent().getIntExtra("imageview4",44));
-        mobName.setText(getIntent().getStringExtra("textMob1"));
-        mobVersion.setText(getIntent().getStringExtra("version"));
-        mobPrize.setText(getIntent().getStringExtra("mobPrize"));
-        mobRating.setText(getIntent().getStringExtra("mobRating"));
-        ratingInWords.setText(getIntent().getStringExtra("ratingInWords"));
+
+        Intent intent = getIntent();
+
+        Log.i(TAG, "hiiiiii");
+
+        position = intent.getIntExtra(Constants.KEY_POSITION, 0);
+
+        productList = intent.getParcelableArrayListExtra("itemList");
+
+        Log.i(TAG, "size" + productList.size());
+
+        Log.i(TAG, "position" + position);
+
+        imageView.setImageResource(productList.get(position).getImage());
+        imageView1.setImageResource(productList.get(position).getImgView1());
+        imageView2.setImageResource(productList.get(position).getImgView2());
+        imageView3.setImageResource(productList.get(position).getImgView3());
+        imageView4.setImageResource(productList.get(position).getImgView4());
+        mobName.setText(productList.get(position).getMobileName());
+        mobVersion.setText(productList.get(position).getVersion());
+        mobPrize.setText(productList.get(position).getMobilePrize());
+        mobRating.setText(productList.get(position).getMobileRating());
+        ratingInWords.setText(productList.get(position).getRatingInWords());
+
 
     }
+
 }
