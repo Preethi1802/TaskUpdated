@@ -25,7 +25,7 @@
                 android:layout_height="290dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:src="@drawable/s1_mob1" />
+                android:src="@mipmap/ic_launcher" />
 
             <LinearLayout
                 android:layout_width="310dp"
@@ -137,10 +137,11 @@
 
             <TextView
                 android:id="@+id/prize"
-                android:layout_width="81dp"
+                android:layout_width="98dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="\u20B9 7,499"
+                android:inputType="number"
+                android:text="\u20B9 9999"
                 android:textAlignment="viewStart"
                 android:textColor="@color/TextDark"
                 android:textSize="20dp"
@@ -148,7 +149,7 @@
 
             <TextView
                 android:id="@+id/productMode2"
-                android:layout_width="112dp"
+                android:layout_width="62dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="11% off"
@@ -159,9 +160,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:paddingRight="100dp"
-                android:src="@drawable/fassured" />
+                android:src="@drawable/f_assured" />
 
         </LinearLayout>
 
@@ -173,7 +175,7 @@
 
             <TextView
                 android:id="@+id/rating"
-                android:layout_width="51dp"
+                android:layout_width="54dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="13dp"
                 android:layout_marginRight="13dp"
@@ -181,6 +183,7 @@
                 android:background="@drawable/rating_corner"
                 android:drawableRight="@drawable/ic_star_border_black_24dp"
                 android:gravity="center"
+                android:layout_marginLeft="2dp"
                 android:paddingLeft="5dp"
                 android:text="3.8"
                 android:textAlignment="viewStart"

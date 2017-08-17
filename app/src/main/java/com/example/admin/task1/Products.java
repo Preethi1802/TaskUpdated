@@ -8,40 +8,44 @@ import android.os.Parcelable;
  */
 
 public class Products implements Parcelable {
-    private String version, mobileName, mobilePrize, mobileRating, ratingInWords;
+    private String version, name, mobilePrize, mobileRating, ratingInWords;
     private int image, imgView1, imgView2, imgView3, imgView4;
+    private String URL ,urlView1, urlView2, urlView3, urlView4;
 
+    public Products() {
 
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.version);
-        dest.writeString(this.mobileName);
-        dest.writeString(this.mobilePrize);
-        dest.writeString(this.mobileRating);
-        dest.writeString(this.ratingInWords);
-        dest.writeInt(this.image);
-        dest.writeInt(this.imgView1);
-        dest.writeInt(this.imgView2);
-        dest.writeInt(this.imgView3);
-        dest.writeInt(this.imgView4);
+    public String getUrlView1() {
+        return urlView1;
     }
 
-    public Products(String version, String mobileName, String mobilePrize, String mobileRating, String ratingInWords, int image, int imgView1, int imgView2, int imgView3, int imgView4) {
-        this.version = version;
-        this.mobileName = mobileName;
-        this.mobilePrize = mobilePrize;
-        this.mobileRating = mobileRating;
-        this.ratingInWords = ratingInWords;
-        this.image = image;
-        this.imgView1 = imgView1;
-        this.imgView2 = imgView2;
-        this.imgView3 = imgView3;
-        this.imgView4 = imgView4;
+    public void setUrlView1(String urlView1) {
+        this.urlView1 = urlView1;
+    }
+
+    public String getUrlView2() {
+        return urlView2;
+    }
+
+    public void setUrlView2(String urlView2) {
+        this.urlView2 = urlView2;
+    }
+
+    public String getUrlView3() {
+        return urlView3;
+    }
+
+    public void setUrlView3(String urlView3) {
+        this.urlView3 = urlView3;
+    }
+
+    public String getUrlView4() {
+        return urlView4;
+    }
+
+    public void setUrlView4(String urlView4) {
+        this.urlView4 = urlView4;
     }
 
     public String getVersion() {
@@ -52,12 +56,12 @@ public class Products implements Parcelable {
         this.version = version;
     }
 
-    public String getMobileName() {
-        return mobileName;
+    public String getName() {
+        return name;
     }
 
-    public void setMobileName(String mobileName) {
-        this.mobileName = mobileName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMobilePrize() {
@@ -124,26 +128,64 @@ public class Products implements Parcelable {
         this.imgView4 = imgView4;
     }
 
-    public Products() {
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    public static Creator<Products> getCREATOR() {
+        return CREATOR;
     }
 
     protected Products(Parcel in) {
-        this.version = in.readString();
-        this.mobileName = in.readString();
-        this.mobilePrize = in.readString();
-        this.mobileRating = in.readString();
-        this.ratingInWords = in.readString();
-        this.image = in.readInt();
-        this.imgView1 = in.readInt();
-        this.imgView2 = in.readInt();
-        this.imgView3 = in.readInt();
-        this.imgView4 = in.readInt();
+        version = in.readString();
+        name = in.readString();
+        mobilePrize = in.readString();
+        mobileRating = in.readString();
+        ratingInWords = in.readString();
+        image = in.readInt();
+        imgView1 = in.readInt();
+        imgView2 = in.readInt();
+        imgView3 = in.readInt();
+        imgView4 = in.readInt();
+        URL = in.readString();
+        urlView1 =in.readString();
+        urlView2 =in.readString();
+        urlView3 =in.readString();
+        urlView4 =in.readString();
     }
 
-    public static final Parcelable.Creator<Products> CREATOR = new Parcelable.Creator<Products>() {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(version);
+        dest.writeString(name);
+        dest.writeString(mobilePrize);
+        dest.writeString(mobileRating);
+        dest.writeString(ratingInWords);
+        dest.writeInt(image);
+        dest.writeInt(imgView1);
+        dest.writeInt(imgView2);
+        dest.writeInt(imgView3);
+        dest.writeInt(imgView4);
+        dest.writeString(URL);
+        dest.writeString(urlView1);
+        dest.writeString(urlView2);
+        dest.writeString(urlView3);
+        dest.writeString(urlView4);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Products> CREATOR = new Creator<Products>() {
         @Override
-        public Products createFromParcel(Parcel source) {
-            return new Products(source);
+        public Products createFromParcel(Parcel in) {
+            return new Products(in);
         }
 
         @Override
