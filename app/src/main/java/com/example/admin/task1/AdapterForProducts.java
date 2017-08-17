@@ -45,7 +45,7 @@ public class AdapterForProducts extends RecyclerView.Adapter<AdapterForProducts.
 
 
         Products products = list.get(position);
-        holder.mobileName.setText(products.getName());
+        holder.mobileName.setText(products.getMobileName());
         holder.version.setText(products.getVersion());
         String image = products.getURL();
 

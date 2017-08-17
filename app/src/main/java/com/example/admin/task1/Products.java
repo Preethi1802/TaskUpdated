@@ -8,7 +8,7 @@ import android.os.Parcelable;
  */
 
 public class Products implements Parcelable {
-    private String version, name, mobilePrize, mobileRating, ratingInWords;
+    private String version, mobileName, mobilePrize, mobileRating, ratingInWords;
     private int image, imgView1, imgView2, imgView3, imgView4;
     private String URL ,urlView1, urlView2, urlView3, urlView4;
 
@@ -56,12 +56,12 @@ public class Products implements Parcelable {
         this.version = version;
     }
 
-    public String getName() {
-        return name;
+    public String getMobileName() {
+        return mobileName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMobileName(String mobileName) {
+        this.mobileName = mobileName;
     }
 
     public String getMobilePrize() {
@@ -142,7 +142,7 @@ public class Products implements Parcelable {
 
     protected Products(Parcel in) {
         version = in.readString();
-        name = in.readString();
+        mobileName = in.readString();
         mobilePrize = in.readString();
         mobileRating = in.readString();
         ratingInWords = in.readString();
@@ -161,7 +161,7 @@ public class Products implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(version);
-        dest.writeString(name);
+        dest.writeString(mobileName);
         dest.writeString(mobilePrize);
         dest.writeString(mobileRating);
         dest.writeString(ratingInWords);

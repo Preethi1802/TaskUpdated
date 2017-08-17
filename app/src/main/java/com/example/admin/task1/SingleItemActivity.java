@@ -59,7 +59,7 @@ public class SingleItemActivity extends AppCompatActivity {
         Glide.with(this).load(urlView2).into(imageView2);
         Glide.with(this).load(urlView3).into(imageView3);
         Glide.with(this).load(urlView4).into(imageView4);
-        mobName.setText(productList.get(position).getName());
+        mobName.setText(productList.get(position).getMobileName());
         mobVersion.setText(productList.get(position).getVersion());
         mobPrize.setText(productList.get(position).getMobilePrize());
         mobRating.setText(productList.get(position).getMobileRating());
