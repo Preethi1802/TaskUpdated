@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.task1.SingleItemActivity">
+    tools:context="com.example.admin.task1.activity.ActivityProductDescription">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,76 +15,42 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="386dp"
+            android:layout_height="401dp"
             android:orientation="vertical"
             android:weightSum="1">
 
-            <ImageView
+            <com.thapovan.android.customui.TouchImageView
                 android:id="@+id/product1"
-                android:layout_width="match_parent"
-                android:layout_height="290dp"
+                android:layout_width="350dp"
+                android:layout_height="280dp"
                 android:layout_gravity="center"
-                android:padding="10dp"
+                android:layout_marginTop="20dp"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
-                android:layout_width="310dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:weightSum="8">
+            <HorizontalScrollView
+                android:layout_width="325dp"
+                android:layout_height="100dp"
+                android:layout_weight="0.83"
+                android:layout_marginLeft="15dp"
+                android:scrollbars="none">
 
-                <ImageView
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/image_background_dark"
-                    android:padding="3dp"
-                    android:src="@drawable/lenova4" />
+                <LinearLayout
+                    android:id="@+id/linear_layout_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/image_background_dark"
-                    android:padding="3dp"
-                    android:src="@drawable/lenova3" />
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/view3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/image_background_dark"
-                    android:padding="3dp"
-                    android:src="@drawable/lenova2" />
+            </HorizontalScrollView>
 
-                <ImageView
-                    android:id="@+id/view4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/image_background_dark"
-                    android:padding="3dp"
-                    android:src="@drawable/lenova5" />
-
-
-            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -131,7 +97,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="20dp"
             android:orientation="horizontal"
             android:weightSum="9">
 
@@ -160,9 +126,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:paddingRight="100dp"
+                android:paddingTop="10dp"
                 android:src="@drawable/f_assured" />
 
         </LinearLayout>
@@ -170,7 +136,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -178,12 +144,12 @@
                 android:layout_width="54dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="13dp"
+                android:layout_marginLeft="2dp"
                 android:layout_marginRight="13dp"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/rating_corner"
                 android:drawableRight="@drawable/ic_star_border_black_24dp"
                 android:gravity="center"
-                android:layout_marginLeft="2dp"
                 android:paddingLeft="5dp"
                 android:text="3.8"
                 android:textAlignment="viewStart"

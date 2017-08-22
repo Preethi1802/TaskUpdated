@@ -1,4 +1,4 @@
-package com.example.admin.task1;
+package com.example.admin.task1.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,7 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.admin.task1.R;
+
+public class ActivityMain extends AppCompatActivity {
     Button btn_viewAll;
     Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.layout_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void goToMobileProducts() {
 
-        Intent intent = new Intent(this, ProductsActivity.class);
+        Intent intent = new Intent(this, ActivityProduct.class);
         startActivity(intent);
     }
 

@@ -36,4 +36,6 @@ dependencies {
     compile 'com.android.support:support-annotations:25.3.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.bumptech.glide:glide:4.0.0'
+    compile 'com.github.thapovan-inc.android-modules:common-utils:v1.0.0'
+    compile 'com.github.thapovan-inc.android-modules:custom-ui:v1.0.0'
 }

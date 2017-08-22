@@ -11,30 +11,30 @@
         android:roundIcon="@drawable/front_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".activity.ActivitySplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.ActivityMain">
             <intent_filter>
-                <action android:name="com.example.admin.task1.MainActivity" />
+                <action android:name="com.example.admin.task1.activity.ActivityMain" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".ProductsActivity">
+        <activity android:name=".activity.ActivityProduct">
             <intent_filter>
-                <action android:name="com.example.admin.task1.ProductsActivity" />
+                <action android:name="com.example.admin.task1.activity.ActivityProduct" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".SingleItemActivity">
+        <activity android:name=".activity.ActivityProductDescription">
             <intent_filter>
-                <action android:name="com.example.admin.task1.SingleItemActivity" />
+                <action android:name="com.example.admin.task1.activity.ActivityProductDescription" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>

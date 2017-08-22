@@ -13,7 +13,7 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <include layout="@layout/tool_bar"></include>
+        <include layout="@layout/layout_toolbar"></include>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,7 +72,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <include layout="@layout/recycler_view"></include>
+        <include layout="@layout/layout_recycler_view"></include>
 
 
     </LinearLayout>

@@ -48,7 +48,7 @@
 
     </string-array>
 
-    <string-array name="mobilePrize">
+    <string-array name="regular_price">
         <item>"\u20B9 7,499"</item>
         <item>"\u20B9 8,099"</item>
         <item>"\u20B9 10,599"</item>
