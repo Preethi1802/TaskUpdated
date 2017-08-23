@@ -39,6 +39,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
+
+        <activity android:name=".activity.ActivityAllCategoriesListView">
+            <intent_filter>
+                <action android:name="com.example.admin.task1.activity.ActivityAllCategoriesListView" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent_filter>
+        </activity>
     </application>
 
 </manifest>

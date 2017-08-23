@@ -28,7 +28,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     private static final String TAG = "AdapterProduct";
     List<Product> list= new ArrayList<>();
     public Context mContext;
-    String imageUrl="http://192.168.1.73/projects/learning/laravel/e-commerce-portal/";
 
     public AdapterProduct(Context applicationContext, ArrayList<Product> list) {
         this.list = list;

@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.admin.task1.API.request.APIClient;
@@ -13,7 +14,6 @@ import com.example.admin.task1.API.request.ApiInterface;
 import com.example.admin.task1.API.response.ApiResponse;
 import com.example.admin.task1.R;
 import com.example.admin.task1.adapter.AdapterProduct;
-import com.example.admin.task1.model.ImageItem;
 import com.example.admin.task1.model.Product;
 
 import java.util.ArrayList;
@@ -37,7 +37,12 @@ public class ActivityProduct extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     ArrayList<Product> productList;
-    ArrayList<ImageItem> imageList;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_view_all, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

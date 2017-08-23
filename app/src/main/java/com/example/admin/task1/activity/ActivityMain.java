@@ -3,14 +3,15 @@ package com.example.admin.task1.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.admin.task1.R;
 
@@ -19,6 +20,7 @@ public class ActivityMain extends AppCompatActivity {
     Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private android.support.v7.app.ActionBarDrawerToggle toggle;
+    TextView tv_more;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -49,7 +51,18 @@ public class ActivityMain extends AppCompatActivity {
         btn_viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMobileProducts();
+                Intent intent = new Intent(v.getContext(), ActivityProduct.class);
+                startActivity(intent);
+            }
+        });
+
+        tv_more = (TextView)findViewById(R.id.tv_more);
+        tv_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(v.getContext(),ActivityAllCategoriesListView.class);
+                startActivity(intent);
+
             }
         });
 
@@ -63,10 +76,5 @@ public class ActivityMain extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void goToMobileProducts() {
-
-        Intent intent = new Intent(this, ActivityProduct.class);
-        startActivity(intent);
-    }
 
 }

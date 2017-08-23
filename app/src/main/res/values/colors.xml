@@ -8,4 +8,5 @@
     <color name="colorAccent">#c8e8ff</color>
     <color name="BackgroundForMyApp">#fe295aec</color>
     <color name="TextDark">#0a0505</color>
+    <color name="grey">#b7b3b3</color>
 </resources>

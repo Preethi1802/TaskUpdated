@@ -38,4 +38,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'com.github.thapovan-inc.android-modules:common-utils:v1.0.0'
     compile 'com.github.thapovan-inc.android-modules:custom-ui:v1.0.0'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    compile 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.jakewharton:butterknife-annotations:8.8.1'
 }
