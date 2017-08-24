@@ -69,7 +69,7 @@ public class ActivityProduct extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 ApiResponse apiResponse = response.body();
-                productList = new ArrayList<>(Arrays.asList(apiResponse.getProduct()));
+                productList = new ArrayList<>(Arrays.asList(apiResponse.getProducts()));
 
                 adapter = new AdapterProduct(getApplicationContext(), productList);
                 layoutManager = new GridLayoutManager(ActivityProduct.this, 2);
