@@ -47,13 +47,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".activity.ActivityElectronics">
-            <intent_filter>
-                <action android:name="com.example.admin.task1.activity.ActivityElectronics" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent_filter>
-        </activity>
     </application>
 
 </manifest>
