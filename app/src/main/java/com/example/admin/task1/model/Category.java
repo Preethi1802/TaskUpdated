@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-import com.example.admin.task1.api.remote.Constants;
+import com.example.admin.task1.api.util.APIUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -87,7 +87,7 @@ public class Category implements Parcelable{
 
     public String getIconUrl() {
 
-        return Constants.IMAGE_URL+this.iconPath+"/"+this.iconName;
+        return APIUtil.IMAGE_URL+this.iconPath+"/"+this.iconName;
     }
 
     public Object getImageName() {

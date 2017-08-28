@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.admin.task1.R;
+import com.example.admin.task1.product.activity.ProductActivity;
+import com.example.admin.task1.settings.activity.AllCategoryActivity;
 
-public class ActivityMain extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     Button btn_viewAll;
     Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -51,7 +53,7 @@ public class ActivityMain extends AppCompatActivity {
         btn_viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ActivityProduct.class);
+                Intent intent = new Intent(v.getContext(), ProductActivity.class);
                 startActivity(intent);
             }
         });
@@ -60,7 +62,7 @@ public class ActivityMain extends AppCompatActivity {
         tv_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(v.getContext(),ActivityAllCategoriesListView.class);
+                Intent intent= new Intent(v.getContext(),AllCategoryActivity.class);
                 startActivity(intent);
 
             }

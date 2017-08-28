@@ -11,38 +11,38 @@
         android:roundIcon="@drawable/front_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ActivitySplashScreen">
+        <activity android:name=".activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ActivityMain">
+        <activity android:name=".activity.MainActivity">
             <intent_filter>
-                <action android:name="com.example.admin.task1.activity.ActivityMain" />
+                <action android:name="com.example.admin.task1.activity.MainActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".activity.ActivityProduct">
+        <activity android:name=".product.activity.ProductActivity">
             <intent_filter>
-                <action android:name="com.example.admin.task1.activity.ActivityProduct" />
+                <action android:name="com.example.admin.task1.product.activity.ProductActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".activity.ActivityProductDescription">
+        <activity android:name=".product.activity.ProductDescriptionActivity">
             <intent_filter>
-                <action android:name="com.example.admin.task1.activity.ActivityProductDescription" />
+                <action android:name="com.example.admin.task1.product.activity.ProductDescriptionActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
 
-        <activity android:name=".activity.ActivityAllCategoriesListView">
+        <activity android:name=".settings.activity.AllCategoryActivity">
             <intent_filter>
-                <action android:name="com.example.admin.task1.activity.ActivityAllCategoriesListView" />
+                <action android:name="com.example.admin.task1.settings.activity.AllCategoryActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>

@@ -1,4 +1,4 @@
-package com.example.admin.task1.activity;
+package com.example.admin.task1.settings.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,13 +18,12 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.example.admin.task1.R;
-import com.example.admin.task1.adapter.AdapterAllCategories;
 import com.example.admin.task1.api.event.SettingsAPI;
-import com.example.admin.task1.api.remote.Constants;
 import com.example.admin.task1.api.response.SettingsResponse;
 import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
 import com.example.admin.task1.api.util.APIUtil;
 import com.example.admin.task1.model.Category;
+import com.example.admin.task1.settings.adapter.AdapterAllCategories;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ import java.util.ArrayList;
  * Created by Admin on 8/22/2017.
  */
 
-public class ActivityAllCategoriesListView extends AppCompatActivity implements AdapterView.OnItemClickListener,SettingsEventSubscriber
+public class AllCategoryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,SettingsEventSubscriber
 {
     private static final String TAG = "ActivityAllCategories";
     Toolbar toolbar;
@@ -87,9 +86,9 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Intent intent= new Intent(view.getContext(),ActivityAllCategoriesListView.class);
+        Intent intent= new Intent(view.getContext(),AllCategoryActivity.class);
 
-        intent.putExtra(Constants.KEY_POSITION, position);
+        intent.putExtra(APIUtil.KEY_POSITION, position);
         view.getContext().startActivity(intent);
 
         Toast toast = Toast.makeText(getApplicationContext(),"Item " + (position + 1) + ": " + cList.get(position),Toast.LENGTH_SHORT);
@@ -104,7 +103,7 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
         Log.i(TAG,"cList.size()"+cList.size());
 
 
-        adapterAllCategories = new AdapterAllCategories(ActivityAllCategoriesListView.this,cList);
+        adapterAllCategories = new AdapterAllCategories(AllCategoryActivity.this,cList);
         expandableListView.setAdapter(adapterAllCategories);
 
     }

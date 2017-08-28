@@ -1,4 +1,4 @@
-package com.example.admin.task1.activity;
+package com.example.admin.task1.product.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.admin.task1.R;
-import com.example.admin.task1.adapter.AdapterProduct;
+import com.example.admin.task1.product.adapter.AdapterListProduct;
 import com.example.admin.task1.api.event.ProductAPI;
 import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
@@ -23,13 +23,13 @@ import java.util.ArrayList;
  * Created by Admin on 7/26/2017.
  */
 
-public class ActivityProduct extends AppCompatActivity implements ProductEventSubscriber{
+public class ProductActivity extends AppCompatActivity implements ProductEventSubscriber{
     Toolbar toolbar;
 
-    private static final String TAG = "ActivityProduct";
+    private static final String TAG = "ProductActivity";
 
     RecyclerView recyclerView;
-    AdapterProduct adapter;
+    AdapterListProduct adapter;
     RecyclerView.LayoutManager layoutManager;
 
     ArrayList<Product> productList;
@@ -76,8 +76,8 @@ public class ActivityProduct extends AppCompatActivity implements ProductEventSu
     public void onProductCompleted(ProductResponse productResponse) {
         productList = new ArrayList<Product>(productResponse.getProducts());
 
-        adapter = new AdapterProduct(getApplicationContext(), productList);
-        layoutManager = new GridLayoutManager(ActivityProduct.this, 2);
+        adapter = new AdapterListProduct(getApplicationContext(), productList);
+        layoutManager = new GridLayoutManager(ProductActivity.this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);

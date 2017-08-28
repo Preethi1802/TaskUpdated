@@ -1,4 +1,4 @@
-package com.example.admin.task1.adapter;
+package com.example.admin.task1.product.adapter;
 
 /**
  * Created by Admin on 7/26/2017.
@@ -17,19 +17,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.task1.R;
-import com.example.admin.task1.activity.ActivityProductDescription;
-import com.example.admin.task1.api.remote.Constants;
+import com.example.admin.task1.api.util.APIUtil;
 import com.example.admin.task1.model.Product;
+import com.example.admin.task1.product.activity.ProductDescriptionActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
-    private static final String TAG = "AdapterProduct";
+public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.ViewHolder> {
+    private static final String TAG = "AdapterListProduct";
     List<Product> list= new ArrayList<>();
     public Context mContext;
 
-    public AdapterProduct(Context applicationContext, ArrayList<Product> list) {
+    public AdapterListProduct(Context applicationContext, ArrayList<Product> list) {
         this.list = list;
         this.mContext = applicationContext;
     }
@@ -60,11 +60,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
             @Override
             public void onClick(View v) {
-                Log.i(TAG, Constants.STORED_ITEMS + position);
+                Log.i(TAG, APIUtil.STORED_ITEMS + position);
 
-                Intent intent = new Intent(v.getContext(), ActivityProductDescription.class);
-                intent.putExtra(Constants.KEY_POSITION, position);
-                intent.putParcelableArrayListExtra(Constants.STORED_ITEMS, (ArrayList<? extends Parcelable>) list);
+                Intent intent = new Intent(v.getContext(), ProductDescriptionActivity.class);
+                intent.putExtra(APIUtil.KEY_POSITION, position);
+                intent.putParcelableArrayListExtra(APIUtil.STORED_ITEMS, (ArrayList<? extends Parcelable>) list);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 v.getContext().startActivity(intent);
             }

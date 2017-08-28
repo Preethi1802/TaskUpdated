@@ -3,7 +3,7 @@ package com.example.admin.task1.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.admin.task1.api.remote.Constants;
+import com.example.admin.task1.api.util.APIUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -64,11 +64,11 @@ public class ImageItem implements Parcelable {
 
     public String getFeaturedImageURL() {
 
-        return Constants.IMAGE_URL+this.path+"/"+this.name;
+        return APIUtil.IMAGE_URL+this.path+"/"+this.name;
     }
     public String getGalleryImageURL() {
 
-        return Constants.IMAGE_URL+this.path+"/"+this.name;
+        return APIUtil.IMAGE_URL+this.path+"/"+this.name;
     }
 
     public void setPath(String path) {

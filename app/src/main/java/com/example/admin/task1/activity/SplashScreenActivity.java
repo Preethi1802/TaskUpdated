@@ -13,7 +13,7 @@ import java.util.TimerTask;
  * Created by Admin on 7/21/2017.
  */
 
-public class ActivitySplashScreen extends Activity {
+public class SplashScreenActivity extends Activity {
     long delay = 4000;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class ActivitySplashScreen extends Activity {
             public void run() {
                 finish();
 
-                Intent intent = new Intent(ActivitySplashScreen.this, ActivityMain.class);
+                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         };

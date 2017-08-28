@@ -1,4 +1,4 @@
-package com.example.admin.task1.adapter;
+package com.example.admin.task1.settings.adapter;
 
 import android.content.Context;
 import android.util.Log;

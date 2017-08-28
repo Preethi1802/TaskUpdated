@@ -1,4 +1,4 @@
-package com.example.admin.task1.activity;
+package com.example.admin.task1.product.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.task1.R;
-import com.example.admin.task1.api.remote.Constants;
+import com.example.admin.task1.api.util.APIUtil;
 import com.example.admin.task1.model.Product;
 import com.thapovan.android.customui.TouchImageView;
 
 import java.util.ArrayList;
 
-public class ActivityProductDescription extends AppCompatActivity {
+public class ProductDescriptionActivity extends AppCompatActivity {
 
     private static final String TAG = "ActivityProductDesc";
     Context mContext;
@@ -48,10 +48,10 @@ public class ActivityProductDescription extends AppCompatActivity {
         Intent intent = getIntent();
         Log.i(TAG, "hiiiiii");
 
-        position = intent.getIntExtra(Constants.KEY_POSITION, 0);
+        position = intent.getIntExtra(APIUtil.KEY_POSITION, 0);
         Log.i(TAG, "...............position........." + position);
 
-        productList = intent.getParcelableArrayListExtra(Constants.STORED_ITEMS);
+        productList = intent.getParcelableArrayListExtra(APIUtil.STORED_ITEMS);
         Log.i(TAG, "..........size............." + productList.size());
 
         Log.i(TAG, ".......GalleryImage..........." + productList.get(position).getGalleryImages());

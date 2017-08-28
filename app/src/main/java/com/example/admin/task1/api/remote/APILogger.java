@@ -1,8 +1,28 @@
 package com.example.admin.task1.api.remote;
 
-public class APILogger /*implements Interceptor*/ {
+import java.io.EOFException;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.concurrent.TimeUnit;
 
-  /*  private static final Charset UTF8 = Charset.forName("UTF-8");
+import okhttp3.Connection;
+import okhttp3.Headers;
+import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okhttp3.internal.http.HttpHeaders;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okio.Buffer;
+import okio.BufferedSource;
+
+
+public class APILogger implements Interceptor {
+
+    private static final Charset UTF8 = Charset.forName("UTF-8");
     private volatile HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.NONE;
     private final HttpLoggingInterceptor.Logger logger;
 
@@ -14,7 +34,7 @@ public class APILogger /*implements Interceptor*/ {
         this.logger = logger;
     }
 
-    *//** Change the level at which this interceptor logs. *//*
+    /** Change the level at which this interceptor logs. */
     public APILogger setLevel(HttpLoggingInterceptor.Level level) {
         if (level == null) throw new NullPointerException("level == null. Use Level.NONE instead.");
         this.level = level;
@@ -161,10 +181,10 @@ public class APILogger /*implements Interceptor*/ {
         return response;
     }
 
-    *//**
+    /**
      * Returns true if the body in question probably contains human readable text. Uses a small sample
      * of code points to detect unicode control characters commonly used in binary file signatures.
-     *//*
+     */
     static boolean isPlaintext(Buffer buffer) {
         try {
             Buffer prefix = new Buffer();
@@ -188,6 +208,6 @@ public class APILogger /*implements Interceptor*/ {
     private boolean bodyEncoded(Headers headers) {
         String contentEncoding = headers.get("Content-Encoding");
         return contentEncoding != null && !contentEncoding.equalsIgnoreCase("identity");
-    }*/
+    }
 
 }

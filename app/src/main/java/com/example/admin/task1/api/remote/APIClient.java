@@ -9,7 +9,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
-  /*  private static String host;
+    private static Retrofit retrofit = null;
+
+    public static Retrofit getClient(final String baseUrl) {
+
+        if (retrofit == null) {
+
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+
+
+
+/*    private static String host;
 
     private static Retrofit retrofit = null;
 
@@ -21,7 +37,7 @@ public class APIClient {
                 public Response intercept(@NonNull Chain chain) throws IOException {
                     HttpUrl.Builder builder = chain.request().url().newBuilder();
                     HttpUrl newUrl = builder
-                            .host(host)
+                            .host(baseUrl)
                             .build();
                     final Request request = chain.request().newBuilder()
                             .url(newUrl)
@@ -62,17 +78,5 @@ public class APIClient {
   //  public static final String BASE_URL = "https://gist.githubusercontent.com";
 
 
-    private static Retrofit retrofit = null;
 
-    public static Retrofit getClient(final String baseUrl) {
-
-        if (retrofit == null) {
-
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
 }
