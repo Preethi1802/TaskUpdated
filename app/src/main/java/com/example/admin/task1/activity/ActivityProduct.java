@@ -9,11 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.admin.task1.API.request.APIClient;
-import com.example.admin.task1.API.request.ProductRequest;
-import com.example.admin.task1.API.response.ProductResponse;
 import com.example.admin.task1.R;
 import com.example.admin.task1.adapter.AdapterProduct;
+import com.example.admin.task1.api.remote.APIClient;
+import com.example.admin.task1.api.remote.APIInterface;
+import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.model.Product;
 
 import java.util.ArrayList;
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.admin.task1.api.util.APIUtil.BASE_URL;
 
 /**
  * Created by Admin on 7/26/2017.
@@ -61,8 +63,8 @@ public class ActivityProduct extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
 
-        ProductRequest productRequest = APIClient.getClient().create(ProductRequest.class);
-        Call<ProductResponse> call = productRequest.getProductDetails();
+        APIInterface productRequest = APIClient.getClient(BASE_URL).create(APIInterface.class);
+        Call<ProductResponse> call = productRequest.getProducts();
 
         call.enqueue(new Callback<ProductResponse>() {
             @Override

@@ -1,4 +1,4 @@
-package com.example.admin.task1.API.response;
+package com.example.admin.task1.api.response;
 
 import android.util.Log;
 

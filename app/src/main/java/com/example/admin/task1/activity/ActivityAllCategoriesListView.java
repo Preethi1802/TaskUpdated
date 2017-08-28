@@ -17,25 +17,22 @@ import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.example.admin.task1.API.request.APIClient;
-import com.example.admin.task1.API.request.SettingsRequest;
-import com.example.admin.task1.API.response.SettingsResponse;
 import com.example.admin.task1.R;
 import com.example.admin.task1.adapter.AdapterAllCategories;
+import com.example.admin.task1.api.event.SettingsAPI;
+import com.example.admin.task1.api.remote.Constants;
+import com.example.admin.task1.api.response.SettingsResponse;
+import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
+import com.example.admin.task1.api.util.APIUtil;
 import com.example.admin.task1.model.Category;
-import com.example.admin.task1.rest.Constants;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Admin on 8/22/2017.
  */
 
-public class ActivityAllCategoriesListView extends AppCompatActivity implements AdapterView.OnItemClickListener
+public class ActivityAllCategoriesListView extends AppCompatActivity implements AdapterView.OnItemClickListener,SettingsEventSubscriber
 {
     private static final String TAG = "ActivityAllCategories";
     Toolbar toolbar;
@@ -74,9 +71,13 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
         expandableListView= (ExpandableListView) findViewById(R.id.expand_list_view);
         cList= new ArrayList<>();
 
+        APIUtil.getAPI();
+        SettingsAPI.get(this);
 
-        SettingsRequest settingsRequest = APIClient.getClient().create(SettingsRequest.class);
-        Call<SettingsResponse> call = settingsRequest.getCategoriesdetail();
+
+/*
+        APIInterface apiInterface = APIClient.getClient(BASE_URL).create(APIInterface.class);
+        Call<SettingsResponse> call = apiInterface.getSettings();
         call.enqueue(new Callback<SettingsResponse>() {
             @Override
             public void onResponse(Call<SettingsResponse> call, Response<SettingsResponse> response) {
@@ -94,7 +95,7 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
             public void onFailure(Call<SettingsResponse> call, Throwable t) {
 
             }
-        });
+        });*/
     }
 
     @Override
@@ -116,5 +117,17 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
         Toast toast = Toast.makeText(getApplicationContext(),"Item " + (position + 1) + ": " + cList.get(position),Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
+    }
+
+    @Override
+    public void onSettingsCompleted(SettingsResponse settingsResponse) {
+
+        cList = new ArrayList<Category>(settingsResponse.getCategory());
+        Log.i(TAG,"cList.size()"+cList.size());
+
+
+        adapterAllCategories = new AdapterAllCategories(ActivityAllCategoriesListView.this,cList);
+        expandableListView.setAdapter(adapterAllCategories);
+
     }
 }

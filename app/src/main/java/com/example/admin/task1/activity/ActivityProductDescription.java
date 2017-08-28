@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.task1.R;
+import com.example.admin.task1.api.remote.Constants;
 import com.example.admin.task1.model.Product;
-import com.example.admin.task1.rest.Constants;
 import com.thapovan.android.customui.TouchImageView;
 
 import java.util.ArrayList;

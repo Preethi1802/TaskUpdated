@@ -1,4 +1,4 @@
-package com.example.admin.task1.rest;
+package com.example.admin.task1.api.remote;
 
 /**
  * Created by Admin on 8/9/2017.

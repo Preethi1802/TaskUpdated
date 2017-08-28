@@ -18,8 +18,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.admin.task1.R;
 import com.example.admin.task1.activity.ActivityProductDescription;
+import com.example.admin.task1.api.remote.Constants;
 import com.example.admin.task1.model.Product;
-import com.example.admin.task1.rest.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
