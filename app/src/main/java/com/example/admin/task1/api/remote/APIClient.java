@@ -1,19 +1,5 @@
 package com.example.admin.task1.api.remote;
 
-import android.net.Uri;
-import android.support.annotation.NonNull;
-
-import com.example.admin.task1.BuildConfig;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
-    private static String host;
+  /*  private static String host;
 
     private static Retrofit retrofit = null;
 
@@ -70,11 +56,12 @@ public class APIClient {
 
     public static void setHost(String url) {
         host = Uri.parse(url).getHost();
-    }
+    }*/
 
 
-  /*
   //  public static final String BASE_URL = "https://gist.githubusercontent.com";
+
+
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(final String baseUrl) {
@@ -87,5 +74,5 @@ public class APIClient {
                     .build();
         }
         return retrofit;
-    }*/
+    }
 }

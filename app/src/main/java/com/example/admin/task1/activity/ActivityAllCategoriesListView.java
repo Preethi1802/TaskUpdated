@@ -74,28 +74,6 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
         APIUtil.getAPI();
         SettingsAPI.get(this);
 
-
-/*
-        APIInterface apiInterface = APIClient.getClient(BASE_URL).create(APIInterface.class);
-        Call<SettingsResponse> call = apiInterface.getSettings();
-        call.enqueue(new Callback<SettingsResponse>() {
-            @Override
-            public void onResponse(Call<SettingsResponse> call, Response<SettingsResponse> response) {
-                SettingsResponse settingsResponse = response.body();
-                cList = new ArrayList<Category>(settingsResponse.getCategory());
-                Log.i(TAG,"cList.size()"+cList.size());
-
-
-                adapterAllCategories = new AdapterAllCategories(ActivityAllCategoriesListView.this,cList);
-                expandableListView.setAdapter(adapterAllCategories);
-
-            }
-
-            @Override
-            public void onFailure(Call<SettingsResponse> call, Throwable t) {
-
-            }
-        });*/
     }
 
     @Override

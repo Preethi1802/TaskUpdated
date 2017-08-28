@@ -11,24 +11,19 @@ import android.view.MenuItem;
 
 import com.example.admin.task1.R;
 import com.example.admin.task1.adapter.AdapterProduct;
-import com.example.admin.task1.api.remote.APIClient;
-import com.example.admin.task1.api.remote.APIInterface;
+import com.example.admin.task1.api.event.ProductAPI;
 import com.example.admin.task1.api.response.ProductResponse;
+import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
+import com.example.admin.task1.api.util.APIUtil;
 import com.example.admin.task1.model.Product;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.example.admin.task1.api.util.APIUtil.BASE_URL;
 
 /**
  * Created by Admin on 7/26/2017.
  */
 
-public class ActivityProduct extends AppCompatActivity {
+public class ActivityProduct extends AppCompatActivity implements ProductEventSubscriber{
     Toolbar toolbar;
 
     private static final String TAG = "ActivityProduct";
@@ -63,28 +58,8 @@ public class ActivityProduct extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
 
-        APIInterface productRequest = APIClient.getClient(BASE_URL).create(APIInterface.class);
-        Call<ProductResponse> call = productRequest.getProducts();
-
-        call.enqueue(new Callback<ProductResponse>() {
-            @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                ProductResponse productResponse = response.body();
-                productList = new ArrayList<Product>(productResponse.getProducts());
-
-                adapter = new AdapterProduct(getApplicationContext(), productList);
-                layoutManager = new GridLayoutManager(ActivityProduct.this, 2);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<ProductResponse> call, Throwable t) {
-
-            }
-        });
-
+        APIUtil.getAPI();
+        ProductAPI.get(this);
 
     }
 
@@ -95,5 +70,17 @@ public class ActivityProduct extends AppCompatActivity {
             this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onProductCompleted(ProductResponse productResponse) {
+        productList = new ArrayList<Product>(productResponse.getProducts());
+
+        adapter = new AdapterProduct(getApplicationContext(), productList);
+        layoutManager = new GridLayoutManager(ActivityProduct.this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
     }
 }
