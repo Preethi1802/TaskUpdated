@@ -10,14 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.admin.task1.API.request.APIClient;
-import com.example.admin.task1.API.request.ApiInterface;
-import com.example.admin.task1.API.response.ApiResponse;
+import com.example.admin.task1.API.request.ProductRequest;
+import com.example.admin.task1.API.response.ProductResponse;
 import com.example.admin.task1.R;
 import com.example.admin.task1.adapter.AdapterProduct;
 import com.example.admin.task1.model.Product;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,14 +61,14 @@ public class ActivityProduct extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
 
-        ApiInterface apiInterface = APIClient.getClient().create(ApiInterface.class);
-        Call<ApiResponse> call = apiInterface.getProductDetails();
+        ProductRequest productRequest = APIClient.getClient().create(ProductRequest.class);
+        Call<ProductResponse> call = productRequest.getProductDetails();
 
-        call.enqueue(new Callback<ApiResponse>() {
+        call.enqueue(new Callback<ProductResponse>() {
             @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                ApiResponse apiResponse = response.body();
-                productList = new ArrayList<>(Arrays.asList(apiResponse.getProducts()));
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                ProductResponse productResponse = response.body();
+                productList = new ArrayList<Product>(productResponse.getProducts());
 
                 adapter = new AdapterProduct(getApplicationContext(), productList);
                 layoutManager = new GridLayoutManager(ActivityProduct.this, 2);
@@ -79,7 +78,7 @@ public class ActivityProduct extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
 
             }
         });

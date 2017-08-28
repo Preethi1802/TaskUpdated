@@ -18,15 +18,14 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.example.admin.task1.API.request.APIClient;
-import com.example.admin.task1.API.request.ApiInterface;
-import com.example.admin.task1.API.response.ApiResponse;
+import com.example.admin.task1.API.request.SettingsRequest;
+import com.example.admin.task1.API.response.SettingsResponse;
 import com.example.admin.task1.R;
 import com.example.admin.task1.adapter.AdapterAllCategories;
 import com.example.admin.task1.model.Category;
 import com.example.admin.task1.rest.Constants;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,13 +75,13 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
         cList= new ArrayList<>();
 
 
-        ApiInterface apiInterface = APIClient.getClient().create(ApiInterface.class);
-        Call<ApiResponse> call = apiInterface.getCategoriesdetail();
-        call.enqueue(new Callback<ApiResponse>() {
+        SettingsRequest settingsRequest = APIClient.getClient().create(SettingsRequest.class);
+        Call<SettingsResponse> call = settingsRequest.getCategoriesdetail();
+        call.enqueue(new Callback<SettingsResponse>() {
             @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                ApiResponse apiResponse = response.body();
-                cList = new ArrayList<>(Arrays.asList(apiResponse.getCategory()));
+            public void onResponse(Call<SettingsResponse> call, Response<SettingsResponse> response) {
+                SettingsResponse settingsResponse = response.body();
+                cList = new ArrayList<Category>(settingsResponse.getCategory());
                 Log.i(TAG,"cList.size()"+cList.size());
 
 
@@ -92,7 +91,7 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
             }
 
             @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
+            public void onFailure(Call<SettingsResponse> call, Throwable t) {
 
             }
         });
@@ -112,8 +111,6 @@ public class ActivityAllCategoriesListView extends AppCompatActivity implements 
         Intent intent= new Intent(view.getContext(),ActivityAllCategoriesListView.class);
 
         intent.putExtra(Constants.KEY_POSITION, position);
-       /* intent.putParcelableArrayListExtra(Constants.STORED_ITEMS, cList);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
         view.getContext().startActivity(intent);
 
         Toast toast = Toast.makeText(getApplicationContext(),"Item " + (position + 1) + ": " + cList.get(position),Toast.LENGTH_SHORT);
