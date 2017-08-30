@@ -71,6 +71,23 @@ public class Product implements Parcelable {
     @Expose
     private List<ImageItem> images = new ArrayList<>();
 
+    @SerializedName("empty")
+    private String empty;
+
+    public Product() {
+
+    }
+
+    public String getEmpty() {
+
+        empty= "No Products Found";
+        return empty;
+    }
+
+    public void setEmpty(String empty) {
+        this.empty = empty;
+    }
+
     public Product(Integer id, String name, String description, String spec, Integer quantity, String sku, String regularPrice, String salePrice, String shippingPrice, String deliveryDays, Integer status, Integer isInStock, Integer isTaxable, Integer isFeatured, String createdAt, String updatedAt, Object deletedAt, List<ImageItem> images) {
         this.id = id;
         this.name = name;

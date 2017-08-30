@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,9 +18,11 @@ import android.widget.Toast;
 
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.event.SettingsAPI;
+import com.example.admin.task1.api.response.BrandsResponse;
 import com.example.admin.task1.api.response.SettingsResponse;
 import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
 import com.example.admin.task1.api.util.APIUtil;
+import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Category;
 import com.example.admin.task1.settings.adapter.AdapterAllCategories;
 
@@ -31,7 +32,7 @@ import java.util.ArrayList;
  * Created by Admin on 8/22/2017.
  */
 
-public class AllCategoryActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,SettingsEventSubscriber
+public class AllCategoryActivity extends AppActivity implements AdapterView.OnItemClickListener,SettingsEventSubscriber
 {
     private static final String TAG = "ActivityAllCategories";
     Toolbar toolbar;
@@ -40,7 +41,7 @@ public class AllCategoryActivity extends AppCompatActivity implements AdapterVie
 
     AdapterAllCategories adapterAllCategories;
     ExpandableListView expandableListView;
-    ArrayList<Category> cList;
+    ArrayList<Category> categoryList;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,7 +69,7 @@ public class AllCategoryActivity extends AppCompatActivity implements AdapterVie
         toggle.syncState();
 
         expandableListView= (ExpandableListView) findViewById(R.id.expand_list_view);
-        cList= new ArrayList<>();
+        categoryList = new ArrayList<>();
 
         APIUtil.getAPI();
         SettingsAPI.get(this);
@@ -91,7 +92,7 @@ public class AllCategoryActivity extends AppCompatActivity implements AdapterVie
         intent.putExtra(APIUtil.KEY_POSITION, position);
         view.getContext().startActivity(intent);
 
-        Toast toast = Toast.makeText(getApplicationContext(),"Item " + (position + 1) + ": " + cList.get(position),Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(),"Item " + (position + 1) + ": " + categoryList.get(position),Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
     }
@@ -99,12 +100,17 @@ public class AllCategoryActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onSettingsCompleted(SettingsResponse settingsResponse) {
 
-        cList = new ArrayList<Category>(settingsResponse.getCategory());
-        Log.i(TAG,"cList.size()"+cList.size());
+        categoryList = new ArrayList<Category>(settingsResponse.getCategory());
+        Log.i(TAG,"categoryList.size()"+ categoryList.size());
 
 
-        adapterAllCategories = new AdapterAllCategories(AllCategoryActivity.this,cList);
+        adapterAllCategories = new AdapterAllCategories(AllCategoryActivity.this, categoryList);
         expandableListView.setAdapter(adapterAllCategories);
+
+    }
+
+    @Override
+    public void onBrandCompleted(BrandsResponse brandsResponse) {
 
     }
 }

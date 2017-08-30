@@ -1,6 +1,7 @@
 package com.example.admin.task1.api.subscriber;
 
 
+import com.example.admin.task1.api.response.BrandsResponse;
 import com.example.admin.task1.api.response.SettingsResponse;
 
 /**
@@ -10,4 +11,5 @@ import com.example.admin.task1.api.response.SettingsResponse;
 public interface SettingsEventSubscriber
 {
     void onSettingsCompleted(SettingsResponse settingsResponse);
+    void onBrandCompleted(BrandsResponse brandsResponse);
 }

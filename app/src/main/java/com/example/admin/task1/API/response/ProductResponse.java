@@ -1,5 +1,7 @@
 package com.example.admin.task1.api.response;
 
+import android.util.Log;
+
 import com.example.admin.task1.model.Product;
 
 import java.util.ArrayList;
@@ -10,11 +12,13 @@ import java.util.ArrayList;
 
 public class ProductResponse
 {
-    private static final String TAG = "ApiResponse";
+    private static final String TAG = "ProductResponse";
 
     ArrayList<Product> products;
 
     public ArrayList<Product> getProducts() {
+        Log.i(TAG,"**********"+products);
+
         return products;
     }
 }

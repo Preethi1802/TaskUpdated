@@ -1,21 +1,24 @@
 package com.example.admin.task1.product.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.admin.task1.R;
-import com.example.admin.task1.product.adapter.AdapterListProduct;
 import com.example.admin.task1.api.event.ProductAPI;
 import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
 import com.example.admin.task1.api.util.APIUtil;
+import com.example.admin.task1.app.AppActivity;
+import com.example.admin.task1.model.Brand;
 import com.example.admin.task1.model.Product;
+import com.example.admin.task1.product.adapter.AdapterListProduct;
 
 import java.util.ArrayList;
 
@@ -23,7 +26,7 @@ import java.util.ArrayList;
  * Created by Admin on 7/26/2017.
  */
 
-public class ProductActivity extends AppCompatActivity implements ProductEventSubscriber{
+public class ProductActivity extends AppActivity implements ProductEventSubscriber{
     Toolbar toolbar;
 
     private static final String TAG = "ProductActivity";
@@ -33,6 +36,8 @@ public class ProductActivity extends AppCompatActivity implements ProductEventSu
     RecyclerView.LayoutManager layoutManager;
 
     ArrayList<Product> productList;
+    ArrayList<Brand> brandList;
+    long position=0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,6 +66,34 @@ public class ProductActivity extends AppCompatActivity implements ProductEventSu
         APIUtil.getAPI();
         ProductAPI.get(this);
 
+        Intent intent = getIntent();
+
+
+        if(intent !=null)
+        {
+            position =intent.getLongExtra(APIUtil.KEY_POSITION, 0);
+            Log.i(TAG, "...............position........." + position);
+
+            String activity = intent.getExtras().getString("start");
+            if (activity.equals("From_ProductActivity")) {
+                ProductAPI.get(this);
+            }
+            else if (activity.equals("From_BrandsActivity")) {
+                long pos= position;
+                if(pos == 2)
+                {
+                    getSupportActionBar().setTitle("Dell");
+                    ProductAPI.getProductsByCategory(this);
+                }
+                else
+                {
+                    ProductAPI.getProductsByBrand(this);
+
+                }
+
+            }
+        }
+
     }
 
 
@@ -75,6 +108,7 @@ public class ProductActivity extends AppCompatActivity implements ProductEventSu
     @Override
     public void onProductCompleted(ProductResponse productResponse) {
         productList = new ArrayList<Product>(productResponse.getProducts());
+
 
         adapter = new AdapterListProduct(getApplicationContext(), productList);
         layoutManager = new GridLayoutManager(ProductActivity.this, 2);

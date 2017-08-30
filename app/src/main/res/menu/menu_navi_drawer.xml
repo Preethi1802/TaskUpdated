@@ -6,6 +6,10 @@
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Offers"></item>
 
+    <item android:id="@+id/brands"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Brands"></item>
+
     <item android:id="@+id/electronics"
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Electronics"></item>
@@ -39,6 +43,18 @@
         android:title="Settings"></item>
 
     <item android:id="@+id/wishlist"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Whislist"></item>
+
+    <item android:id="@+id/wishlist1"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Whislist"></item>
+
+    <item android:id="@+id/wishlist2"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="Whislist"></item>
+
+    <item android:id="@+id/wishlist3"
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Whislist"></item>
 
