@@ -8,13 +8,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.event.SettingsAPI;
@@ -32,7 +29,7 @@ import java.util.ArrayList;
  * Created by Admin on 8/22/2017.
  */
 
-public class AllCategoryActivity extends AppActivity implements AdapterView.OnItemClickListener, SettingsEventSubscriber {
+public class AllCategoryActivity extends AppActivity implements SettingsEventSubscriber {
     private static final String TAG = "ActivityAllCategories";
     Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -70,10 +67,8 @@ public class AllCategoryActivity extends AppActivity implements AdapterView.OnIt
         expandableListView = (ExpandableListView) findViewById(R.id.expand_list_view);
         categoryList = new ArrayList<>();
 
-        APIUtil.getAPI();
+        showProgress();
         SettingsAPI.get(this);
-        //    Log.i(TAG,"categoryList.size()"+ categoryList.size());
-
 
     }
 
@@ -85,30 +80,16 @@ public class AllCategoryActivity extends AppActivity implements AdapterView.OnIt
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        int value = (int) expandableListView.getAdapter().getItemId(position);
-        Log.i(TAG, "...............position........." + value);
-
-        Intent intent = new Intent(view.getContext(), AllCategoryActivity.class);
-
-        intent.putExtra(APIUtil.KEY_POSITION, position);
-        view.getContext().startActivity(intent);
-
-        Toast toast = Toast.makeText(getApplicationContext(), "Item " + (position + 1) + ": " + categoryList.get(position), Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-        toast.show();
-    }
 
     @Override
     public void onSettingsCompleted(SettingsResponse settingsResponse) {
+        hideProgress();
 
-            categoryList = new ArrayList<Category>(settingsResponse.getCategory());
-            Log.i(TAG, "categoryList.size()" + categoryList.size());
+        categoryList = new ArrayList<Category>(settingsResponse.getCategory());
+        Log.i(TAG, "categoryList.size()" + categoryList.size());
 
-            adapterAllCategories = new AdapterAllCategories(AllCategoryActivity.this, categoryList);
-            expandableListView.setAdapter(adapterAllCategories);
+        adapterAllCategories = new AdapterAllCategories(AllCategoryActivity.this, categoryList);
+        expandableListView.setAdapter(adapterAllCategories);
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {

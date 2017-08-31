@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">Task1</string>
     <string name="title">Flipkart</string>
-    <string name="Offers">Offers</string>
-    <string name="Electronics">Electronics</string>
-    <string name="Home">Home</string>
-    <string name="Book">Book</string>
-    <string name="More">More</string>
-    <string name="RedmiNote">RedmiNote</string>
-    <string name="Tab_New">Tab_New</string>
-    <string name="Deals">Deals of the Day</string>
-    <string name="ViewButton">View All</string>
-    <string name="Deals2">Deals of the Day</string>
-    <string name="ViewButton2">View All</string>
+    <string name="offers">Offers</string>
+    <string name="electronics">Electronics</string>
+    <string name="home">Home</string>
+    <string name="book">Book</string>
+    <string name="more">More</string>
+    <string name="redmiNote">RedmiNote</string>
+    <string name="tab_New">Tab_New</string>
+    <string name="deals">Deals of the Day</string>
+    <string name="viewButton">View All</string>
+    <string name="deals2">Deals of the Day</string>
+    <string name="viewButton2">View All</string>
     <string name="iphone">Apple iPhone 4s</string>
     <string name="s1_mob1">Lenova Vibe K5</string>
     <string name="s1_mob2">Alcatel OneTouch XL</string>
@@ -20,20 +20,21 @@
     <string name="s2_toptext">Mobiles</string>
     <string name="s2_sort">Sort</string>
     <string name="s2_filter">Filter</string>
-    <string name="Watch_text">Top Branded Watches</string>
-    <string name="Coolers_text">Rayban Glass</string>
-    <string name="Saree_text">Cotton Sarees</string>
-    <string name="Bag_text">Sling Bags</string>
-    <string name="AddToCart">Add To Cart</string>
-    <string name="BuyNow">Buy Now</string>
+    <string name="watch_text">Top Branded Watches</string>
+    <string name="coolers_text">Rayban Glass</string>
+    <string name="saree_text">Cotton Sarees</string>
+    <string name="bag_text">Sling Bags</string>
+    <string name="addToCart">Add To Cart</string>
+    <string name="buyNow">Buy Now</string>
+    <string name="category1">Dell</string>
     <string name="label_loading">Loading</string>
 
-    <string name="NoCostEmiMore">No Cost EMI &amp; more</string>
+    <string name="noCostEmiMore">No Cost EMI &amp; more</string>
     <string name="rs">\u20B9 10,799</string>
     <string name="offer">70% off</string>
 
 
-    <string-array name="MobileName">
+    <string-array name="mobileName">
         <item>"Lenova Vibe K5 3GB"</item>
         <item>"Moto_E"</item>
         <item>"iPhone s6"</item>
@@ -41,7 +42,7 @@
 
     </string-array>
 
-    <string-array name="Version">
+    <string-array name="version">
         <item>"model_s4"</item>
         <item>"model_s1"</item>
         <item>"NewVersion_s6"</item>

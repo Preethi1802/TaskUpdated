@@ -65,7 +65,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         productList = new ArrayList<>();
 
-        APIUtil.getAPI();
+
 
         Intent intent = getIntent();
 
@@ -75,18 +75,24 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
             String activity = intent.getExtras().getString(APIUtil.ACTIVITY_CHECK);
             if (activity.equals(APIUtil.ACTIVITY_MAIN)) {
+
+                showProgress();
                 ProductAPI.get(this);
+
             } else if (activity.equals(APIUtil.ACTIVITY_BRAND)) {
                 int pos = position;
                 if (pos == 2) {
-                    getSupportActionBar().setTitle("Dell");
+                    getSupportActionBar().setTitle(R.string.category1);
+
+                    showProgress();
                     ProductAPI.getProductsByCategory(this);
                 } else {
+                    showProgress();
                     ProductAPI.getProductsByBrand(this);
                 }
-
             }
         }
+
 
     }
 
@@ -105,19 +111,17 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
     @Override
     public void onProductCompleted(ProductResponse productResponse) {
+
+        hideProgress();
+
         if (productResponse.isSuccess()) {
+            productList = productResponse.getProducts();
+            adapter = new AdapterListProduct(getApplicationContext(), productList);
+            layoutManager = new GridLayoutManager(ProductActivity.this, 2);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(adapter);
 
-           /* if (isListNotEmpty(productList)) {*/
-                productList = productResponse.getProducts();
-                adapter = new AdapterListProduct(getApplicationContext(), productList);
-                layoutManager = new GridLayoutManager(ProductActivity.this, 2);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(adapter);
-           /* } else {
-                Toast.makeText(getApplicationContext(), productResponse.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }*/
         } else {
             Toast.makeText(getApplicationContext(), productResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -128,3 +132,17 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
 }
 
+
+
+
+
+
+
+
+   /*if (isListNotEmpty(productList)) {
+
+
+   } else {
+                Toast.makeText(getApplicationContext(), productResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }*/

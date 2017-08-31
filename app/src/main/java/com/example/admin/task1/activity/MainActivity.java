@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.task1.api.util.APIUtil;
-import com.example.admin.task1.settings.activity.BrandsActivity;
+import com.example.admin.task1.Brand.activity.BrandsActivity;
 import com.example.admin.task1.R;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.product.activity.ProductActivity;
@@ -40,6 +40,8 @@ public class MainActivity extends AppActivity {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.admin.task1.settings.activity.BrandsActivity">
+    tools:context="com.example.admin.task1.Brand.activity.BrandsActivity">
 
     <include layout="@layout/layout_toolbar"></include>
     <LinearLayout

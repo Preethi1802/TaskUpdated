@@ -66,7 +66,7 @@
                         android:layout_height="@dimen/ToolbarHeight"
                         android:drawableTop="@drawable/ic_local_offer_black_24dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/Offers"
+                        android:text="@string/offers"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize" />
@@ -77,7 +77,7 @@
                         android:layout_height="@dimen/ToolbarHeight"
                         android:drawableTop="@drawable/ic_phone_iphone_black_24dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/Electronics"
+                        android:text="@string/electronics"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize" />
@@ -88,7 +88,7 @@
                         android:layout_height="@dimen/ToolbarHeight"
                         android:drawableTop="@drawable/ic_home_black_24dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/Home"
+                        android:text="@string/home"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize" />
@@ -99,7 +99,7 @@
                         android:layout_height="@dimen/ToolbarHeight"
                         android:drawableTop="@drawable/ic_book_black_24dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/Book"
+                        android:text="@string/book"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize" />
@@ -110,7 +110,7 @@
                         android:layout_height="@dimen/ToolbarHeight"
                         android:drawableTop="@drawable/ic_more_horiz_black_24dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/More"
+                        android:text="@string/more"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize" />
@@ -305,7 +305,7 @@
                     android:layout_marginTop="16dp"
                     android:paddingBottom="20dp"
                     android:paddingTop="20dp"
-                    android:text="@string/Deals"
+                    android:text="@string/deals"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
                     android:textSize="22dp" />
@@ -319,7 +319,7 @@
                     android:layout_marginTop="16dp"
                     android:background="@drawable/curved_corner"
                     android:elevation="@dimen/cardview_compat_inset_shadow"
-                    android:text="@string/ViewButton"
+                    android:text="@string/viewButton"
                     android:textAllCaps="false"
                     android:textSize="@dimen/ButtonSize" />
             </LinearLayout>
@@ -377,7 +377,7 @@
                                     android:layout_marginBottom="24dp"
                                     android:clickable="true"
                                     android:gravity="center"
-                                    android:text="@string/Watch_text"
+                                    android:text="@string/watch_text"
                                     android:textAlignment="center"
                                     android:textSize="17dp"
                                     android:textStyle="bold" />
@@ -412,7 +412,7 @@
                                     android:layout_marginBottom="24dp"
                                     android:clickable="true"
                                     android:gravity="center"
-                                    android:text="@string/Coolers_text"
+                                    android:text="@string/coolers_text"
                                     android:textAlignment="center"
                                     android:textSize="17sp"
                                     android:textStyle="bold" />
@@ -454,7 +454,7 @@
                                     android:layout_marginBottom="24dp"
                                     android:clickable="true"
                                     android:gravity="center"
-                                    android:text="@string/Saree_text"
+                                    android:text="@string/saree_text"
                                     android:textAlignment="center"
                                     android:textSize="20sp"
                                     android:textStyle="bold" />
@@ -490,7 +490,7 @@
                                     android:layout_marginBottom="24dp"
                                     android:clickable="true"
                                     android:gravity="center"
-                                    android:text="@string/Bag_text"
+                                    android:text="@string/bag_text"
                                     android:textAlignment="center"
                                     android:textSize="17sp"
                                     android:textStyle="bold" />

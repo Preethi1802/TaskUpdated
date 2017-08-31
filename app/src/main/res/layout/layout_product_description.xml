@@ -211,7 +211,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="5"
                     android:background="@android:color/white"
-                    android:text="@string/AddToCart" />
+                    android:text="@string/addToCart" />
 
                 <Button
                     android:id="@+id/btn2"
@@ -222,7 +222,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="5"
                     android:background="@android:color/white"
-                    android:text="@string/BuyNow" />
+                    android:text="@string/buyNow" />
 
             </LinearLayout>
         </RelativeLayout>

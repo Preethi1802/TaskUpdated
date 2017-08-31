@@ -4,34 +4,30 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class AdapterTabPage extends FragmentPagerAdapter {
+import com.example.admin.task1.activity.AllDetailsFragement;
+
+public class AdapterTabPage extends  FragmentPagerAdapter {
+    final int PAGE_COUNT = 2;
+    private String tabTitles[] = new String[] { "Tab1", "Tab2"};
 
     public AdapterTabPage(FragmentManager fm) {
         super(fm);
     }
 
     @Override
-    public Fragment getItem(int index) {
-
-        switch (index) {
-            case 0:
-                // Top Rated fragment activity
-                //    return new TopRatedFragment();
-            case 1:
-                // Games fragment activity
-                //    return new GamesFragment();
-            case 2:
-                // Movies fragment activity
-                //    return new MoviesFragment();
-        }
-
-        return null;
+    public int getCount() {
+        return PAGE_COUNT;
     }
 
     @Override
-    public int getCount() {
-        // get item count - equal to number of tabs
-        return 3;
+    public Fragment getItem(int position) {
+
+       return AllDetailsFragement.newInstance(position + 1);
     }
 
+    @Override
+    public CharSequence getPageTitle(int position) {
+        // Generate title based on item position
+        return tabTitles[position];
+    }
 }

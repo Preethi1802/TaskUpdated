@@ -1,4 +1,4 @@
-package com.example.admin.task1.settings.adapter;
+package com.example.admin.task1.Brand.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -46,7 +46,6 @@ public class AdapterBrand extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
 
         view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.brand_items, viewGroup, false);
-
         Brand brand = brandList.get(position);
         TextView tv_brand = (TextView) view.findViewById(R.id.brand_text);
         tv_brand.setText(brand.getName());
