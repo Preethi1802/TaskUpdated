@@ -26,6 +26,7 @@
     <string name="Bag_text">Sling Bags</string>
     <string name="AddToCart">Add To Cart</string>
     <string name="BuyNow">Buy Now</string>
+    <string name="label_loading">Loading</string>
 
     <string name="NoCostEmiMore">No Cost EMI &amp; more</string>
     <string name="rs">\u20B9 10,799</string>

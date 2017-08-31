@@ -1,17 +1,36 @@
 package com.example.admin.task1.app;
 
 import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
-public class AppActivity extends AppCompatActivity/* implements NetworkStateReceiver.NetworkStateReceiverListener*/
+import com.example.admin.task1.R;
+import com.thapovan.android.commonutils.dialog.DialogUtil;
+
+public class AppActivity extends AppCompatActivity
 
 {
+
+    public static final String CLASS_TAG    = AppActivity.class.getSimpleName();
+    public static final String LOG_TAG = AppActivity.class.getSimpleName();
 
     private ProgressDialog mProgress;
     private AppActivity mActivity;
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mActivity = this;
+        super.onCreate(savedInstanceState);
+    }
 
-   /* public void showProgress(@StringRes int resId){
+
+    public void showProgress(){
+        showProgress(R.string.label_loading);
+    }
+
+    public void showProgress(@StringRes int resId){
         showProgress(getString(resId));
     }
 
@@ -23,14 +42,8 @@ public class AppActivity extends AppCompatActivity/* implements NetworkStateRece
         mProgress = DialogUtil.showProgressDialog(this,message);
     }
 
-    protected int getSourceFrom(){
-        return getIntent().getIntExtra(KEY_SOURCE_FROM, Constants.INVALID);
-    }
-
     public void hideProgress(){
         DialogUtil.hideProgressDialog(mProgress);
         mProgress=null;
-    }*/
-
-
+    }
 }

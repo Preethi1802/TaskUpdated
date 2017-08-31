@@ -34,7 +34,9 @@ public class APILogger implements Interceptor {
         this.logger = logger;
     }
 
-    /** Change the level at which this interceptor logs. */
+    /**
+     * Change the level at which this interceptor logs.
+     */
     public APILogger setLevel(HttpLoggingInterceptor.Level level) {
         if (level == null) throw new NullPointerException("level == null. Use Level.NONE instead.");
         this.level = level;
@@ -91,7 +93,7 @@ public class APILogger implements Interceptor {
                 String name = headers.name(i);
                 // Skip headers from the request body as they are explicitly logged above.
                 if (!"Content-Type".equalsIgnoreCase(name) && !"Content-Length".equalsIgnoreCase(name)) {
-                    logger.log("## Header: " +name + ": " + headers.value(i));
+                    logger.log("## Header: " + name + ": " + headers.value(i));
                 }
             }
 
@@ -111,7 +113,7 @@ public class APILogger implements Interceptor {
 
                 logger.log("");
                 if (isPlaintext(buffer)) {
-                    logger.log("## "+ buffer.readString(charset));
+                    logger.log("## " + buffer.readString(charset));
                     logger.log("## END " + request.method()
                             + " (" + requestBody.contentLength() + "-byte body)");
                 } else {
@@ -137,14 +139,14 @@ public class APILogger implements Interceptor {
         String bodySize = contentLength != -1 ? contentLength + "-byte" : "unknown-length";
         logger.log("################# [RESPONSE START] ####################");
         logger.log("## Response Code: " + response.code());
-        logger.log("## "  + response.message() + ' '
+        logger.log("## " + response.message() + ' '
                 + response.request().url() + " (" + tookMs + "ms" + (!logHeaders ? ", "
                 + bodySize + " body" : "") + ')');
 
         if (logHeaders) {
             Headers headers = response.headers();
             for (int i = 0, count = headers.size(); i < count; i++) {
-                logger.log("## "+headers.name(i) + ": " + headers.value(i));
+                logger.log("## " + headers.name(i) + ": " + headers.value(i));
             }
 
             if (!logBody || !HttpHeaders.hasBody(response)) {
@@ -170,7 +172,7 @@ public class APILogger implements Interceptor {
 
                 if (contentLength != 0) {
                     logger.log("");
-                    logger.log("## "+buffer.clone().readString(charset));
+                    logger.log("## " + buffer.clone().readString(charset));
                 }
 
                 logger.log("## END HTTP (" + buffer.size() + "-byte body)");

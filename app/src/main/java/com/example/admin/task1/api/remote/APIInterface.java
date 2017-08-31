@@ -1,7 +1,6 @@
 package com.example.admin.task1.api.remote;
 
 
-import com.example.admin.task1.api.response.BrandsResponse;
 import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.api.response.SettingsResponse;
 import com.example.admin.task1.api.util.APIUtil;
@@ -14,8 +13,7 @@ import retrofit2.http.Query;
  * Created by Admin on 8/28/2017.
  */
 
-public interface APIInterface
-{
+public interface APIInterface {
     @GET(APIUtil.API_PRODUCTS)
     Call<ProductResponse> getProducts();
 
@@ -26,8 +24,8 @@ public interface APIInterface
     Call<ProductResponse> getProductsByBrand(@Query("brand_id") String brandId);
 
     @GET(APIUtil.API_SETTINGS)
-    Call<SettingsResponse> getSettings();
+    Call<SettingsResponse> getCategory();
 
     @GET(APIUtil.API_SETTINGS)
-    Call<BrandsResponse> getBrand();
+    Call<SettingsResponse> getBrand();
 }

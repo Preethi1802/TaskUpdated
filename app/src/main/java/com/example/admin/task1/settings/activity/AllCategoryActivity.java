@@ -18,12 +18,12 @@ import android.widget.Toast;
 
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.event.SettingsAPI;
-import com.example.admin.task1.api.response.BrandsResponse;
 import com.example.admin.task1.api.response.SettingsResponse;
 import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
 import com.example.admin.task1.api.util.APIUtil;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Category;
+import com.example.admin.task1.product.activity.ProductActivity;
 import com.example.admin.task1.settings.adapter.AdapterAllCategories;
 
 import java.util.ArrayList;
@@ -32,8 +32,7 @@ import java.util.ArrayList;
  * Created by Admin on 8/22/2017.
  */
 
-public class AllCategoryActivity extends AppActivity implements AdapterView.OnItemClickListener,SettingsEventSubscriber
-{
+public class AllCategoryActivity extends AppActivity implements AdapterView.OnItemClickListener, SettingsEventSubscriber {
     private static final String TAG = "ActivityAllCategories";
     Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -62,17 +61,19 @@ public class AllCategoryActivity extends AppActivity implements AdapterView.OnIt
         getSupportActionBar().setTitle("All Categories");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawerlayoutAllCategories);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayoutAllCategories);
         toggle = new android.support.v7.app.ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        expandableListView= (ExpandableListView) findViewById(R.id.expand_list_view);
+        expandableListView = (ExpandableListView) findViewById(R.id.expand_list_view);
         categoryList = new ArrayList<>();
 
         APIUtil.getAPI();
         SettingsAPI.get(this);
+        //    Log.i(TAG,"categoryList.size()"+ categoryList.size());
+
 
     }
 
@@ -87,30 +88,43 @@ public class AllCategoryActivity extends AppActivity implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Intent intent= new Intent(view.getContext(),AllCategoryActivity.class);
+        int value = (int) expandableListView.getAdapter().getItemId(position);
+        Log.i(TAG, "...............position........." + value);
+
+        Intent intent = new Intent(view.getContext(), AllCategoryActivity.class);
 
         intent.putExtra(APIUtil.KEY_POSITION, position);
         view.getContext().startActivity(intent);
 
-        Toast toast = Toast.makeText(getApplicationContext(),"Item " + (position + 1) + ": " + categoryList.get(position),Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+        Toast toast = Toast.makeText(getApplicationContext(), "Item " + (position + 1) + ": " + categoryList.get(position), Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
     }
 
     @Override
     public void onSettingsCompleted(SettingsResponse settingsResponse) {
 
-        categoryList = new ArrayList<Category>(settingsResponse.getCategory());
-        Log.i(TAG,"categoryList.size()"+ categoryList.size());
+            categoryList = new ArrayList<Category>(settingsResponse.getCategory());
+            Log.i(TAG, "categoryList.size()" + categoryList.size());
 
+            adapterAllCategories = new AdapterAllCategories(AllCategoryActivity.this, categoryList);
+            expandableListView.setAdapter(adapterAllCategories);
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-        adapterAllCategories = new AdapterAllCategories(AllCategoryActivity.this, categoryList);
-        expandableListView.setAdapter(adapterAllCategories);
+                int value = (int) expandableListView.getAdapter().getItemId(childPosition);
+                Log.i(TAG, "...............position........." + value);
+
+                Intent intent = new Intent(v.getContext(), ProductActivity.class);
+                intent.setClass(v.getContext(), ProductActivity.class);
+                intent.putExtra(APIUtil.KEY_POSITION, value);
+                intent.putExtra(APIUtil.ACTIVITY_CHECK, APIUtil.ACTIVITY_BRAND);
+                startActivity(intent);
+                return false;
+            }
+        });
 
     }
 
-    @Override
-    public void onBrandCompleted(BrandsResponse brandsResponse) {
-
-    }
 }

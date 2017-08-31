@@ -7,8 +7,7 @@ import com.example.admin.task1.api.util.APIUtil;
  * Created by Admin on 8/28/2017.
  */
 
-public class APIAbstact
-{
+public class APIAbstact {
     static APIInterface sApiInterface = APIUtil.getAPI();
 
 }

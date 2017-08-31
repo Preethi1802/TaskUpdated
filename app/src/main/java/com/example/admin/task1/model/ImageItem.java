@@ -64,11 +64,12 @@ public class ImageItem implements Parcelable {
 
     public String getFeaturedImageURL() {
 
-        return APIUtil.IMAGE_URL+this.path+"/"+this.name;
+        return APIUtil.IMAGE_URL + this.path + "/" + this.name;
     }
+
     public String getGalleryImageURL() {
 
-        return APIUtil.IMAGE_URL+this.path+"/"+this.name;
+        return APIUtil.IMAGE_URL + this.path + "/" + this.name;
     }
 
     public void setPath(String path) {

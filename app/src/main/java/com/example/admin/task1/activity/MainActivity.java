@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.admin.task1.api.util.APIUtil;
 import com.example.admin.task1.settings.activity.BrandsActivity;
 import com.example.admin.task1.R;
 import com.example.admin.task1.app.AppActivity;
@@ -76,7 +78,7 @@ public class MainActivity extends AppActivity {
                         Toast.makeText(getApplicationContext(), "book Selected", Toast.LENGTH_LONG).show();
                         return true;
                     case R.id.electronics:
-                        intent= new Intent(getApplicationContext(),AllCategoryActivity.class);
+                        intent = new Intent(getApplicationContext(), AllCategoryActivity.class);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(), "electronics Selected", Toast.LENGTH_LONG).show();
                         return true;
@@ -86,25 +88,24 @@ public class MainActivity extends AppActivity {
         });
 
 
-
-
         btn_viewAll = (Button) findViewById(R.id.button6);
         btn_viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ProductActivity.class);
-                intent.setClass(v.getContext(),ProductActivity.class);
-                intent.putExtra("start","From_ProductActivity");
+                intent.setClass(v.getContext(), ProductActivity.class);
+                intent.putExtra(APIUtil.ACTIVITY_CHECK, APIUtil.ACTIVITY_MAIN);
                 startActivity(intent);
             }
         });
 
-        tv_more = (TextView)findViewById(R.id.tv_more);
+        tv_more = (TextView) findViewById(R.id.tv_more);
         tv_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(v.getContext(),AllCategoryActivity.class);
+                Intent intent = new Intent(v.getContext(), AllCategoryActivity.class);
                 startActivity(intent);
+                Log.i(TAG, "HIIII");
 
             }
         });
@@ -113,8 +114,7 @@ public class MainActivity extends AppActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item))
-        {
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);

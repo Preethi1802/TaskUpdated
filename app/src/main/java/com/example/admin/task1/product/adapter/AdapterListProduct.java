@@ -26,10 +26,10 @@ import java.util.List;
 
 public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.ViewHolder> {
     private static final String TAG = "AdapterListProduct";
-    List<Product> list= new ArrayList<>();
+    List<Product> list = new ArrayList<>();
     public Context mContext;
 
-    public AdapterListProduct(Context applicationContext, ArrayList<Product> list) {
+    public AdapterListProduct(Context applicationContext, List<Product> list) {
         this.list = list;
         this.mContext = applicationContext;
     }
@@ -48,13 +48,13 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
         Product product = list.get(position);
         holder.mobileName.setText(product.getName());
         holder.version.setText(product.getSpec());
-        Log.i(TAG,"%%%%%%%%%%%%%%%%%%"+product.getFeaturedImages());
+        Log.i(TAG, "%%%%%%%%%%%%%%%%%%" + product.getFeaturedImages());
 
-        String imageURL= product.getFeaturedImages().getFeaturedImageURL();
+        String imageURL = product.getFeaturedImages().getFeaturedImageURL();
 
-                Glide.with(mContext)
-                        .load(imageURL)
-                        .into(holder.productImage);
+        Glide.with(mContext)
+                .load(imageURL)
+                .into(holder.productImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 

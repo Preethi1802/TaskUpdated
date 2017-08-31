@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.event.SettingsAPI;
-import com.example.admin.task1.api.response.BrandsResponse;
 import com.example.admin.task1.api.response.SettingsResponse;
 import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
 import com.example.admin.task1.api.util.APIUtil;
@@ -23,12 +22,13 @@ import com.example.admin.task1.settings.adapter.AdapterBrand;
 
 import java.util.ArrayList;
 
-public class BrandsActivity extends AppCompatActivity implements SettingsEventSubscriber{
+public class BrandsActivity extends AppCompatActivity implements SettingsEventSubscriber {
 
     private static final String TAG = "BrandsActivity";
     Toolbar toolbar;
     ListView listView;
-    ArrayList<Brand> brandList= new ArrayList<>();;
+    ArrayList<Brand> brandList = new ArrayList<>();
+    ;
     AdapterBrand adapterBrand;
 
     @Override
@@ -43,7 +43,7 @@ public class BrandsActivity extends AppCompatActivity implements SettingsEventSu
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
 
 
-        listView = (ListView)findViewById(R.id.brands_list);
+        listView = (ListView) findViewById(R.id.brands_list);
 
         Log.i(TAG, "hiiiiii");
 
@@ -58,37 +58,29 @@ public class BrandsActivity extends AppCompatActivity implements SettingsEventSu
 
     }
 
-    @Override
-    public void onBrandCompleted(BrandsResponse brandsResponse) {
 
-        brandList = new ArrayList<Brand>(brandsResponse.getBrand());
-        Log.i(TAG,"brandList.size()"+ brandList.size());
+    @Override
+    public void onSettingsCompleted(SettingsResponse settingsResponse) {
+        brandList = new ArrayList<Brand>(settingsResponse.getBrand());
+        Log.i(TAG, "brandList.size()" + brandList.size());
         AdapterBrand adapterBrand = new AdapterBrand(brandList);
         listView.setAdapter(adapterBrand);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                long value = listView.getAdapter().getItemId(position);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int value = (int) listView.getAdapter().getItemId(position);
                 Log.i(TAG, "...............position........." + value);
 
-                Intent intent= new Intent(view.getContext(), ProductActivity.class);
-                intent.setClass(view.getContext(),ProductActivity.class);
-                intent.putExtra(APIUtil.KEY_POSITION,value);
-                intent.putExtra("start","From_BrandsActivity");
+                Intent intent = new Intent(view.getContext(), ProductActivity.class);
+                intent.setClass(view.getContext(), ProductActivity.class);
+                intent.putExtra(APIUtil.KEY_POSITION, value);
+                intent.putExtra(APIUtil.ACTIVITY_CHECK, APIUtil.ACTIVITY_BRAND);
                 startActivity(intent);
 
 
             }
         });
-    }
-
-
-
-
-    @Override
-    public void onSettingsCompleted(SettingsResponse settingsResponse) {
 
     }
 

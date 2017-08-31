@@ -7,8 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Admin on 8/30/2017.
  */
 
-public class Settings
-{
+public class Settings {
 
     @SerializedName("id")
     @Expose

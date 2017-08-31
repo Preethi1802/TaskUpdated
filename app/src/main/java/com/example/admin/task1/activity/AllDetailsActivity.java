@@ -25,7 +25,7 @@ public class AllDetailsActivity extends FragmentActivity implements
 
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
-    //    actionBar = getActionBar();
+        //    actionBar = getActionBar();
         adapterTabPage = new AdapterTabPage(getSupportFragmentManager());
 
         viewPager.setAdapter(adapterTabPage);

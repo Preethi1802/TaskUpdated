@@ -71,23 +71,6 @@ public class Product implements Parcelable {
     @Expose
     private List<ImageItem> images = new ArrayList<>();
 
-    @SerializedName("empty")
-    private String empty;
-
-    public Product() {
-
-    }
-
-    public String getEmpty() {
-
-        empty= "No Products Found";
-        return empty;
-    }
-
-    public void setEmpty(String empty) {
-        this.empty = empty;
-    }
-
     public Product(Integer id, String name, String description, String spec, Integer quantity, String sku, String regularPrice, String salePrice, String shippingPrice, String deliveryDays, Integer status, Integer isInStock, Integer isTaxable, Integer isFeatured, String createdAt, String updatedAt, Object deletedAt, List<ImageItem> images) {
         this.id = id;
         this.name = name;
@@ -250,9 +233,9 @@ public class Product implements Parcelable {
     }
 
     public ImageItem getFeaturedImages() {
-        for (int i= 0; i<images.size();i++) {
+        for (int i = 0; i < images.size(); i++) {
 
-            if (images.get(i).getType() .equals("FEATURED") ) {
+            if (images.get(i).getType().equals("FEATURED")) {
 
                 return images.get(i);
             }
@@ -261,19 +244,18 @@ public class Product implements Parcelable {
         return null;
     }
 
-    public ArrayList<ImageItem> getGalleryImages(){
+    public ArrayList<ImageItem> getGalleryImages() {
         ArrayList<ImageItem> imageItems = new ArrayList();
         int i;
         ImageItem j = new ImageItem();
-        for ( i=0;i<images.size();i++)
-        {
-            if (images.get(i).getType().equals("GALLERY")){
+        for (i = 0; i < images.size(); i++) {
+            if (images.get(i).getType().equals("GALLERY")) {
 
-                Log.i("Products",""+images.get(i));
+                Log.i("Products", "" + images.get(i));
                 imageItems.add(images.get(i));
             }
         }
-        Log.i("Products",""+imageItems.size());
+        Log.i("Products", "" + imageItems.size());
 
         return imageItems;
     }

@@ -9,8 +9,7 @@ import java.util.List;
  * Created by Admin on 8/30/2017.
  */
 
-public class Example
-{
+public class Example {
 
     @SerializedName("success")
     @Expose

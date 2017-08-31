@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Admin on 8/23/2017.
  */
 
-public class Category implements Parcelable{
+public class Category implements Parcelable {
     private static final String TAG = "Category";
 
 
@@ -52,8 +52,8 @@ public class Category implements Parcelable{
     }
 
     public String getName() {
-        Log.i(TAG,"HIIIIIII");
-        Log.i(TAG,")))))))))"+name);
+        Log.i(TAG, "HIIIIIII");
+        Log.i(TAG, ")))))))))" + name);
         return name;
     }
 
@@ -87,7 +87,7 @@ public class Category implements Parcelable{
 
     public String getIconUrl() {
 
-        return APIUtil.IMAGE_URL+this.iconPath+"/"+this.iconName;
+        return APIUtil.IMAGE_URL + this.iconPath + "/" + this.iconName;
     }
 
     public Object getImageName() {
