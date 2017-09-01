@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.admin.task1.Brand.activity.BrandsActivity;
+import com.example.admin.task1.brand.activity.BrandsActivity;
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
@@ -96,7 +96,7 @@ public class MainActivity extends AppActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ProductActivity.class);
                 intent.setClass(v.getContext(), ProductActivity.class);
-                intent.putExtra(Constants.ACTIVITY_CHECK, Constants.ACTIVITY_MAIN);
+                intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_FROM_MAINACTIVITY);
                 startActivity(intent);
             }
         });

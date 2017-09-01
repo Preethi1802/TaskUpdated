@@ -1,4 +1,4 @@
-package com.example.admin.task1.Brand.adapter;
+package com.example.admin.task1.brand.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

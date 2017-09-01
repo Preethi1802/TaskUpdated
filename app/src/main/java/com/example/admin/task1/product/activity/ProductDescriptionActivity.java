@@ -75,8 +75,7 @@ public class ProductDescriptionActivity extends AppActivity {
             iv_galleryImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    //      Toast.makeText(getApplicationContext(), "ON ITEM" + imageURL1, Toast.LENGTH_LONG).show();
+                    // Toast.makeText(getApplicationContext(), "ON ITEM" + imageURL1, Toast.LENGTH_LONG).show();
                     iv_featuredImage.setImageDrawable(iv_galleryImage.getDrawable());
                 }
             });

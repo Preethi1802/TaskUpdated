@@ -1,4 +1,4 @@
-package com.example.admin.task1.Brand.activity;
+package com.example.admin.task1.brand.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.admin.task1.Brand.adapter.AdapterBrand;
+import com.example.admin.task1.brand.adapter.AdapterBrand;
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.event.SettingsAPI;
 import com.example.admin.task1.api.response.SettingsResponse;
@@ -59,14 +59,18 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int value = (int) listView.getAdapter().getItemId(position);
-                Log.i(TAG, "...............position........." + value);
+                int brandId = brandList.get(position).getId();
+                Log.i(TAG, "...............position........." + brandId);
+
+                String brandName = brandList.get(position).getName();
+                Log.i(TAG, "...............brandName........." + brandName);
 
                 //intent to product activity for getting products by brand
                 Intent intent = new Intent(view.getContext(), ProductActivity.class);
                 intent.setClass(view.getContext(), ProductActivity.class);
-                intent.putExtra(Constants.KEY_POSITION, value);
-                intent.putExtra(Constants.ACTIVITY_CHECK, Constants.ACTIVITY_BRAND);
+                intent.putExtra(Constants.KEY_POSITION, brandId);
+                intent.putExtra(Constants.STORED_ITEMS,brandName);
+                intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_FROM_BRAND);
                 startActivity(intent);
             }
         });

@@ -18,10 +18,10 @@ public interface APIInterface {
     Call<ProductResponse> getProducts();
 
     @GET(APIUtil.API_PRODUCTS)
-    Call<ProductResponse> getProductsByCategory(@Query("category_id") int id);
+    Call<ProductResponse> getProductsByCategory(@Query("category_id") int categoryID);
 
     @GET(APIUtil.API_PRODUCTS)
-    Call<ProductResponse> getProductsByBrand(@Query("brand_id") int id);
+    Call<ProductResponse> getProductsByBrand(@Query("brand_id") int brandID);
 
     @GET(APIUtil.API_SETTINGS)
     Call<SettingsResponse> getCategory();

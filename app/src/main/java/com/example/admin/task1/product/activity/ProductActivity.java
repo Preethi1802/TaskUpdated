@@ -39,7 +39,6 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
     List<Product> productList;
     ArrayList<Brand> brandList;
-    int position = 0;
 
     // inflate toolbar into allproductslayout
     @Override
@@ -63,41 +62,45 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        productList = new ArrayList<>();
-
-
         Intent intent = getIntent();
 
         if (intent != null) {
-            position = intent.getIntExtra(Constants.KEY_POSITION, 0);
-            Log.i(TAG, "...............position........." + position);
+            String KEY_SOURCE = intent.getExtras().getString(Constants.KEY_SOURCE);
 
-            String activity = intent.getExtras().getString(Constants.ACTIVITY_CHECK);
-            if (activity.equals(Constants.ACTIVITY_MAIN)) {
+            if (KEY_SOURCE.equals(Constants.SOURCE_FROM_MAINACTIVITY)) {
 
                 showProgress();
-
                 //api call to get all products
                 ProductAPI.getAllProducts(this);
+            }
+            else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_BRAND)) {
 
-            } else if (activity.equals(Constants.ACTIVITY_BRAND)) {
-                int pos = position;
-                if (pos == 2) {
-                    getSupportActionBar().setTitle(R.string.category1);
+                int brandId = intent.getIntExtra(Constants.KEY_POSITION, 0);
+                Log.i(TAG, "...............position........." + brandId);
 
-                    showProgress();
+                String brandName = intent.getStringExtra(Constants.STORED_ITEMS);
+                Log.i(TAG, "...............position........." + brandName);
 
-                    //api call to get product by category
-                    ProductAPI.getProductsByCategory(this);
-                } else {
-                    showProgress();
+                getSupportActionBar().setTitle(brandName);
+                showProgress();
+                //api call to get product by category
+                ProductAPI.getProductsByBrand(brandId,this);
 
-                    //api call to get product by brand
-                    ProductAPI.getProductsByBrand(this);
-                }
+            }
+            else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_CATEGORY)) {
+                int categoryId = intent.getIntExtra(Constants.KEY_POSITION, 0);
+                Log.i(TAG, "...............position........." + categoryId);
+
+                String categoryName = intent.getStringExtra(Constants.STORED_ITEMS);
+                Log.i(TAG, "...............position........." + categoryName);
+                getSupportActionBar().setTitle(categoryName);
+                showProgress();
+                //api call to get product by brand
+                ProductAPI.getProductsByCategory(categoryId,this);
             }
         }
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        productList = new ArrayList<>();
     }
 
     @Override
@@ -107,7 +110,6 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         }
         return super.onOptionsItemSelected(item);
     }
-
     public <T> boolean isListNotEmpty(List<T> data) {
         return data != null && !data.isEmpty();
     }

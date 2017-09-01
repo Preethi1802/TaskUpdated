@@ -38,9 +38,9 @@ public class ProductAPI extends APIAbstact {
 
     }
 
-    public static void getProductsByCategory(final ProductEventSubscriber subscriber) {
+    public static void getProductsByBrand(final int brandId, final ProductEventSubscriber subscriber) {
 
-        sApiInterface.getProductsByCategory(1).enqueue(new Callback<ProductResponse>() {
+        sApiInterface.getProductsByBrand(brandId).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {
@@ -58,9 +58,9 @@ public class ProductAPI extends APIAbstact {
 
     }
 
-    public static void getProductsByBrand(final ProductEventSubscriber subscriber) {
+    public static void getProductsByCategory(final int categoryId, final ProductEventSubscriber subscriber) {
 
-        sApiInterface.getProductsByBrand(1).enqueue(new Callback<ProductResponse>() {
+        sApiInterface.getProductsByCategory(categoryId).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {
@@ -69,8 +69,6 @@ public class ProductAPI extends APIAbstact {
                     //   subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), ProductResponse.class));
                 }
             }
-
-
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 //  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
