@@ -26,13 +26,11 @@ public class AllDetailsFragement extends Fragment
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
     }
-
     // Inflate the fragment layout we defined above for this fragment
     // Set the associated text for the title
     @Override

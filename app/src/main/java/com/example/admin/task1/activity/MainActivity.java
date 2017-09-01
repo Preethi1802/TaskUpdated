@@ -16,12 +16,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.admin.task1.api.util.APIUtil;
 import com.example.admin.task1.Brand.activity.BrandsActivity;
 import com.example.admin.task1.R;
+import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.product.activity.ProductActivity;
-import com.example.admin.task1.settings.activity.AllCategoryActivity;
+import com.example.admin.task1.category.activity.AllCategoryActivity;
 
 public class MainActivity extends AppActivity {
 
@@ -35,13 +35,12 @@ public class MainActivity extends AppActivity {
     private android.support.v7.app.ActionBarDrawerToggle toggle;
     TextView tv_more;
 
+   // inflating menu items into toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +50,18 @@ public class MainActivity extends AppActivity {
         toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.appTitle);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
+
+        //setting navigation drawer in home page
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toggle = new android.support.v7.app.ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Flipkart");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navi_view);
+        //providing action with on click listnener for items in navigation drawer
+        navigationView = (NavigationView) findViewById(R.id.navi_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -89,18 +89,19 @@ public class MainActivity extends AppActivity {
             }
         });
 
-
+        //intent to product activity
         btn_viewAll = (Button) findViewById(R.id.button6);
         btn_viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ProductActivity.class);
                 intent.setClass(v.getContext(), ProductActivity.class);
-                intent.putExtra(APIUtil.ACTIVITY_CHECK, APIUtil.ACTIVITY_MAIN);
+                intent.putExtra(Constants.ACTIVITY_CHECK, Constants.ACTIVITY_MAIN);
                 startActivity(intent);
             }
         });
 
+        //intent to allcategories ctivity
         tv_more = (TextView) findViewById(R.id.tv_more);
         tv_more.setOnClickListener(new View.OnClickListener() {
             @Override

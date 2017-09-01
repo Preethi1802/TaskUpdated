@@ -26,7 +26,11 @@
     <string name="bag_text">Sling Bags</string>
     <string name="addToCart">Add To Cart</string>
     <string name="buyNow">Buy Now</string>
+    <string name="appTitle">Flipkart</string>
+    <string name="allCategories">All Categories</string>
     <string name="category1">Dell</string>
+    <string name="brand">Brand</string>
+    <string name="mobile">Mobile</string>
     <string name="label_loading">Loading</string>
 
     <string name="noCostEmiMore">No Cost EMI &amp; more</string>

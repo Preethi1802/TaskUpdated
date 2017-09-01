@@ -17,7 +17,8 @@ public class ProductAPI extends APIAbstact {
         // empty method
     }
 
-    public static void get(final ProductEventSubscriber subscriber) {
+
+    public static void getAllProducts(final ProductEventSubscriber subscriber) {
 
         sApiInterface.getProducts().enqueue(new Callback<ProductResponse>() {
             @Override
@@ -39,7 +40,7 @@ public class ProductAPI extends APIAbstact {
 
     public static void getProductsByCategory(final ProductEventSubscriber subscriber) {
 
-        sApiInterface.getProductsByCategory(null).enqueue(new Callback<ProductResponse>() {
+        sApiInterface.getProductsByCategory(1).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {
@@ -59,7 +60,7 @@ public class ProductAPI extends APIAbstact {
 
     public static void getProductsByBrand(final ProductEventSubscriber subscriber) {
 
-        sApiInterface.getProductsByBrand(null).enqueue(new Callback<ProductResponse>() {
+        sApiInterface.getProductsByBrand(1).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {

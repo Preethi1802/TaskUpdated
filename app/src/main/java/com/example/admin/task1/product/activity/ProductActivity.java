@@ -15,7 +15,7 @@ import com.example.admin.task1.R;
 import com.example.admin.task1.api.event.ProductAPI;
 import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
-import com.example.admin.task1.api.util.APIUtil;
+import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Brand;
 import com.example.admin.task1.model.Product;
@@ -41,9 +41,10 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
     ArrayList<Brand> brandList;
     int position = 0;
 
+    // inflate toolbar into allproductslayout
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_view_all, menu);
+        getMenuInflater().inflate(R.menu.menu_product_activity, menu);
         return true;
     }
 
@@ -55,7 +56,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
         toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Mobiles");
+        getSupportActionBar().setTitle(R.string.mobile);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,36 +67,38 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         productList = new ArrayList<>();
 
 
-
         Intent intent = getIntent();
 
         if (intent != null) {
-            position = intent.getIntExtra(APIUtil.KEY_POSITION, 0);
+            position = intent.getIntExtra(Constants.KEY_POSITION, 0);
             Log.i(TAG, "...............position........." + position);
 
-            String activity = intent.getExtras().getString(APIUtil.ACTIVITY_CHECK);
-            if (activity.equals(APIUtil.ACTIVITY_MAIN)) {
+            String activity = intent.getExtras().getString(Constants.ACTIVITY_CHECK);
+            if (activity.equals(Constants.ACTIVITY_MAIN)) {
 
                 showProgress();
-                ProductAPI.get(this);
 
-            } else if (activity.equals(APIUtil.ACTIVITY_BRAND)) {
+                //api call to get all products
+                ProductAPI.getAllProducts(this);
+
+            } else if (activity.equals(Constants.ACTIVITY_BRAND)) {
                 int pos = position;
                 if (pos == 2) {
                     getSupportActionBar().setTitle(R.string.category1);
 
                     showProgress();
+
+                    //api call to get product by category
                     ProductAPI.getProductsByCategory(this);
                 } else {
                     showProgress();
+
+                    //api call to get product by brand
                     ProductAPI.getProductsByBrand(this);
                 }
             }
         }
-
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,10 +129,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             Toast.makeText(getApplicationContext(), productResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
-
-
     }
-
 }
 
 

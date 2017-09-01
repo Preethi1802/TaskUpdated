@@ -10,15 +10,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.admin.task1.Brand.adapter.AdapterBrand;
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.event.SettingsAPI;
 import com.example.admin.task1.api.response.SettingsResponse;
 import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
-import com.example.admin.task1.api.util.APIUtil;
+import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Brand;
 import com.example.admin.task1.product.activity.ProductActivity;
-import com.example.admin.task1.Brand.adapter.AdapterBrand;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,6 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
     Toolbar toolbar;
     ListView listView;
     ArrayList<Brand> brandList = new ArrayList<>();
-    ;
     AdapterBrand adapterBrand;
 
     @Override
@@ -39,26 +38,23 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
         toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("Brands");
+        getSupportActionBar().setTitle(R.string.brand);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
 
-
         listView = (ListView) findViewById(R.id.brands_list);
-
         Log.i(TAG, "hiiiiii");
 
+        //api call to get categories by brand
         showProgress();
         SettingsAPI.getCategoryListByBrand(this);
     }
-
-
     @Override
     public void onSettingsCompleted(SettingsResponse settingsResponse) {
         hideProgress();
 
         brandList = new ArrayList<Brand>(settingsResponse.getBrand());
         Log.i(TAG, "brandList.size()" + brandList.size());
-        AdapterBrand adapterBrand = new AdapterBrand(brandList);
+        adapterBrand = new AdapterBrand(brandList);
         listView.setAdapter(adapterBrand);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,16 +62,13 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
                 int value = (int) listView.getAdapter().getItemId(position);
                 Log.i(TAG, "...............position........." + value);
 
+                //intent to product activity for getting products by brand
                 Intent intent = new Intent(view.getContext(), ProductActivity.class);
                 intent.setClass(view.getContext(), ProductActivity.class);
-                intent.putExtra(APIUtil.KEY_POSITION, value);
-                intent.putExtra(APIUtil.ACTIVITY_CHECK, APIUtil.ACTIVITY_BRAND);
+                intent.putExtra(Constants.KEY_POSITION, value);
+                intent.putExtra(Constants.ACTIVITY_CHECK, Constants.ACTIVITY_BRAND);
                 startActivity(intent);
-
-
             }
         });
-
     }
-
 }

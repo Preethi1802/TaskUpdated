@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.task1.R;
-import com.example.admin.task1.api.util.APIUtil;
+import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.model.Product;
 import com.example.admin.task1.product.activity.ProductDescriptionActivity;
 
@@ -60,18 +60,16 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
 
             @Override
             public void onClick(View v) {
-                Log.i(TAG, APIUtil.STORED_ITEMS + position);
+                Log.i(TAG, Constants.STORED_ITEMS + position);
 
                 Intent intent = new Intent(v.getContext(), ProductDescriptionActivity.class);
-                intent.putExtra(APIUtil.KEY_POSITION, position);
-                intent.putParcelableArrayListExtra(APIUtil.STORED_ITEMS, (ArrayList<? extends Parcelable>) list);
+                intent.putExtra(Constants.KEY_POSITION, position);
+                intent.putParcelableArrayListExtra(Constants.STORED_ITEMS, (ArrayList<? extends Parcelable>) list);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 v.getContext().startActivity(intent);
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -91,11 +89,6 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
             productImage = (ImageView) itemView.findViewById(R.id.s1_mob1);
             mobileName = (TextView) itemView.findViewById(R.id.mobileName);
             version = (TextView) itemView.findViewById(R.id.version);
-
         }
-
-
     }
-
-
 }

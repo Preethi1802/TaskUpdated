@@ -17,11 +17,11 @@ public interface APIInterface {
     @GET(APIUtil.API_PRODUCTS)
     Call<ProductResponse> getProducts();
 
-    @GET(APIUtil.API_CATEGORY)
-    Call<ProductResponse> getProductsByCategory(@Query("category_id") String categoryId);
+    @GET(APIUtil.API_PRODUCTS)
+    Call<ProductResponse> getProductsByCategory(@Query("category_id") int id);
 
-    @GET(APIUtil.API_BRAND)
-    Call<ProductResponse> getProductsByBrand(@Query("brand_id") String brandId);
+    @GET(APIUtil.API_PRODUCTS)
+    Call<ProductResponse> getProductsByBrand(@Query("brand_id") int id);
 
     @GET(APIUtil.API_SETTINGS)
     Call<SettingsResponse> getCategory();

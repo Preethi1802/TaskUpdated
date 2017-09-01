@@ -39,9 +39,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".settings.activity.AllCategoryActivity">
+        <activity android:name=".category.activity.AllCategoryActivity">
             <intent_filter>
-                <action android:name="com.example.admin.task1.settings.activity.AllCategoryActivity" />
+                <action android:name="com.example.admin.task1.category.activity.AllCategoryActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>

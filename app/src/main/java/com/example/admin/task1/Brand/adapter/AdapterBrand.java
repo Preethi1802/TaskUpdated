@@ -1,6 +1,5 @@
 package com.example.admin.task1.Brand.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +16,11 @@ import java.util.ArrayList;
  */
 
 public class AdapterBrand extends BaseAdapter {
-    Context context;
     public ArrayList<Brand> brandList;
     LayoutInflater layoutInflater;
 
     public AdapterBrand(ArrayList<Brand> brandList) {
-        this.context = context;
         this.brandList = brandList;
-
     }
 
     @Override
@@ -45,11 +41,11 @@ public class AdapterBrand extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
 
+        //inflate items in brand list view
         view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.brand_items, viewGroup, false);
         Brand brand = brandList.get(position);
         TextView tv_brand = (TextView) view.findViewById(R.id.brand_text);
         tv_brand.setText(brand.getName());
-
         return view;
 
     }
