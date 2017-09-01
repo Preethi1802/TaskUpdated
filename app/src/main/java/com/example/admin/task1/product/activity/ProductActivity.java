@@ -70,7 +70,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             if (KEY_SOURCE.equals(Constants.SOURCE_FROM_MAINACTIVITY)) {
 
                 showProgress();
-                //api call to get all products
+                //api call to getAllCategories all products
                 ProductAPI.getAllProducts(this);
             }
             else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_BRAND)) {
@@ -83,19 +83,21 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
                 getSupportActionBar().setTitle(brandName);
                 showProgress();
-                //api call to get product by category
+                //api call to getAllCategories product by category
                 ProductAPI.getProductsByBrand(brandId,this);
 
             }
             else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_CATEGORY)) {
+
                 int categoryId = intent.getIntExtra(Constants.KEY_POSITION, 0);
                 Log.i(TAG, "...............position........." + categoryId);
 
                 String categoryName = intent.getStringExtra(Constants.STORED_ITEMS);
                 Log.i(TAG, "...............position........." + categoryName);
+
                 getSupportActionBar().setTitle(categoryName);
                 showProgress();
-                //api call to get product by brand
+                //api call to getAllCategories product by brand
                 ProductAPI.getProductsByCategory(categoryId,this);
             }
         }

@@ -19,7 +19,7 @@ public class SettingsAPI extends APIAbstact {
         // empty method
     }
 
-    public static void get(final SettingsEventSubscriber subscriber) {
+    public static void getAllCategories(final SettingsEventSubscriber subscriber) {
 
         sApiInterface.getCategory().enqueue(new Callback<SettingsResponse>() {
 

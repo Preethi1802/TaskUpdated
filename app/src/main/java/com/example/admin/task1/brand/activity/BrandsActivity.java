@@ -44,7 +44,7 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
         listView = (ListView) findViewById(R.id.brands_list);
         Log.i(TAG, "hiiiiii");
 
-        //api call to get categories by brand
+        //api call to getAllCategories categories by brand
         showProgress();
         SettingsAPI.getCategoryListByBrand(this);
     }
