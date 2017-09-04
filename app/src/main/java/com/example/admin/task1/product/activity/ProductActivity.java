@@ -55,7 +55,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
         toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.mobile);
+        getSupportActionBar().setTitle(R.string.electronics);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

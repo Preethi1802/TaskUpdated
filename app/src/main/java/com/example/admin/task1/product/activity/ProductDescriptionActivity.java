@@ -2,6 +2,7 @@ package com.example.admin.task1.product.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -84,15 +85,17 @@ public class ProductDescriptionActivity extends AppActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), AllDetailsActivity.class);
-                    startActivity(intent);
+                    intent.putExtra(Constants.KEY_POSITION, position);
+                    intent.putParcelableArrayListExtra(Constants.STORED_ITEMS, productList);
+                    v.getContext().startActivity(intent);
                 }
             });
 
         }
         tv_mobName.setText(productList.get(position).getName());
-        tv_mobVersion.setText(productList.get(position).getSpec());
+        tv_mobVersion.setText(Html.fromHtml(productList.get(position).getSpec()).toString());
         tv_mobPrize.setText(productList.get(position).getRegularPrice());
-        tv_ratingInWords.setText(productList.get(position).getDescription());
+        tv_ratingInWords.setText(Html.fromHtml(productList.get(position).getDescription()).toString());
     }
 
 }
