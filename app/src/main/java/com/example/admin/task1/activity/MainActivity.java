@@ -33,7 +33,7 @@ public class MainActivity extends AppActivity {
     NavigationView navigationView;
 
     private android.support.v7.app.ActionBarDrawerToggle toggle;
-    TextView tv_more;
+    TextView tvMore;
 
    // inflating menu items into toolbar
     @Override
@@ -102,8 +102,8 @@ public class MainActivity extends AppActivity {
         });
 
         //intent to allcategories ctivity
-        tv_more = (TextView) findViewById(R.id.tv_more);
-        tv_more.setOnClickListener(new View.OnClickListener() {
+        tvMore = (TextView) findViewById(R.id.tv_more);
+        tvMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), AllCategoryActivity.class);

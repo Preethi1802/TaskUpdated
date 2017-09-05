@@ -17,6 +17,7 @@ import com.example.admin.task1.R;
 import com.example.admin.task1.api.event.SettingsAPI;
 import com.example.admin.task1.api.response.SettingsResponse;
 import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
+import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Category;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
  */
 
 public class AllCategoryActivity extends AppActivity implements SettingsEventSubscriber {
+    AllCategoryActivity mActivity;
     private static final String TAG = "ActivityAllCategories";
     Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -48,6 +50,7 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mActivity= this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_all_categories_list);
 
@@ -68,6 +71,7 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
         categoryList = new ArrayList<>();
 
         showProgress();
+        CommunicationManager.getInstance().getAllCategories(mActivity);
         SettingsAPI.getAllCategories(this);
     }
 

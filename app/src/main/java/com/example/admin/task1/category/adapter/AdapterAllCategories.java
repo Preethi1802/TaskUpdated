@@ -53,8 +53,8 @@ public class AdapterAllCategories extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.child_elctronic_item, null);
         }
-        TextView tv_child = (TextView) convertView.findViewById(R.id.txt_child_list);
-        tv_child.setText(child.getName());
+        TextView tvChild = (TextView) convertView.findViewById(R.id.txt_child_list);
+        tvChild.setText(child.getName());
         return convertView;
     }
 
@@ -91,13 +91,15 @@ public class AdapterAllCategories extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.parent_electronic_item, null);
         }
 
-        TextView tv_parent = (TextView) convertView.findViewById(R.id.txt_electronics_list);
-        tv_parent.setText(category.getName());
+        TextView tvParent = (TextView) convertView.findViewById(R.id.txt_electronics_list);
+        tvParent.setText(category.getName());
 
-        ImageView iv_category_icon = (ImageView) convertView.findViewById(R.id.category_icon);
+        ImageView ivCategoryIcon = (ImageView) convertView.findViewById(R.id.category_icon);
         String iconUrl = category.getIconUrl();
         Log.i(TAG, "" + iconUrl);
-        Glide.with(mContext).load(iconUrl).into(iv_category_icon);
+        Glide.with(mContext)
+                .load(iconUrl)
+                .into(ivCategoryIcon);
 
         return convertView;
     }

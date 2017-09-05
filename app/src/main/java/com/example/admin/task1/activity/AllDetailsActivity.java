@@ -27,7 +27,7 @@ public class AllDetailsActivity extends AppActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    TextView tv_spec;
+    TextView tvSpec;
     int position;
     ArrayList<Product> productList= new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class AllDetailsActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_all_details);
-        tv_spec= (TextView)this.findViewById(R.id.fragement);
+        tvSpec = (TextView)this.findViewById(R.id.fragement);
 
         toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
@@ -63,7 +63,7 @@ public class AllDetailsActivity extends AppActivity {
         productList = intent.getParcelableArrayListExtra(Constants.STORED_ITEMS);
         Log.i(TAG, "..........size............." + productList.size());
 
-     //   tv_spec.setText(productList.get(position).getName());
+     //   tvSpec.setText(productList.get(position).getName());
     }
 
     @Override

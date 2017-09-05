@@ -10,28 +10,30 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.admin.task1.brand.adapter.AdapterBrand;
 import com.example.admin.task1.R;
-import com.example.admin.task1.api.event.SettingsAPI;
 import com.example.admin.task1.api.response.SettingsResponse;
 import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
+import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
+import com.example.admin.task1.brand.adapter.AdapterBrand;
 import com.example.admin.task1.model.Brand;
 import com.example.admin.task1.product.activity.ProductActivity;
 
 import java.util.ArrayList;
 
 public class BrandsActivity extends AppActivity implements SettingsEventSubscriber {
+    BrandsActivity mActivity;
 
     private static final String TAG = "BrandsActivity";
     Toolbar toolbar;
-    ListView listView;
+    ListView lvBrandList;
     ArrayList<Brand> brandList = new ArrayList<>();
     AdapterBrand adapterBrand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mActivity= this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_brands);
 
@@ -41,12 +43,13 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
         getSupportActionBar().setTitle(R.string.brand);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
 
-        listView = (ListView) findViewById(R.id.brands_list);
+        lvBrandList = (ListView) findViewById(R.id.brands_list);
         Log.i(TAG, "hiiiiii");
 
         //api call to getAllCategories categories by brand
         showProgress();
-        SettingsAPI.getCategoryListByBrand(this);
+        CommunicationManager.getInstance().getCategoryListByBrand(mActivity);
+      //  SettingsAPI.getCategoryListByBrand(this);
     }
     @Override
     public void onSettingsCompleted(SettingsResponse settingsResponse) {
@@ -55,8 +58,8 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
         brandList = new ArrayList<Brand>(settingsResponse.getBrand());
         Log.i(TAG, "brandList.size()" + brandList.size());
         adapterBrand = new AdapterBrand(brandList);
-        listView.setAdapter(adapterBrand);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvBrandList.setAdapter(adapterBrand);
+        lvBrandList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int brandId = brandList.get(position).getId();

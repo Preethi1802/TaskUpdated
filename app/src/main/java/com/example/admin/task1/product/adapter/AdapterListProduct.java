@@ -46,15 +46,15 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
 
 
         Product product = list.get(position);
-        holder.mobileName.setText(product.getName());
-        holder.version.setText(product.getRegularPrice());
+        holder.tvMobileName.setText(product.getName());
+        holder.tvMobilePrize.setText(product.getRegularPrice());
         Log.i(TAG, "%%%%%%%%%%%%%%%%%%" + product.getFeaturedImages());
 
         String imageURL = product.getFeaturedImages().getFeaturedImageURL();
 
         Glide.with(mContext)
                 .load(imageURL)
-                .into(holder.productImage);
+                .into(holder.ivProductImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -77,8 +77,8 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView productImage;
-        TextView mobileName, version;
+        ImageView ivProductImage;
+        TextView tvMobileName, tvMobilePrize;
         List<Product> items;
         Context ctx;
 
@@ -86,9 +86,9 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
             super(itemView);
             this.items = items;
             this.ctx = ctx;
-            productImage = (ImageView) itemView.findViewById(R.id.s1_mob1);
-            mobileName = (TextView) itemView.findViewById(R.id.mobileName);
-            version = (TextView) itemView.findViewById(R.id.version);
+            ivProductImage = (ImageView) itemView.findViewById(R.id.s1_mob1);
+            tvMobileName = (TextView) itemView.findViewById(R.id.mobileName);
+            tvMobilePrize = (TextView) itemView.findViewById(R.id.version);
         }
     }
 }

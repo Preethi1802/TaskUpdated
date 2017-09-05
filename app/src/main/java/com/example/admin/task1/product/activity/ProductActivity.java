@@ -12,9 +12,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.admin.task1.R;
-import com.example.admin.task1.api.event.ProductAPI;
 import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
+import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Brand;
@@ -30,6 +30,7 @@ import java.util.List;
 
 public class ProductActivity extends AppActivity implements ProductEventSubscriber {
     Toolbar toolbar;
+    ProductActivity mActivity;
 
     private static final String TAG = "ProductActivity";
 
@@ -49,6 +50,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mActivity=this;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_product);
@@ -71,7 +73,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
                 showProgress();
                 //api call to getAllCategories all products
-                ProductAPI.getAllProducts(this);
+                CommunicationManager.getInstance().getAllProducts(mActivity);
             }
             else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_BRAND)) {
 
@@ -84,7 +86,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
                 getSupportActionBar().setTitle(brandName);
                 showProgress();
                 //api call to getAllCategories product by category
-                ProductAPI.getProductsByBrand(brandId,this);
+                CommunicationManager.getInstance().getProductsByBrand(mActivity,brandId);
 
             }
             else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_CATEGORY)) {
@@ -98,7 +100,8 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
                 getSupportActionBar().setTitle(categoryName);
                 showProgress();
                 //api call to getAllCategories product by brand
-                ProductAPI.getProductsByCategory(categoryId,this);
+                CommunicationManager.getInstance().getProductsByCategory(mActivity,categoryId);
+                //ProductAPI.getProductsByCategory(categoryId,this);
             }
         }
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -135,9 +138,6 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         }
     }
 }
-
-
-
 
 
 
