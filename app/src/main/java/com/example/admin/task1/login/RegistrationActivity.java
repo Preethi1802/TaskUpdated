@@ -58,33 +58,23 @@ public class RegistrationActivity extends AppActivity implements RegistrationEve
 
                 if (TextUtils.isEmpty(name)) {
                     editName.setError(getString(R.string.error_field_required));
-                }
-
-                if (TextUtils.isEmpty(email)) {
+                } else if (TextUtils.isEmpty(email)) {
                     etEmail.setError(getString(R.string.error_field_required));
                 } else if (!isEmailValid(email)) {
                     etEmail.setError(getString(R.string.error_invalid_email));
-                }
-
-                if (TextUtils.isEmpty(mobileNumber)) {
+                } else if (TextUtils.isEmpty(mobileNumber)) {
                     editMobileNum.setError(getString(R.string.error_field_required));
                 } else if (!isMobileNumberValid(mobileNumber)) {
                     editMobileNum.setError(getString(R.string.error_invalid_mobNumber));
-                }
-
-                if (TextUtils.isEmpty(password)) {
+                } else if (TextUtils.isEmpty(password)) {
                     editPassword.setError(getString(R.string.error_field_required));
                 } else if (!isPasswordValid(password)) {
                     editPassword.setError(getString(R.string.error_invalid_password));
-                }
-
-                if (TextUtils.isEmpty(confirmPassword)) {
+                } else if (TextUtils.isEmpty(confirmPassword)) {
                     editConfrimPassword.setError(getString(R.string.error_field_required));
                 } else if (!isPasswordValid(confirmPassword)) {
                     editConfrimPassword.setError(getString(R.string.error_invalid_password));
-                }
-
-                if (!password.equals(confirmPassword)) {
+                } else if (!password.equals(confirmPassword)) {
                     editConfrimPassword.setError(getString(R.string.error_confirm_password_doesnt_match));
                 } else {
 

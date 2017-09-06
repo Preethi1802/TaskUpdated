@@ -31,8 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="true"
+            android:padding="20dp"
+            android:layout_margin="10dp"
             android:focusableInTouchMode="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/curved_corner">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -81,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/logIn"
-                android:background="@drawable/curved_corner"
+                android:textColor="@color/black"
+                android:background="@drawable/registration_button_background"
                 android:textStyle="bold" />
 
             <TextView
@@ -91,7 +95,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="New to Flipkart? Sign Up"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="15dp"
                 tools:singleLine="true" />
 

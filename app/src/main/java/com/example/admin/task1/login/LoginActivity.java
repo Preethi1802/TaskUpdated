@@ -66,15 +66,11 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
                     mEmailView.setError(getString(R.string.error_field_required));
                 } else if (!isEmailValid(email)) {
                     mEmailView.setError(getString(R.string.error_invalid_email));
-                }
-
-                if (TextUtils.isEmpty(password)) {
+                } else if (TextUtils.isEmpty(password)) {
                     editPassword.setError(getString(R.string.error_field_required));
                 } else if (!isPasswordValid(password)) {
                     editPassword.setError(getString(R.string.error_invalid_password));
-                }
-
-                else {
+                } else {
                     LoginRequest loginRequest = new LoginRequest();
                     loginRequest.setEmail(email);
                     loginRequest.setPassword(password);
