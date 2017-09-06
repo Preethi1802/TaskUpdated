@@ -58,6 +58,12 @@
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Whislist"></item>
 
+    <item android:id="@+id/line"
+        android:title="---------------------------"></item>
+
+    <item android:id="@+id/signIn"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="Login"></item>
 
 
 </menu>

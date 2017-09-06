@@ -67,7 +67,10 @@ public class ProductDescriptionActivity extends AppActivity {
 
             final ImageView ivGalleryImage = new ImageView(this);
             ivGalleryImage.setId(k);
-            ivGalleryImage.setLayoutParams(new LinearLayout.LayoutParams(250, 200));
+            ivGalleryImage.setLayoutParams(new LinearLayout.LayoutParams(220, 220));
+            ivGalleryImage.setPadding(15,15,15,15);
+            ivGalleryImage.setBackgroundResource(R.drawable.image_border);
+
 
             final String imageURL1 = productList.get(position).getGalleryImages().get(k).getGalleryImageURL();
 
@@ -77,7 +80,7 @@ public class ProductDescriptionActivity extends AppActivity {
                     .load(imageURL1)
                     .into(ivGalleryImage);
 
-            ivGalleryImage.setScaleType(ImageView.ScaleType.FIT_XY);
+         //   ivGalleryImage.setScaleType(ImageView.ScaleType.FIT_XY);
             galleryLayout.addView(ivGalleryImage);
 
             ivGalleryImage.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +105,7 @@ public class ProductDescriptionActivity extends AppActivity {
         tvMobName.setText(productList.get(position).getName());
         tvMobVersion.setText(Html.fromHtml(productList.get(position).getSpec()).toString());
         tvMobPrize.setText(productList.get(position).getRegularPrice());
-        tvRatingInWords.setText(Html.fromHtml(productList.get(position).getDescription()).toString());
+    //    tvRatingInWords.setText(Html.fromHtml(productList.get(position).getDescription()).toString());
     }
 
 }

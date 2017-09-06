@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.response.ProductResponse;
@@ -20,6 +19,7 @@ import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Brand;
 import com.example.admin.task1.model.Product;
 import com.example.admin.task1.product.adapter.AdapterListProduct;
+import com.thapovan.android.commonutils.toast.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,7 +133,9 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             recyclerView.setAdapter(adapter);
 
         } else {
-            Toast.makeText(getApplicationContext(), productResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+            ToastUtil.showCenterToast(getApplicationContext(), productResponse.getMessage());
+           // Toast.makeText(getApplicationContext(), productResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
     }

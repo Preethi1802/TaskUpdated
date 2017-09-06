@@ -20,6 +20,7 @@ import com.example.admin.task1.brand.activity.BrandsActivity;
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
+import com.example.admin.task1.login.LoginActivity;
 import com.example.admin.task1.product.activity.ProductActivity;
 import com.example.admin.task1.category.activity.AllCategoryActivity;
 
@@ -83,6 +84,10 @@ public class MainActivity extends AppActivity {
                         intent = new Intent(getApplicationContext(), AllCategoryActivity.class);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(), "electronics Selected", Toast.LENGTH_LONG).show();
+                        return true;
+                    case R.id.signIn:
+                        intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
                         return true;
                 }
                 return true;

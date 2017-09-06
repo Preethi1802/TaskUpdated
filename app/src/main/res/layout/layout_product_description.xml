@@ -9,27 +9,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
         android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="389dp"
+            android:layout_height="320dp"
             android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
             android:weightSum="1">
 
             <com.thapovan.android.customui.TouchImageView
                 android:id="@+id/product1"
-                android:layout_width="350dp"
+                android:layout_width="320dp"
                 android:layout_height="280dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+                android:layout_gravity="center"
                 android:src="@mipmap/ic_launcher" />
 
+        </LinearLayout>
+
             <HorizontalScrollView
-                android:layout_width="325dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="0.83"
                 android:layout_marginLeft="15dp"
                 android:scrollbars="none">
@@ -37,8 +41,7 @@
                 <LinearLayout
                     android:id="@+id/linear_layout_gallery"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                 </LinearLayout>
@@ -46,7 +49,7 @@
             </HorizontalScrollView>
 
 
-        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,8 +64,8 @@
                 android:gravity="center"
                 android:text="MobileName"
                 android:textAlignment="viewStart"
-                android:textSize="22dp"
-                android:textStyle="bold" />
+                android:textSize="17dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/modelName"
@@ -70,6 +73,7 @@
                 android:layout_height="41dp"
                 android:gravity="center"
                 android:text="model"
+                android:textColor="@color/black"
                 android:textAlignment="viewStart"
                 android:textSize="15dp" />
 
@@ -90,6 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:textColor="@color/black"
                     android:text="Ends in few hours"
                     android:textAlignment="viewStart" />
             </LinearLayout>
@@ -172,6 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:text="120 ratings &amp; 29 reviews"
                 android:textAlignment="viewStart" />
 

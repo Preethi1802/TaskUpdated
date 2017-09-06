@@ -95,6 +95,7 @@ public class AdapterAllCategories extends BaseExpandableListAdapter {
         tvParent.setText(category.getName());
 
         ImageView ivCategoryIcon = (ImageView) convertView.findViewById(R.id.category_icon);
+
         String iconUrl = category.getIconUrl();
         Log.i(TAG, "" + iconUrl);
         Glide.with(mContext)
