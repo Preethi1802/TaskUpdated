@@ -502,6 +502,37 @@
                 </android.support.v7.widget.CardView>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/session_user"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="aaaaaaaa"/>
+            <TextView
+                android:id="@+id/session_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="bbbbbbbbb"/>
+
+
+            <Button
+                android:id="@+id/btn_login_logout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginRight="150dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:text="Login"
+                android:textAllCaps="false"
+                android:background="@drawable/curved_corner"
+                />
+            </LinearLayout>
 
         </LinearLayout>
 

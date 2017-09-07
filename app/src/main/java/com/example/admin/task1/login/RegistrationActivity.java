@@ -56,28 +56,44 @@ public class RegistrationActivity extends AppActivity implements RegistrationEve
                 password = TextUtil.cleanupString(editPassword.getText().toString().trim());
                 confirmPassword = TextUtil.cleanupString(editConfrimPassword.getText().toString().trim());
 
-                if (TextUtils.isEmpty(name)) {
-                    editName.setError(getString(R.string.error_field_required));
-                } else if (TextUtils.isEmpty(email)) {
-                    etEmail.setError(getString(R.string.error_field_required));
-                } else if (!isEmailValid(email)) {
-                    etEmail.setError(getString(R.string.error_invalid_email));
-                } else if (TextUtils.isEmpty(mobileNumber)) {
-                    editMobileNum.setError(getString(R.string.error_field_required));
-                } else if (!isMobileNumberValid(mobileNumber)) {
-                    editMobileNum.setError(getString(R.string.error_invalid_mobNumber));
-                } else if (TextUtils.isEmpty(password)) {
-                    editPassword.setError(getString(R.string.error_field_required));
-                } else if (!isPasswordValid(password)) {
-                    editPassword.setError(getString(R.string.error_invalid_password));
-                } else if (TextUtils.isEmpty(confirmPassword)) {
-                    editConfrimPassword.setError(getString(R.string.error_field_required));
-                } else if (!isPasswordValid(confirmPassword)) {
-                    editConfrimPassword.setError(getString(R.string.error_invalid_password));
-                } else if (!password.equals(confirmPassword)) {
-                    editConfrimPassword.setError(getString(R.string.error_confirm_password_doesnt_match));
-                } else {
+                if (!isEmailValid(email) || !isMobileNumberValid(mobileNumber) || !isPasswordValid(password)
+                        || !isPasswordValid(confirmPassword) || !password.equals(confirmPassword) || (TextUtils.isEmpty(name))
+                        || TextUtils.isEmpty(email) || TextUtils.isEmpty(mobileNumber) || TextUtils.isEmpty(password)
+                        || TextUtils.isEmpty(confirmPassword)) {
 
+
+                    if (!isEmailValid(email)) {
+                        etEmail.setError(getString(R.string.error_invalid_email));
+                    }
+                    if (!isMobileNumberValid(mobileNumber)) {
+                        editMobileNum.setError(getString(R.string.error_invalid_mobNumber));
+                    }
+                    if (!isPasswordValid(password)) {
+                        editPassword.setError(getString(R.string.error_invalid_password));
+                    }
+                    if (!isPasswordValid(confirmPassword)) {
+                        editConfrimPassword.setError(getString(R.string.error_invalid_password));
+                    }
+                    if (!password.equals(confirmPassword)) {
+                        editConfrimPassword.setError(getString(R.string.error_confirm_password_doesnt_match));
+                    }
+                    if (TextUtils.isEmpty(name)) {
+                        editName.setError(getString(R.string.error_field_required));
+                    }
+                    if (TextUtils.isEmpty(email)) {
+                        etEmail.setError(getString(R.string.error_field_required));
+                    }
+                    if (TextUtils.isEmpty(mobileNumber)) {
+                        editMobileNum.setError(getString(R.string.error_field_required));
+                    }
+                    if (TextUtils.isEmpty(password)) {
+                        editPassword.setError(getString(R.string.error_field_required));
+                    }
+                    if (TextUtils.isEmpty(confirmPassword)) {
+                        editConfrimPassword.setError(getString(R.string.error_field_required));
+                    }
+
+                } else {
                     RegistrationRequest registrationRequest = new RegistrationRequest();
                     registrationRequest.setName(name);
                     registrationRequest.setEmail(email);
@@ -88,24 +104,23 @@ public class RegistrationActivity extends AppActivity implements RegistrationEve
                     showProgress();
                     CommunicationManager.getInstance().postRegistrationDetails(registrationRequest, mActivity);
                 }
+
             }
         });
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String pass) {
-        //TODO: Replace this with your own logic
         return pass.length() > 6;
     }
 
     private boolean isMobileNumberValid(String mobNumber) {
-        //TODO: Replace this with your own logic
         return mobNumber.length() == 10;
     }
+
 
     @Override
     public void onRegistrationCompleted(RegistrationResponse registrationResponse) {

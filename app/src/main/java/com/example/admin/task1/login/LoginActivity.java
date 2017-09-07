@@ -36,12 +36,16 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
     private EditText editPassword;
     private AutoCompleteTextView mEmailView;
 
+    SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mActivity = this;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        session = new SessionManager(getApplicationContext());
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.loginEmail);
         editPassword = (EditText) findViewById(R.id.loginPass);
@@ -62,14 +66,21 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
                 email = TextUtil.cleanupString(mEmailView.getText().toString().trim());
                 password = TextUtil.cleanupString(editPassword.getText().toString().trim());
 
-                if (TextUtils.isEmpty(email)) {
-                    mEmailView.setError(getString(R.string.error_field_required));
-                } else if (!isEmailValid(email)) {
-                    mEmailView.setError(getString(R.string.error_invalid_email));
-                } else if (TextUtils.isEmpty(password)) {
-                    editPassword.setError(getString(R.string.error_field_required));
-                } else if (!isPasswordValid(password)) {
-                    editPassword.setError(getString(R.string.error_invalid_password));
+                if (!isEmailValid(email) || !isPasswordValid(password) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+
+                    if (!isEmailValid(email)) {
+                        mEmailView.setError(getString(R.string.error_invalid_email));
+                    }
+                    if (!isPasswordValid(password)) {
+                        editPassword.setError(getString(R.string.error_invalid_password));
+                    }
+                    if (TextUtils.isEmpty(email)) {
+                        mEmailView.setError(getString(R.string.error_field_required));
+                    }
+                    if (TextUtils.isEmpty(password)) {
+                        editPassword.setError(getString(R.string.error_field_required));
+                    }
+
                 } else {
                     LoginRequest loginRequest = new LoginRequest();
                     loginRequest.setEmail(email);
@@ -83,11 +94,13 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
     }
 
     private boolean isEmailValid(String email) {
+
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
+
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
@@ -97,8 +110,11 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
         hideProgress();
         if (loginResponse.isSuccess()) {
             ToastUtil.showCenterToast(getApplicationContext(), loginResponse.getMessage());
+
+            session.createLoginSession(loginResponse.getUser().getName(),loginResponse.getUser().getEmail());
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
+            finish();
         } else {
             ToastUtil.showCenterToast(getApplicationContext(), loginResponse.getMessage());
         }

@@ -88,7 +88,7 @@
     <string name="logIn">Login</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_mobNumber">Mobile Number must be 10 digit</string>
-    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_email">Invalid Email address</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
