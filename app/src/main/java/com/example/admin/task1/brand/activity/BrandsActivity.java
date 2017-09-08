@@ -22,12 +22,17 @@ import com.example.admin.task1.product.activity.ProductActivity;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class BrandsActivity extends AppActivity implements SettingsEventSubscriber {
     BrandsActivity mActivity;
 
+    @BindView(R.id.toolAction)      Toolbar toolbar;
+    @BindView(R.id.brands_list)     ListView lvBrandList;
+
+
     private static final String TAG = "BrandsActivity";
-    Toolbar toolbar;
-    ListView lvBrandList;
     ArrayList<Brand> brandList = new ArrayList<>();
     AdapterBrand adapterBrand;
 
@@ -36,14 +41,12 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
         mActivity= this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_brands);
+        ButterKnife.bind(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle(R.string.brand);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
-
-        lvBrandList = (ListView) findViewById(R.id.brands_list);
         Log.i(TAG, "hiiiiii");
 
         //api call to getAllCategories categories by brand

@@ -1,4 +1,4 @@
-package com.example.admin.task1.activity;
+package com.example.admin.task1.utilities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

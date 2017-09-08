@@ -5,8 +5,6 @@ package com.example.admin.task1.product.adapter;
  */
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,14 +15,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.task1.R;
-import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.model.Product;
-import com.example.admin.task1.product.activity.ProductDescriptionActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.ViewHolder> {
+
     private static final String TAG = "AdapterListProduct";
     List<Product> list = new ArrayList<>();
     public Context mContext;
@@ -56,7 +56,7 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
                 .load(imageURL)
                 .into(holder.ivProductImage);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -68,7 +68,7 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 v.getContext().startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override
@@ -77,8 +77,11 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivProductImage;
-        TextView tvMobileName, tvMobilePrize;
+
+        @BindView(R.id.s1_mob1)    ImageView ivProductImage;
+        @BindView(R.id.mobileName)    TextView tvMobileName;
+        @BindView(R.id.version)    TextView tvMobilePrize;
+
         List<Product> items;
         Context ctx;
 
@@ -86,9 +89,8 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
             super(itemView);
             this.items = items;
             this.ctx = ctx;
-            ivProductImage = (ImageView) itemView.findViewById(R.id.s1_mob1);
-            tvMobileName = (TextView) itemView.findViewById(R.id.mobileName);
-            tvMobilePrize = (TextView) itemView.findViewById(R.id.version);
+            ButterKnife.bind(this,itemView);
+
         }
     }
 }

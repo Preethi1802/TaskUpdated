@@ -11,11 +11,16 @@ import com.example.admin.task1.model.Brand;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Admin on 8/29/2017.
  */
 
 public class AdapterBrand extends BaseAdapter {
+    @BindView(R.id.brand_text)      TextView tv_brand;
+
     public ArrayList<Brand> brandList;
     LayoutInflater layoutInflater;
 
@@ -43,8 +48,8 @@ public class AdapterBrand extends BaseAdapter {
 
         //inflate items in brand list view
         view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.brand_items, viewGroup, false);
+        ButterKnife.bind(this,view);
         Brand brand = brandList.get(position);
-        TextView tv_brand = (TextView) view.findViewById(R.id.brand_text);
         tv_brand.setText(brand.getName());
         return view;
 

@@ -26,19 +26,25 @@ import com.example.admin.task1.category.adapter.AdapterAllCategories;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Admin on 8/22/2017.
  */
 
 public class AllCategoryActivity extends AppActivity implements SettingsEventSubscriber {
+
+    @BindView(R.id.toolAction)                          Toolbar toolbar;
+    @BindView(R.id.drawerlayoutAllCategories)           DrawerLayout drawerLayout;
+    @BindView(R.id.expand_list_view)                    ExpandableListView expandableListView;
+
+
     AllCategoryActivity mActivity;
     private static final String TAG = "ActivityAllCategories";
-    Toolbar toolbar;
-    private DrawerLayout drawerLayout;
     private android.support.v7.app.ActionBarDrawerToggle toggle;
 
     AdapterAllCategories adapterAllCategories;
-    ExpandableListView expandableListView;
     ArrayList<Category> categoryList;
 
     //inflate menu items into toolbar in all categories layout
@@ -53,8 +59,8 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
         mActivity= this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_all_categories_list);
+        ButterKnife.bind(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,12 +68,10 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
 
         //setting navigation drawer in all categories layout
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayoutAllCategories);
         toggle = new android.support.v7.app.ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        expandableListView = (ExpandableListView) findViewById(R.id.expand_list_view);
         categoryList = new ArrayList<>();
 
         showProgress();

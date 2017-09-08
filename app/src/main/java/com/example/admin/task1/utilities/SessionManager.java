@@ -1,10 +1,12 @@
-package com.example.admin.task1.login;
+package com.example.admin.task1.utilities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.admin.task1.activity.MainActivity;
+import com.example.admin.task1.login.LoginActivity;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 
@@ -33,27 +35,35 @@ public class SessionManager {
 
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
+    public static final String KEY_OBJECT = "myObject";
 
     // Email address (make variable public to access from outside)
     public static final String KEY_EMAIL = "email";
+    public static final String KEY_CARTID = "id";
+
+
+    Gson gson;
 
     // Constructor
     public SessionManager(Context context){
         this.mContext = context;
         pref = mContext.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+        gson= new Gson();
     }
 
     // Create login session
-    public void createLoginSession(String name, String email){
+    public void createLoginSession(/*String name, String email,*/ Object object){
         // Storing login value as TRUE
+        String json = gson.toJson(object);
         editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_OBJECT,json);
 
-        // Storing name in pref
+       /* // Storing name in pref
         editor.putString(KEY_NAME, name);
 
         // Storing email in pref
-        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_EMAIL, email);*/
 
         // commit changes
         editor.commit();
@@ -63,12 +73,19 @@ public class SessionManager {
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         // user name
+        user.put(KEY_OBJECT,pref.getString(KEY_OBJECT,null));
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
 
         // user email id
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
 
         // return user
+        return user;
+    }
+
+    public String getUserObject()
+    {
+        String user = pref.getString(KEY_OBJECT, "");
         return user;
     }
 
@@ -88,7 +105,6 @@ public class SessionManager {
             mContext.startActivity(i);
         }
     }
-
     // log out user and Clear session details
     public void logoutUser(){
         // Clearing all data from Shared Preferences
@@ -112,4 +128,19 @@ public class SessionManager {
         return pref.getBoolean(IS_LOGIN, false);
     }
 
+//********************************************************************************************
+    public void createCart(Object object) {
+        // Storing product to cart
+
+        String cartJSON = gson.toJson(object);
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_OBJECT, cartJSON);
+    }
+    public String getPrductId()
+    {
+
+        String user = pref.getString(KEY_OBJECT, "");
+        return user;
+    }
+//********************************************************************************************
 }

@@ -2,8 +2,11 @@ package com.example.admin.task1.product.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,34 +17,57 @@ import com.example.admin.task1.R;
 import com.example.admin.task1.activity.AllDetailsActivity;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
+import com.example.admin.task1.model.Cart;
 import com.example.admin.task1.model.Product;
+import com.example.admin.task1.utilities.SessionManager;
 import com.thapovan.android.customui.TouchImageView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class ProductDescriptionActivity extends AppActivity {
 
+    @BindView(R.id.toolAction)                  Toolbar toolbar;
+    @BindView(R.id.product1)                    TouchImageView ivFeaturedImage;
+    @BindView(R.id.productName1)                TextView tvMobName;
+    @BindView(R.id.modelName)                   TextView tvMobVersion;
+    @BindView(R.id.prize)                       TextView tvMobPrize;
+    @BindView(R.id.rating)                      TextView tvMobRating;
+    @BindView(R.id.ratingInWords)               TextView tvRatingInWords;
+    @BindView(R.id.allDetails)                  TextView tvAllDetails;
+    @BindView(R.id.linear_layout_gallery)       LinearLayout galleryLayout;
+
+
     private static final String TAG = "ActivityProductDesc";
-    TouchImageView ivFeaturedImage;
-    TextView tvMobName, tvMobVersion, tvMobPrize, tvMobRating, tvRatingInWords, tvAllDetails;
     ArrayList<Product> productList = new ArrayList<Product>();
 
     int position;
+    SessionManager session;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_product_activity, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_product_description);
+        ButterKnife.bind(this);
+        session= new SessionManager(getApplicationContext());
 
-        ivFeaturedImage = (TouchImageView) findViewById(R.id.product1);
-        tvMobName = (TextView) findViewById(R.id.productName1);
-        tvMobVersion = (TextView) findViewById(R.id.modelName);
-        tvMobName = (TextView) findViewById(R.id.productName1);
-        tvMobVersion = (TextView) findViewById(R.id.modelName);
-        tvMobPrize = (TextView) findViewById(R.id.prize);
-        tvMobRating = (TextView) findViewById(R.id.rating);
-        tvRatingInWords = (TextView) findViewById(R.id.ratingInWords);
-        tvAllDetails = (TextView) findViewById(R.id.allDetails);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+        }
+
         Intent intent = getIntent();
         Log.i(TAG, "hiiiiii");
 
@@ -58,8 +84,6 @@ public class ProductDescriptionActivity extends AppActivity {
         Glide.with(this)
                 .load(imageURL)
                 .into(ivFeaturedImage);
-
-        LinearLayout galleryLayout = (LinearLayout) findViewById(R.id.linear_layout_gallery);
 
         Log.i(TAG, "" + productList.get(position).getImages().size());
 
@@ -80,18 +104,16 @@ public class ProductDescriptionActivity extends AppActivity {
                     .load(imageURL1)
                     .into(ivGalleryImage);
 
-         //   ivGalleryImage.setScaleType(ImageView.ScaleType.FIT_XY);
             galleryLayout.addView(ivGalleryImage);
 
             ivGalleryImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Toast.makeText(getApplicationContext(), "ON ITEM" + imageURL1, Toast.LENGTH_LONG).show();
                     ivFeaturedImage.setImageDrawable(ivGalleryImage.getDrawable());
                 }
             });
 
-            tvAllDetails.setOnClickListener(new View.OnClickListener() {
+            /*tvAllDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), AllDetailsActivity.class);
@@ -100,12 +122,37 @@ public class ProductDescriptionActivity extends AppActivity {
                     v.getContext().startActivity(intent);
                 }
             });
-
+*/
         }
         tvMobName.setText(productList.get(position).getName());
         tvMobVersion.setText(Html.fromHtml(productList.get(position).getSpec()).toString());
         tvMobPrize.setText(productList.get(position).getRegularPrice());
     //    tvRatingInWords.setText(Html.fromHtml(productList.get(position).getDescription()).toString());
+    }
+
+    @OnClick(R.id.allDetails)
+    public void AllDetails(View v) {
+        Intent intent = new Intent(v.getContext(), AllDetailsActivity.class);
+        intent.putExtra(Constants.KEY_POSITION, position);
+        intent.putParcelableArrayListExtra(Constants.STORED_ITEMS, productList);
+        v.getContext().startActivity(intent);
+    }
+//********************************************************************************************
+    @OnClick(R.id.btn_add_to_cart)
+    public void AddCart()
+    {
+        Cart cart= new Cart();
+        cart.setId(productList.get(position).getId());
+        session.createCart(cart);
+
+    }
+    //********************************************************************************************
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.admin.task1.product.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.response.ProductResponse;
@@ -19,22 +21,28 @@ import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Brand;
 import com.example.admin.task1.model.Product;
 import com.example.admin.task1.product.adapter.AdapterListProduct;
+import com.thapovan.android.commonutils.recyclerview.RecyclerTouchListener;
 import com.thapovan.android.commonutils.toast.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Admin on 7/26/2017.
  */
 
 public class ProductActivity extends AppActivity implements ProductEventSubscriber {
-    Toolbar toolbar;
+
+    @BindView(R.id.toolAction)          Toolbar toolbar;
+    @BindView(R.id.recycler_view)       RecyclerView recyclerView;
+
     ProductActivity mActivity;
 
     private static final String TAG = "ProductActivity";
 
-    RecyclerView recyclerView;
     AdapterListProduct adapter;
     RecyclerView.LayoutManager layoutManager;
 
@@ -54,8 +62,8 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_product);
+        ButterKnife.bind(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolAction);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.electronics);
 
@@ -104,8 +112,27 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
                 //ProductAPI.getProductsByCategory(categoryId,this);
             }
         }
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
         productList = new ArrayList<>();
+        new RecyclerTouchListener(mActivity, recyclerView, new RecyclerTouchListener.ClickListener()
+        {
+            @Override
+            public void onClick(final View view, final int position)
+            {
+                Log.i(TAG, Constants.STORED_ITEMS + position);
+
+                Intent intent = new Intent(view.getContext(), ProductDescriptionActivity.class);
+                intent.putExtra(Constants.KEY_POSITION, position);
+                intent.putParcelableArrayListExtra(Constants.STORED_ITEMS, (ArrayList<? extends Parcelable>) productList);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(final View view, final int position)
+            {
+            }
+        });
     }
 
     @Override
@@ -135,15 +162,9 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         } else {
 
             ToastUtil.showCenterToast(getApplicationContext(), productResponse.getMessage());
-           // Toast.makeText(getApplicationContext(), productResponse.getMessage(), Toast.LENGTH_SHORT).show();
-
         }
     }
 }
-
-
-
-
 
    /*if (isListNotEmpty(productList)) {
 

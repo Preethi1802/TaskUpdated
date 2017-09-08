@@ -11,6 +11,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include layout="@layout/layout_toolbar"></include>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -221,7 +223,7 @@
                 android:weightSum="10">
 
                 <Button
-                    android:id="@+id/btn1"
+                    android:id="@+id/btn_add_to_cart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -232,7 +234,7 @@
                     android:text="@string/addToCart" />
 
                 <Button
-                    android:id="@+id/btn2"
+                    android:id="@+id/btn_buy_now"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
