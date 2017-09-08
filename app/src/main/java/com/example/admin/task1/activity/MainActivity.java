@@ -170,8 +170,6 @@ public class MainActivity extends AppActivity {
                 {
                     // Clear the session data
                     session.logoutUser();
-                    Intent intent = new Intent(v.getContext(), MainActivity.class);
-                    startActivity(intent);
                     finish();
                 }
             }

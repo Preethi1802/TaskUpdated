@@ -114,7 +114,7 @@ public class RegistrationActivity extends AppActivity implements RegistrationEve
     }
 
     private boolean isPasswordValid(String pass) {
-        return pass.length() > 6;
+        return pass.length() > 4;
     }
 
     private boolean isMobileNumberValid(String mobNumber) {
