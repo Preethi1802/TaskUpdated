@@ -114,19 +114,16 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
             session.createLoginSession(loginResponse.getUser());
 
             ToastUtil.showCenterToast(getApplicationContext(),loginResponse.getUser().getName());
-            Intent intent =
-                    new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
+            finish();
+
         } else {
             ToastUtil.showCenterToast(getApplicationContext(), loginResponse.getMessage());
         }
 
     }
-    public void onBackPressed()
-    {
-        startActivity(new Intent(this,MainActivity.class));
-        finish();
-    }
+
 
 }
 

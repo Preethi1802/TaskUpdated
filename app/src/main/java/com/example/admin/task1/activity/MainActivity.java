@@ -36,7 +36,7 @@ public class MainActivity extends AppActivity {
     @BindView(R.id.session_user)            TextView tvLoginUser;
     @BindView(R.id.tv_more)                 TextView tvMore;
     @BindView(R.id.btn_viewAll)             Button btnViewAll;
-    @BindView(R.id.btn_login_logout)        TextView btnLogout;
+    @BindView(R.id.tv_login_logout)         TextView btnLogout;
     @BindView(R.id.toolAction)              Toolbar toolbar;
     @BindView(R.id.drawerLayoutMain)        DrawerLayout drawerLayout;
     @BindView(R.id.navi_view)               NavigationView navigationView;
@@ -110,16 +110,15 @@ public class MainActivity extends AppActivity {
 
         User user= gson.fromJson(session.getUserObject(),User.class);
 
-        if (session.isLoggedIn()== false)
+        if (session.isLoggedIn())
         {
-            tvLoginUser.setText("Welcome to Flipkart");
-            btnLogout.setText("Login");
+            tvLoginUser.setText(user.getName());
+            btnLogout.setText("Logout");
 
         }
         else {
-
-            tvLoginUser.setText(user.getName());
-            btnLogout.setText("Logout");
+            tvLoginUser.setText("Welcome to Flipkart");
+            btnLogout.setText("Login");
         }
     }
 
@@ -142,22 +141,24 @@ public class MainActivity extends AppActivity {
     }
 
     // Login / Logout button click event
-    @OnClick(R.id.btn_login_logout)
+    @OnClick(R.id.tv_login_logout)
     public void LoginLogout(View v) {
 
-        if (session.isLoggedIn()== false)
-        {
-            // redirect user to LoginActivity
-            session.checkLogin();
-            finish();
-        }
-        else
+        if (session.isLoggedIn())
         {
             // Clear the session data
             session.logoutUser();
             finish();
         }
+        else
+        {
+            // redirect user to LoginActivity
+            session.checkLogin();
+            finish();
+        }
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -166,11 +167,4 @@ public class MainActivity extends AppActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void onBackPressed()
-    {
-        finish();
-    }
-
-
 }

@@ -12,6 +12,7 @@
         android:id="@+id/cart"
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         app:showAsAction="ifRoom|withText"
+        android:onClick="OnCart"
         android:title="Profile">
     </item>
 

@@ -69,7 +69,13 @@ public class SessionManager {
         editor.commit();
     }
 
-    // Get stored session data
+    public String getUserObject()
+    {
+        String user = pref.getString(KEY_OBJECT, "");
+        return user;
+    }
+
+    // Get stored session data in key and value pair
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         // user name
@@ -83,11 +89,7 @@ public class SessionManager {
         return user;
     }
 
-    public String getUserObject()
-    {
-        String user = pref.getString(KEY_OBJECT, "");
-        return user;
-    }
+
 
     // Check login method wil check user login status ,If false it will redirect user to login page
     public void checkLogin(){
@@ -136,11 +138,11 @@ public class SessionManager {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_OBJECT, cartJSON);
     }
-    public String getPrductId()
+    public String getCartObject()
     {
 
-        String user = pref.getString(KEY_OBJECT, "");
-        return user;
+        String cart = pref.getString(KEY_OBJECT, "");
+        return cart;
     }
 //********************************************************************************************
 }
