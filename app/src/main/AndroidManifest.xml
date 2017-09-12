@@ -16,16 +16,16 @@
         android:roundIcon="@drawable/front_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SplashScreenActivity">
+        <activity android:name=".home.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".home.MainActivity">
             <intent_filter>
-                <action android:name="com.example.admin.task1.activity.MainActivity" />
+                <action android:name="com.example.admin.task1.home.MainActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
@@ -51,7 +51,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent_filter>
         </activity>
-        <activity android:name=".activity.AllDetailsActivity" />
+        <activity android:name=".home.AllDetailsActivity" />
         <activity android:name=".brand.activity.BrandsActivity" />
         <activity android:name=".login.RegistrationActivity" />
         <activity

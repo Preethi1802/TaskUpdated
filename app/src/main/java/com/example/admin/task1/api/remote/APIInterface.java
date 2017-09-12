@@ -21,7 +21,7 @@ import retrofit2.http.Query;
 
 public interface APIInterface {
     @GET(APIUtil.API_PRODUCTS)
-    Call<ProductResponse> getProducts();
+    Call<ProductResponse> getProducts(@Query("page") int page);
 
     @GET(APIUtil.API_PRODUCTS)
     Call<ProductResponse> getProductsByCategory(@Query("category_id") int categoryID);

@@ -4,8 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.example.admin.task1.activity.MainActivity;
+import com.example.admin.task1.home.MainActivity;
 import com.example.admin.task1.login.LoginActivity;
+import com.example.admin.task1.product.activity.ProductDescriptionActivity;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -79,7 +80,6 @@ public class SessionManager {
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         // user name
-        user.put(KEY_OBJECT,pref.getString(KEY_OBJECT,null));
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
 
         // user email id
@@ -130,19 +130,37 @@ public class SessionManager {
         return pref.getBoolean(IS_LOGIN, false);
     }
 
-//********************************************************************************************
-    public void createCart(Object object) {
+    public void createCart(String id) {
         // Storing product to cart
-
-        String cartJSON = gson.toJson(object);
         editor.putBoolean(IS_LOGIN, true);
-        editor.putString(KEY_OBJECT, cartJSON);
-    }
-    public String getCartObject()
-    {
+         // Storing id in pref
+        editor.putString(KEY_CARTID, id);
+        editor.commit();
 
-        String cart = pref.getString(KEY_OBJECT, "");
-        return cart;
     }
-//********************************************************************************************
+
+    public HashMap<String, String> getCartProducts(){
+        HashMap<String, String> cartProducts = new HashMap<String, String>();
+        // user name
+        cartProducts.put(KEY_NAME, pref.getString(KEY_CARTID, null));
+
+        return cartProducts;
+    }
+
+    public void cartClear(){
+        // Clearing all data from Shared Preferences
+        editor.clear();
+        editor.commit();
+
+        // After logout redirect user to Loing Activity
+        Intent i = new Intent(mContext, ProductDescriptionActivity.class);
+        // Closing all the Activities
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        // Add new Flag to start new Activity
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        // Staring Login Activity
+        mContext.startActivity(i);
+    }
 }

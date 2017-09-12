@@ -18,9 +18,9 @@ public class ProductAPI extends APIAbstact {
     }
 
 
-    public static void getAllProducts(final ProductEventSubscriber subscriber) {
+    public static void getAllProducts(int page ,final ProductEventSubscriber subscriber) {
 
-        sApiInterface.getProducts().enqueue(new Callback<ProductResponse>() {
+        sApiInterface.getProducts(page).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {

@@ -1,4 +1,4 @@
-package com.example.admin.task1.activity;
+package com.example.admin.task1.home;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.example.admin.task1.activity;
+package com.example.admin.task1.home;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -121,7 +121,6 @@ public class MainActivity extends AppActivity {
             btnLogout.setText("Login");
         }
     }
-
 
     // intent to allcategories ctivity
     @OnClick(R.id.tv_more)

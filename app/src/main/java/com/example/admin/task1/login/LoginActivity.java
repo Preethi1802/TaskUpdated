@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.admin.task1.R;
-import com.example.admin.task1.activity.MainActivity;
+import com.example.admin.task1.home.MainActivity;
 import com.example.admin.task1.api.request.LoginRequest;
 import com.example.admin.task1.api.response.LoginResponse;
 import com.example.admin.task1.api.subscriber.LoginEventSubscriber;

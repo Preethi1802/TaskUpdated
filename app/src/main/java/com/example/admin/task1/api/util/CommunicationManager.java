@@ -27,8 +27,8 @@ public class CommunicationManager {
     private CommunicationManager() {
     }
 
-    public void getAllProducts(Activity activity){
-        ProductAPI.getAllProducts((ProductEventSubscriber) activity);
+    public void getAllProducts(Activity activity, int page){
+        ProductAPI.getAllProducts(page,(ProductEventSubscriber) activity);
     }
     public void getProductsByBrand(Activity activity, int brandId){
         ProductAPI.getProductsByBrand(brandId,(ProductEventSubscriber) activity);

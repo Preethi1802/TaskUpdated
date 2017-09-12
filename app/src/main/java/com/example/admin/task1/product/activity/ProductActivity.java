@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
 import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.api.util.Constants;
+import com.example.admin.task1.api.util.RecyclerViewInfiniteScrollListener;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.model.Brand;
 import com.example.admin.task1.model.Product;
@@ -36,15 +38,15 @@ import butterknife.ButterKnife;
 
 public class ProductActivity extends AppActivity implements ProductEventSubscriber {
 
-    @BindView(R.id.toolAction)          Toolbar toolbar;
-    @BindView(R.id.recycler_view)       RecyclerView recyclerView;
+    @BindView(R.id.toolAction)              Toolbar toolbar;
+    @BindView(R.id.recycler_view)           RecyclerView recyclerView;
 
     ProductActivity mActivity;
 
     private static final String TAG = "ProductActivity";
 
     AdapterListProduct adapter;
-    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
 
     List<Product> productList;
     ArrayList<Brand> brandList;
@@ -58,7 +60,8 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mActivity=this;
+        mActivity = this;
+        layoutManager = new LinearLayoutManager(getApplicationContext());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_product);
@@ -79,11 +82,12 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
             if (KEY_SOURCE.equals(Constants.SOURCE_FROM_MAINACTIVITY)) {
 
+                int page = 1;
                 showProgress();
                 //api call to getAllCategories all products
-                CommunicationManager.getInstance().getAllProducts(mActivity);
-            }
-            else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_BRAND)) {
+                CommunicationManager.getInstance().getAllProducts(mActivity, page);
+
+            } else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_BRAND)) {
 
                 int brandId = intent.getIntExtra(Constants.KEY_POSITION, 0);
                 Log.i(TAG, "...............position........." + brandId);
@@ -94,10 +98,9 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
                 getSupportActionBar().setTitle(brandName);
                 showProgress();
                 //api call to getAllCategories product by category
-                CommunicationManager.getInstance().getProductsByBrand(mActivity,brandId);
+                CommunicationManager.getInstance().getProductsByBrand(mActivity, brandId);
 
-            }
-            else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_CATEGORY)) {
+            } else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_CATEGORY)) {
 
                 int categoryId = intent.getIntExtra(Constants.KEY_POSITION, 0);
                 Log.i(TAG, "...............position........." + categoryId);
@@ -108,17 +111,21 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
                 getSupportActionBar().setTitle(categoryName);
                 showProgress();
                 //api call to getAllCategories product by brand
-                CommunicationManager.getInstance().getProductsByCategory(mActivity,categoryId);
+                CommunicationManager.getInstance().getProductsByCategory(mActivity, categoryId);
                 //ProductAPI.getProductsByCategory(categoryId,this);
             }
         }
 
         productList = new ArrayList<>();
-        new RecyclerTouchListener(mActivity, recyclerView, new RecyclerTouchListener.ClickListener()
-        {
+        adapter = new AdapterListProduct(mActivity, productList);
+        layoutManager = new GridLayoutManager(ProductActivity.this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        new RecyclerTouchListener(mActivity, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
-            public void onClick(final View view, final int position)
-            {
+            public void onClick(final View view, final int position) {
                 Log.i(TAG, Constants.STORED_ITEMS + position);
 
                 Intent intent = new Intent(view.getContext(), ProductDescriptionActivity.class);
@@ -129,8 +136,14 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             }
 
             @Override
-            public void onLongClick(final View view, final int position)
-            {
+            public void onLongClick(final View view, final int position) {
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerViewInfiniteScrollListener(layoutManager) {
+            @Override
+            public void loadMore(int page) {
+                CommunicationManager.getInstance().getAllProducts(mActivity, page);
             }
         });
     }
@@ -142,34 +155,24 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         }
         return super.onOptionsItemSelected(item);
     }
+
     public <T> boolean isListNotEmpty(List<T> data) {
         return data != null && !data.isEmpty();
     }
 
     @Override
     public void onProductCompleted(ProductResponse productResponse) {
+        Log.d(TAG, "onProductCompleted() called with: productResponse = [" + productResponse.isSuccess() + "]");
+        Log.d(TAG, "onProductCompleted() called with: productResponse = [" + productResponse.getMessage() + "]");
 
         hideProgress();
 
         if (productResponse.isSuccess()) {
-            productList = productResponse.getProducts();
-            adapter = new AdapterListProduct(getApplicationContext(), productList);
-            layoutManager = new GridLayoutManager(ProductActivity.this, 2);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapter);
+            productList.addAll(productResponse.getProducts());
+            adapter.notifyDataSetChanged();
 
         } else {
-
             ToastUtil.showCenterToast(getApplicationContext(), productResponse.getMessage());
         }
     }
 }
-
-   /*if (isListNotEmpty(productList)) {
-
-
-   } else {
-                Toast.makeText(getApplicationContext(), productResponse.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }*/
