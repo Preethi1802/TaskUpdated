@@ -17,6 +17,7 @@ import com.example.admin.task1.api.response.FirebaseLoginResponse;
 import com.example.admin.task1.api.subscriber.FirebaseLoginEventSubscriber;
 import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.app.AppActivity;
+import com.example.admin.task1.home.MainActivity;
 import com.example.admin.task1.utilities.SessionManager;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -116,7 +117,6 @@ public class FirebaseActivity extends AppActivity implements FirebaseLoginEventS
                 FirebaseLoginRequest firebaseLoginRequest = new FirebaseLoginRequest();
                 firebaseLoginRequest.setEmail(currentUser.getEmail());
                 firebaseLoginRequest.setName(currentUser.getDisplayName());
-                firebaseLoginRequest.setUid(currentUser.getUid());
 
                 Iterator<String> providerIter = currentUser.getProviders().iterator();
                 while (providerIter.hasNext()) {
@@ -134,7 +134,7 @@ public class FirebaseActivity extends AppActivity implements FirebaseLoginEventS
 
                 Log.i("FirebaseTAG",""+currentUser.getProviders().size());
 
-                firebaseLoginRequest.setProvider_id(currentUser.getProviderId());
+                firebaseLoginRequest.setProvider_id(currentUser.getUid());
 
                 CommunicationManager.getInstance().postFirebaseLoginDetails(firebaseLoginRequest,mActivity);
 
@@ -292,9 +292,9 @@ public class FirebaseActivity extends AppActivity implements FirebaseLoginEventS
         if (firebaseLoginResponse.isSuccess()) {
 
             session.createLoginSession(firebaseLoginResponse.getUser());
-
-
-            startSignedInActivity(response);
+        //    startSignedInActivity(response);
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
             finish();
             return;
         }

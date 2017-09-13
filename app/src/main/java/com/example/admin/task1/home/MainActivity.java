@@ -22,9 +22,12 @@ import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.brand.activity.BrandsActivity;
 import com.example.admin.task1.category.activity.AllCategoryActivity;
 import com.example.admin.task1.login.LoginActivity;
-import com.example.admin.task1.utilities.SessionManager;
 import com.example.admin.task1.model.User;
 import com.example.admin.task1.product.activity.ProductActivity;
+import com.example.admin.task1.utilities.SessionManager;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 
 import butterknife.BindView;
@@ -145,6 +148,19 @@ public class MainActivity extends AppActivity {
 
         if (session.isLoggedIn())
         {
+            AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //FirebaseActivity.start(MainActivity.this);
+                                finish();
+                            } else {
+                               // showSnackbar(R.string.sign_out_failed);
+                            }
+                        }
+                    });
             // Clear the session data
             session.logoutUser();
             finish();
