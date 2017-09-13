@@ -87,6 +87,7 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="logIn">Login</string>
     <string name="action_sign_in_short">Sign in</string>
+
     <string name="error_invalid_mobNumber">Mobile Number must be 10 digit</string>
     <string name="error_invalid_email">Invalid Email address</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -96,4 +97,28 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="label_welcome_guest">Welcome Guest.!!</string>
+
+    <!--error-->
+    <string name="unknown_response">Unexpected onActivityResult response code</string>
+    <string name="sign_in_cancelled">Sign in cancelled</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="unknown_error">An unknown error occurred</string>
+    <string name="unknown_sign_in_response">Unknown response from AuthUI sign-in</string>
+
+    <!--profile-->
+    <string name="sign_out">Sign out</string>
+    <string name="delete_account_label">Delete account</string>
+    <string name="user_profile_header">User profile:</string>
+    <string name="profile_picture_content_desc">Profile picture</string>
+    <string name="idp_token">IDP Token</string>
+    <string name="idp_secret">IDP Secret</string>
+    <string name="sign_out_failed">Sign out failed</string>
+    <string name="delete_account_failed">Delete account failed</string>
+    <!--facebook -->
+    <string name="msg_fetching_facebook_profile">Fetching Facebook Profile.!!</string>
+
+    <!--screen titles-->
+    <string name="title_activity_home">Home</string>
 </resources>

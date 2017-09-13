@@ -2,12 +2,15 @@ package com.example.admin.task1.api.util;
 
 import android.app.Activity;
 
+import com.example.admin.task1.api.event.FirbaseLoginAPI;
 import com.example.admin.task1.api.event.LoginAPI;
 import com.example.admin.task1.api.event.ProductAPI;
 import com.example.admin.task1.api.event.RegistrationAPI;
 import com.example.admin.task1.api.event.SettingsAPI;
+import com.example.admin.task1.api.request.FirebaseLoginRequest;
 import com.example.admin.task1.api.request.LoginRequest;
 import com.example.admin.task1.api.request.RegistrationRequest;
+import com.example.admin.task1.api.subscriber.FirebaseLoginEventSubscriber;
 import com.example.admin.task1.api.subscriber.LoginEventSubscriber;
 import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
 import com.example.admin.task1.api.subscriber.RegistrationEventSubscriber;
@@ -47,5 +50,9 @@ public class CommunicationManager {
     }
     public void postLoginDetails( LoginRequest request,Activity activity){
         LoginAPI.postLoginDetails(request,(LoginEventSubscriber) activity);
+    }
+
+    public void postFirebaseLoginDetails(FirebaseLoginRequest request, Activity activity){
+        FirbaseLoginAPI.postFirbaseLoginDetails(request,(FirebaseLoginEventSubscriber) activity);
     }
 }

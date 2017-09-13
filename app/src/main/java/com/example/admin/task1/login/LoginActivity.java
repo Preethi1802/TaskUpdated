@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.admin.task1.R;
+import com.example.admin.task1.firebase.FirebaseActivity;
 import com.example.admin.task1.home.MainActivity;
 import com.example.admin.task1.api.request.LoginRequest;
 import com.example.admin.task1.api.response.LoginResponse;
@@ -103,6 +104,13 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
 
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+
+    @OnClick(R.id.firebase_login)
+    public void onFirebaseLogin()
+    {
+        Intent intent= new Intent(mActivity, FirebaseActivity.class);
+        startActivity(intent);
     }
 
     @Override

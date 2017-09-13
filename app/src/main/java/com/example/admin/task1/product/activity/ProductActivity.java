@@ -75,6 +75,13 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
 
+        productList = new ArrayList<>();
+        adapter = new AdapterListProduct(mActivity, productList);
+        layoutManager = new GridLayoutManager(ProductActivity.this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
         Intent intent = getIntent();
 
         if (intent != null) {
@@ -86,6 +93,13 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
                 showProgress();
                 //api call to getAllCategories all products
                 CommunicationManager.getInstance().getAllProducts(mActivity, page);
+
+                recyclerView.addOnScrollListener(new RecyclerViewInfiniteScrollListener(layoutManager) {
+                    @Override
+                    public void loadMore(int page) {
+                        CommunicationManager.getInstance().getAllProducts(mActivity, page);
+                    }
+                });
 
             } else if (KEY_SOURCE.equals(Constants.SOURCE_FROM_BRAND)) {
 
@@ -116,12 +130,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             }
         }
 
-        productList = new ArrayList<>();
-        adapter = new AdapterListProduct(mActivity, productList);
-        layoutManager = new GridLayoutManager(ProductActivity.this, 2);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+
 
         new RecyclerTouchListener(mActivity, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -140,12 +149,6 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             }
         });
 
-        recyclerView.addOnScrollListener(new RecyclerViewInfiniteScrollListener(layoutManager) {
-            @Override
-            public void loadMore(int page) {
-                CommunicationManager.getInstance().getAllProducts(mActivity, page);
-            }
-        });
     }
 
     @Override

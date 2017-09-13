@@ -15,6 +15,7 @@ public class APIUtil {
     public static final String API_SETTINGS = "/projects/learning/laravel/e-commerce-portal/api/v1/getSettings";
     public static final String API_LOGIN = "/projects/learning/laravel/e-commerce-portal/api/v1/login";
     public static final String API_REGISTRATION = "/projects/learning/laravel/e-commerce-portal/api/v1/registration";
+    public static final String API_FIREBASE_LOGIN = "/projects/learning/laravel/e-commerce-portal/api/v1/loginSocial";
     public static final String BASE_URL = "http://192.168.1.73";
 
     public static final String IMAGE_URL = "http://192.168.1.73/projects/learning/laravel/e-commerce-portal/";

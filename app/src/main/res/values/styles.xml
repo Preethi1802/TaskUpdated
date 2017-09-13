@@ -8,4 +8,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="GreenTheme">
+        <item name="colorPrimary">@color/material_green_500</item>
+        <item name="colorPrimaryDark">@color/material_green_700</item>
+        <item name="colorAccent">@color/material_red_a200</item>
+        <item name="android:windowBackground">@color/material_green_50</item>
+    </style>
+
+    <style name="ButtonBlue" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/blue</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="ButtonOrange" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/orange</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>

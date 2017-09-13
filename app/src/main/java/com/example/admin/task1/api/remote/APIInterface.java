@@ -1,8 +1,10 @@
 package com.example.admin.task1.api.remote;
 
 
+import com.example.admin.task1.api.request.FirebaseLoginRequest;
 import com.example.admin.task1.api.request.LoginRequest;
 import com.example.admin.task1.api.request.RegistrationRequest;
+import com.example.admin.task1.api.response.FirebaseLoginResponse;
 import com.example.admin.task1.api.response.LoginResponse;
 import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.api.response.RegistrationResponse;
@@ -40,4 +42,7 @@ public interface APIInterface {
 
     @POST(APIUtil.API_REGISTRATION)
     Call<RegistrationResponse> postRegistrationDetails(@Body RegistrationRequest request);
+
+    @POST(APIUtil.API_FIREBASE_LOGIN)
+    Call<FirebaseLoginResponse> postFirebaseLoginDetails(@Body FirebaseLoginRequest request);
 }
