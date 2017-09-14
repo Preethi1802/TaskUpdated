@@ -9,7 +9,7 @@
         android:title="Compose">
     </item>
     <item
-        android:id="@+id/cart"
+        android:id="@+id/cart_toolbar"
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         app:showAsAction="ifRoom|withText"
         android:title="Profile">

@@ -1,5 +1,6 @@
 package com.example.admin.task1.product.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,18 +10,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.task1.R;
+import com.example.admin.task1.api.request.CartRequest;
+import com.example.admin.task1.api.response.CartResponse;
+import com.example.admin.task1.api.subscriber.CartEventSubscriber;
+import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
+import com.example.admin.task1.cart.activity.CartActivity;
 import com.example.admin.task1.home.AllDetailsActivity;
+import com.example.admin.task1.login.LoginActivity;
 import com.example.admin.task1.model.Product;
+import com.example.admin.task1.model.User;
 import com.example.admin.task1.utilities.SessionManager;
 import com.google.gson.Gson;
+import com.thapovan.android.commonutils.text.TextUtil;
+import com.thapovan.android.commonutils.toast.ToastUtil;
 import com.thapovan.android.customui.TouchImageView;
 
 import java.util.ArrayList;
@@ -29,7 +40,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProductDescriptionActivity extends AppActivity {
+public class ProductDescriptionActivity extends AppActivity implements CartEventSubscriber{
 
     @BindView(R.id.toolAction)              Toolbar toolbar;
     @BindView(R.id.product1)                TouchImageView ivFeaturedImage;
@@ -40,33 +51,40 @@ public class ProductDescriptionActivity extends AppActivity {
     @BindView(R.id.ratingInWords)           TextView tvRatingInWords;
     @BindView(R.id.allDetails)              TextView tvAllDetails;
     @BindView(R.id.linear_layout_gallery)   LinearLayout galleryLayout;
+    @BindView(R.id.et_quantity)             EditText etQuantity;
+    @BindView(R.id.btn_add_to_cart)         Button btnAddToCart;
 
-    @BindView(R.id.btn_add_to_cart)
-    Button btnAddToCart;
 
+    private ProductDescriptionActivity mActivity;
 
-    private static final String TAG = "ActivityProductDesc";
-    ArrayList<Product> productList = new ArrayList<Product>();
+    private static final String TAG = ProductDescriptionActivity.class.getSimpleName();
+
+    private ArrayList<Product> productList = new ArrayList<Product>();
 
     int position;
     SessionManager session;
     Gson gson;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_product_activity, menu);
-        return true;
+    public static void start(Context context, Product product) {
+        Intent starter = new Intent(context, ProductDescriptionActivity.class);
+        starter.putExtra(Constants.KEY_EXTRA_PRODUCT,product);
+        context.startActivity(starter);
     }
+
+    private Product getProduct(){
+        return getIntent().getParcelableExtra(Constants.KEY_EXTRA_PRODUCT);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_product_description);
         ButterKnife.bind(this);
 
         session = new SessionManager(getApplicationContext());
         gson = new Gson();
-
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -76,26 +94,14 @@ public class ProductDescriptionActivity extends AppActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
 
-        Intent intent = getIntent();
-        Log.i(TAG, "hiiiiii");
 
-        position = intent.getIntExtra(Constants.KEY_POSITION, 0);
-        Log.i(TAG, "...............position........." + position);
-
-        productList = intent.getParcelableArrayListExtra(Constants.STORED_ITEMS);
-        Log.i(TAG, "..........size............." + productList.size());
-
-        Log.i(TAG, ".......GalleryImage..........." + productList.get(position).getGalleryImages());
-
-        String imageURL = productList.get(position).getFeaturedImages().getFeaturedImageURL();
+        String imageUrl= getProduct().getFeaturedImages().getFeaturedImageURL();
 
         Glide.with(this)
-                .load(imageURL)
+                .load(imageUrl)
                 .into(ivFeaturedImage);
 
-        Log.i(TAG, "" + productList.get(position).getImages().size());
-
-        for (int k = 0; k < productList.get(position).getGalleryImages().size(); k++) {
+        for (int k = 0; k < getProduct().getGalleryImages().size(); k++) {
 
             final ImageView ivGalleryImage = new ImageView(this);
             ivGalleryImage.setId(k);
@@ -103,13 +109,10 @@ public class ProductDescriptionActivity extends AppActivity {
             ivGalleryImage.setPadding(15, 15, 15, 15);
             ivGalleryImage.setBackgroundResource(R.drawable.image_border);
 
-
-            final String imageURL1 = productList.get(position).getGalleryImages().get(k).getGalleryImageURL();
-
-            Log.i(TAG, "image Url" + imageURL1);
+            final String imageUrl1 = getProduct().getGalleryImages().get(k).getGalleryImageURL();
 
             Glide.with(this)
-                    .load(imageURL1)
+                    .load(imageUrl1)
                     .into(ivGalleryImage);
 
             galleryLayout.addView(ivGalleryImage);
@@ -121,16 +124,17 @@ public class ProductDescriptionActivity extends AppActivity {
                 }
             });
         }
-        tvMobName.setText(productList.get(position).getName());
-        tvMobVersion.setText(Html.fromHtml(productList.get(position).getSpec()).toString());
-        tvMobPrize.setText(productList.get(position).getRegularPrice());
-//      tvRatingInWords.setText(Html.fromHtml(productList.get(position).getDescription()).toString());
 
-//        if (session.getCartProducts().containsValue(productList.get(position).getId()))
-//        {
-//            ToastUtil.showCenterToast(getApplicationContext(),""+session.getCartProducts());
-//            btnAddToCart.setText("Remove From Cart");
-//        }
+            tvMobName.setText(getProduct().getName());
+            tvMobVersion.setText(Html.fromHtml(getProduct().getSpec()).toString());
+            tvMobPrize.setText(getProduct().getRegularPrice());
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
     }
 
     @OnClick(R.id.allDetails)
@@ -141,26 +145,57 @@ public class ProductDescriptionActivity extends AppActivity {
         v.getContext().startActivity(intent);
     }
 
-    //********************************************************************************************
-//    @OnClick(R.id.btn_add_to_cart)
-//    public void onAddCartClicked() {
-//        if (session.isLoggedIn()) {
-//            session.createCart(productList.get(position).getId().toString());
-//            ToastUtil.showCenterToast(getApplicationContext(), "Product added to cart"+session.getCartProducts().size());
-//        } else {
-//            ToastUtil.showCenterToast(getApplicationContext(), "Please login or signup to continue");
-//            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//            startActivity(intent);
-//        }
-//    }
+    @OnClick(R.id.btn_add_to_cart)
+    public void onAddCartClicked() {
+        if (session.isLoggedIn()) {
+            User user= gson.fromJson(session.getUserObject(),User.class);
 
-    //********************************************************************************************
+            CartRequest cartRequest = new CartRequest();
+            cartRequest.setUser_id(user.getId());
+            cartRequest.setProduct_id(productList.get(position).getId());
+            cartRequest.setQuantity(TextUtil.cleanupString(etQuantity.getText().toString().trim()));
+            Log.i(TAG,""+user.getId());
+            showProgress();
+            CommunicationManager.getInstance().postAddCart(cartRequest,mActivity);
+
+        } else {
+            ToastUtil.showCenterToast(getApplicationContext(),"Login or SignUp to Continue");
+            Intent intent= new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int id= item.getItemId();
+        if (id == android.R.id.home) {
             this.finish();
+        }
+        if (id== R.id.cart_toolbar)
+        {
+            Intent intent= new Intent(this, CartActivity.class);
+            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onCartCompleted(CartResponse cartResponse) {
+        hideProgress();
+        if (cartResponse.isSuccess())
+        {
+            Log.i(TAG,"****"+cartResponse.getProducts());
+           // cartList.addAll(cartResponse.getProducts());
+            btnAddToCart.setText("GO TO CART");
+            Intent intent= new Intent(mActivity, CartActivity.class);
+            ToastUtil.showCenterToast(getApplicationContext(),cartResponse.getMessage());
+
+        }else {
+            ToastUtil.showCenterToast(getApplicationContext(),cartResponse.getMessage());
+        }
+
+    }
 }

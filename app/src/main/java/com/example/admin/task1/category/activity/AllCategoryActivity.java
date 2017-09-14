@@ -91,6 +91,8 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
     public void onSettingsCompleted(SettingsResponse settingsResponse) {
         hideProgress();
 
+        Log.i(TAG,"********"+settingsResponse.getCategory());
+
         categoryList = new ArrayList<Category>(settingsResponse.getCategory());
         Log.i(TAG, "categoryList.size()" + categoryList.size());
 

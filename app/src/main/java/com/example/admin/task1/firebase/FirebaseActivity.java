@@ -45,7 +45,6 @@ public class FirebaseActivity extends AppActivity implements FirebaseLoginEventS
 
     FirebaseActivity mActivity;
     IdpResponse response;
-    UserProfileActivity userProfileActivity;
 
     SessionManager session;
 

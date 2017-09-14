@@ -1,9 +1,11 @@
 package com.example.admin.task1.api.remote;
 
 
+import com.example.admin.task1.api.request.CartRequest;
 import com.example.admin.task1.api.request.FirebaseLoginRequest;
 import com.example.admin.task1.api.request.LoginRequest;
 import com.example.admin.task1.api.request.RegistrationRequest;
+import com.example.admin.task1.api.response.CartResponse;
 import com.example.admin.task1.api.response.FirebaseLoginResponse;
 import com.example.admin.task1.api.response.LoginResponse;
 import com.example.admin.task1.api.response.ProductResponse;
@@ -45,4 +47,13 @@ public interface APIInterface {
 
     @POST(APIUtil.API_FIREBASE_LOGIN)
     Call<FirebaseLoginResponse> postFirebaseLoginDetails(@Body FirebaseLoginRequest request);
+
+    @GET(APIUtil.API_GET_CART)
+    Call<CartResponse> getCart(@Query("user_id") int userID);
+
+    @POST(APIUtil.API_ADD_CART)
+    Call<CartResponse> postAddCart(@Body CartRequest request);
+
+    @POST(APIUtil.API_REMOVE_CART)
+    Call<CartResponse> postRemoveCart(@Body CartRequest request);
 }

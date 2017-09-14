@@ -37,6 +37,8 @@
     <string name="rs">\u20B9 10,799</string>
     <string name="offer">70% off</string>
 
+    <string name="cart">My Cart</string>
+
 
     <string-array name="mobileName">
         <item>"Lenova Vibe K5 3GB"</item>

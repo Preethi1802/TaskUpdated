@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 
 public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.ViewHolder> {
 
-    private static final String TAG = "AdapterListProduct";
+    private static final String TAG = "AdapterCart";
     List<Product> list = new ArrayList<>();
     public Context mContext;
 

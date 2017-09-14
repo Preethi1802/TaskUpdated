@@ -20,6 +20,7 @@ import com.example.admin.task1.R;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
 import com.example.admin.task1.brand.activity.BrandsActivity;
+import com.example.admin.task1.cart.activity.CartActivity;
 import com.example.admin.task1.category.activity.AllCategoryActivity;
 import com.example.admin.task1.login.LoginActivity;
 import com.example.admin.task1.model.User;
@@ -69,7 +70,6 @@ public class MainActivity extends AppActivity {
         gson = new Gson();
 
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.appTitle);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
@@ -110,6 +110,8 @@ public class MainActivity extends AppActivity {
                 return true;
             }
         });
+
+
 
         User user= gson.fromJson(session.getUserObject(),User.class);
 
@@ -179,6 +181,14 @@ public class MainActivity extends AppActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {
             return true;
+        }
+
+        int id= item.getItemId();
+        if (id== R.id.cart_toolbar)
+        {
+            Intent intent= new Intent(this, CartActivity.class);
+            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

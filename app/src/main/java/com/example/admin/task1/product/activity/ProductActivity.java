@@ -2,7 +2,6 @@ package com.example.admin.task1.product.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +19,7 @@ import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.api.util.RecyclerViewInfiniteScrollListener;
 import com.example.admin.task1.app.AppActivity;
+import com.example.admin.task1.cart.activity.CartActivity;
 import com.example.admin.task1.model.Brand;
 import com.example.admin.task1.model.Product;
 import com.example.admin.task1.product.adapter.AdapterListProduct;
@@ -54,7 +54,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
     // inflate toolbar into allproductslayout
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_product_activity, menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }
 
@@ -137,11 +137,13 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             public void onClick(final View view, final int position) {
                 Log.i(TAG, Constants.STORED_ITEMS + position);
 
-                Intent intent = new Intent(view.getContext(), ProductDescriptionActivity.class);
-                intent.putExtra(Constants.KEY_POSITION, position);
-                intent.putParcelableArrayListExtra(Constants.STORED_ITEMS, (ArrayList<? extends Parcelable>) productList);
+                /*Intent intent = new Intent(view.getContext(), ProductDescriptionActivity.class);
+                *//*intent.putExtra(Constants.KEY_POSITION, position);
+                intent.putParcelableArrayListExtra(Constants.STORED_ITEMS, (ArrayList<? extends Parcelable>) productList);*//*
+                intent.putExtra(Constants.KEY_EXTRA_PRODUCT,productList.get(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                view.getContext().startActivity(intent);
+                startActivity(intent);*/
+                ProductDescriptionActivity.start(mActivity, productList.get(position));
             }
 
             @Override
@@ -153,8 +155,16 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
             this.finish();
+        }
+        if (id== R.id.cart_toolbar)
+        {
+            Intent intent= new Intent(this, CartActivity.class);
+            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

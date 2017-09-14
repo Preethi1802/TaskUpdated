@@ -17,40 +17,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="320dp"
-            android:orientation="vertical"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
             android:weightSum="1">
 
             <com.thapovan.android.customui.TouchImageView
                 android:id="@+id/product1"
                 android:layout_width="320dp"
                 android:layout_height="280dp"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:src="@mipmap/ic_launcher" />
 
         </LinearLayout>
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="0.83"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/linear_layout_gallery"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.83"
-                android:layout_marginLeft="15dp"
-                android:scrollbars="none">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/linear_layout_gallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+            </LinearLayout>
 
-                </LinearLayout>
-
-            </HorizontalScrollView>
-
-
+        </HorizontalScrollView>
 
 
         <LinearLayout
@@ -66,8 +64,8 @@
                 android:gravity="center"
                 android:text="MobileName"
                 android:textAlignment="viewStart"
-                android:textSize="17dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/modelName"
@@ -75,8 +73,8 @@
                 android:layout_height="41dp"
                 android:gravity="center"
                 android:text="model"
-                android:textColor="@color/black"
                 android:textAlignment="viewStart"
+                android:textColor="@color/black"
                 android:textSize="15dp" />
 
             <LinearLayout
@@ -96,9 +94,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/black"
                     android:text="Ends in few hours"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
 
@@ -108,11 +106,12 @@
             android:layout_marginLeft="20dp"
             android:orientation="horizontal"
             android:weightSum="9">
+
             <TextView
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:text="\u20B9"
                 android:gravity="center"
+                android:text="\u20B9"
                 android:textAlignment="viewStart"
                 android:textColor="@color/TextDark"
                 android:textSize="20dp"
@@ -179,29 +178,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:text="120 ratings &amp; 29 reviews"
-                android:textAlignment="viewStart" />
+                android:textAlignment="viewStart"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/allDetails"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="All Details"
-                android:textStyle="bold"
-                android:textSize="16dp"
-                android:textColor="@color/black"
-                android:textAlignment="viewStart"
-                android:gravity="center_vertical"
                 android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-                />
+                android:gravity="center_vertical"
+                android:text="All Details"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="4.5"
+                android:gravity="center"
+                android:hint="Quantity"
+                android:inputType="number"
+                android:textAlignment="viewStart" />
 
 
         </LinearLayout>

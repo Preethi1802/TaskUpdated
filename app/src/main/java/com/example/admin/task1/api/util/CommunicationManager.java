@@ -2,14 +2,17 @@ package com.example.admin.task1.api.util;
 
 import android.app.Activity;
 
+import com.example.admin.task1.api.event.CartAPI;
 import com.example.admin.task1.api.event.FirbaseLoginAPI;
 import com.example.admin.task1.api.event.LoginAPI;
 import com.example.admin.task1.api.event.ProductAPI;
 import com.example.admin.task1.api.event.RegistrationAPI;
 import com.example.admin.task1.api.event.SettingsAPI;
+import com.example.admin.task1.api.request.CartRequest;
 import com.example.admin.task1.api.request.FirebaseLoginRequest;
 import com.example.admin.task1.api.request.LoginRequest;
 import com.example.admin.task1.api.request.RegistrationRequest;
+import com.example.admin.task1.api.subscriber.CartEventSubscriber;
 import com.example.admin.task1.api.subscriber.FirebaseLoginEventSubscriber;
 import com.example.admin.task1.api.subscriber.LoginEventSubscriber;
 import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
@@ -54,5 +57,14 @@ public class CommunicationManager {
 
     public void postFirebaseLoginDetails(FirebaseLoginRequest request, Activity activity){
         FirbaseLoginAPI.postFirbaseLoginDetails(request,(FirebaseLoginEventSubscriber) activity);
+    }
+    public void getCart( Activity activity, int userId){
+        CartAPI.getCart(userId, (CartEventSubscriber) activity);
+    }
+    public void postAddCart(CartRequest request, Activity activity){
+        CartAPI.postAddCart(request,(CartEventSubscriber) activity);
+    }
+    public void postRemoveCart(CartRequest request, Activity activity){
+        CartAPI.postRemoveCart(request,(CartEventSubscriber) activity);
     }
 }
