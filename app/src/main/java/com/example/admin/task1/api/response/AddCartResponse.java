@@ -1,0 +1,5 @@
+package com.example.admin.task1.api.response;
+
+public class AddCartResponse extends GenericResponse {
+
+}

@@ -1,4 +1,4 @@
-package com.example.admin.task1.firebase;
+package com.example.admin.task1.login;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -83,7 +83,8 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
-            FirebaseActivity.start(this);
+            LoginActivity.start(this);
+           // FirebaseActivity.start(this);
             finish();
             return;
         }
@@ -107,8 +108,8 @@ public class UserProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            FirebaseActivity.start(UserProfileActivity.this);
-                            finish();
+                            LoginActivity.start(UserProfileActivity.this);
+                         //   FirebaseActivity.start(UserProfileActivity.this);
                         } else {
                             showSnackbar(R.string.sign_out_failed);
                         }
@@ -137,8 +138,8 @@ public class UserProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            FirebaseActivity.start(UserProfileActivity.this);
-                            finish();
+                            LoginActivity.start(UserProfileActivity.this);
+                          //  FirebaseActivity.start(UserProfileActivity.this);
                         } else {
                             showSnackbar(R.string.delete_account_failed);
                         }

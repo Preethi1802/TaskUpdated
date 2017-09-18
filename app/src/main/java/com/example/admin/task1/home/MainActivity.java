@@ -1,5 +1,6 @@
 package com.example.admin.task1.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,6 +27,7 @@ import com.example.admin.task1.login.LoginActivity;
 import com.example.admin.task1.model.User;
 import com.example.admin.task1.product.activity.ProductActivity;
 import com.example.admin.task1.utilities.SessionManager;
+import com.example.admin.task1.wishlist.activity.WishlistActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,6 +48,7 @@ public class MainActivity extends AppActivity {
     @BindView(R.id.navi_view)               NavigationView navigationView;
 
     private static final String TAG = "MainActivity";
+    MainActivity mActivity;
 
     // Session Manager Class
     SessionManager session;
@@ -53,11 +56,9 @@ public class MainActivity extends AppActivity {
 
     private android.support.v7.app.ActionBarDrawerToggle toggle;
 
-   // inflating menu items into toolbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-        return true;
+    public static void start(final Activity activity) {
+        final Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
     }
 
     @Override
@@ -65,6 +66,7 @@ public class MainActivity extends AppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
         ButterKnife.bind(this);
+        mActivity= this;
 
         session = new SessionManager(getApplicationContext());
         gson = new Gson();
@@ -86,24 +88,28 @@ public class MainActivity extends AppActivity {
 
                 Intent intent;
                 switch (item.getItemId()) {
-                    case R.id.brands:
+                    case R.id.navi_brands:
                         intent = new Intent(getApplicationContext(), BrandsActivity.class);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(), "brand Selected", Toast.LENGTH_SHORT).show();
                         return true;
-                    case R.id.offers:
+                    case R.id.navi_offers:
                         Toast.makeText(getApplicationContext(), "offers Selected", Toast.LENGTH_LONG).show();
                         return true;
-                    case R.id.book:
+                    case R.id.navi_book:
                         Toast.makeText(getApplicationContext(), "book Selected", Toast.LENGTH_LONG).show();
                         return true;
-                    case R.id.electronics:
+                    case R.id.navi_electronics:
                         intent = new Intent(getApplicationContext(), AllCategoryActivity.class);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(), "electronics Selected", Toast.LENGTH_LONG).show();
                         return true;
-                    case R.id.signIn:
+                    case R.id.navi_myAccount:
                         intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.navi_whishlist:
+                        intent = new Intent(getApplicationContext(), WishlistActivity.class);
                         startActivity(intent);
                         return true;
                 }
@@ -129,7 +135,7 @@ public class MainActivity extends AppActivity {
 
     // intent to allcategories ctivity
     @OnClick(R.id.tv_more)
-    public void More(View v) {
+    public void onMoreClicked(View v) {
         Intent intent = new Intent(v.getContext(), AllCategoryActivity.class);
         startActivity(intent);
         Log.i(TAG, "HIIII");
@@ -137,7 +143,7 @@ public class MainActivity extends AppActivity {
 
     // intent to product activity
     @OnClick(R.id.btn_viewAll)
-    public void ViewAll(View v) {
+    public void onViewAllClicked(View v) {
         Intent intent = new Intent(v.getContext(), ProductActivity.class);
         intent.setClass(v.getContext(), ProductActivity.class);
         intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_FROM_MAINACTIVITY);
@@ -146,7 +152,7 @@ public class MainActivity extends AppActivity {
 
     // Login / Logout button click event
     @OnClick(R.id.tv_login_logout)
-    public void LoginLogout(View v) {
+    public void onLoginLogoutClicked(View v) {
 
         if (session.isLoggedIn())
         {
@@ -156,8 +162,8 @@ public class MainActivity extends AppActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+
                                 //FirebaseActivity.start(MainActivity.this);
-                                finish();
                             } else {
                                // showSnackbar(R.string.sign_out_failed);
                             }
@@ -165,7 +171,8 @@ public class MainActivity extends AppActivity {
                     });
             // Clear the session data
             session.logoutUser();
-            finish();
+            tvLoginUser.setText("Welcome to Flipkart");
+            btnLogout.setText("Login");
         }
         else
         {
@@ -175,7 +182,12 @@ public class MainActivity extends AppActivity {
         }
     }
 
-
+    // inflating menu items into toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

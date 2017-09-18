@@ -7,9 +7,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.MainThread;
 import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.request.FirebaseLoginRequest;
@@ -35,13 +33,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FirebaseActivity extends AppActivity implements FirebaseLoginEventSubscriber{
 
-    @BindView(R.id.root)    View mRootView;
+  //  @BindView(R.id.root)    View mRootView;
 
     FirebaseActivity mActivity;
     IdpResponse response;
@@ -80,7 +77,7 @@ public class FirebaseActivity extends AppActivity implements FirebaseLoginEventS
         initFireBaseLogin();
     }
 
-    private void initFireBaseLogin() {
+    public void initFireBaseLogin() {
         startActivityForResult(
                 AuthUI.getInstance().createSignInIntentBuilder()
                         .setTheme(getSelectedTheme())
@@ -163,10 +160,10 @@ public class FirebaseActivity extends AppActivity implements FirebaseLoginEventS
 
     private void startSignedInActivity(IdpResponse response) {
         startActivity(
-                UserProfileActivity.createIntent(
+                UserProfileActivityy.createIntent(
                         this,
                         response,
-                        new UserProfileActivity.SignedInConfig(
+                        new UserProfileActivityy.SignedInConfig(
                                 getSelectedLogo(),
                                 getSelectedTheme(),
                                 getSelectedProviders(),
@@ -282,7 +279,7 @@ public class FirebaseActivity extends AppActivity implements FirebaseLoginEventS
     }
     @MainThread
     private void showSnackbar(@StringRes int errorMessageRes) {
-        Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
+     //   Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

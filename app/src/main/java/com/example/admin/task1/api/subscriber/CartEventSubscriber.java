@@ -1,6 +1,8 @@
 package com.example.admin.task1.api.subscriber;
 
-import com.example.admin.task1.api.response.CartResponse;
+import com.example.admin.task1.api.response.AddCartResponse;
+import com.example.admin.task1.api.response.GetCartResponse;
+import com.example.admin.task1.api.response.RemoveCartResponse;
 
 /**
  * Created by Admin on 9/14/2017.
@@ -8,5 +10,8 @@ import com.example.admin.task1.api.response.CartResponse;
 
 public interface CartEventSubscriber
 {
-    void onCartCompleted(CartResponse cartResponse);
+    void onGetCartCompleted(GetCartResponse getCartResponse);
+    void onAddCartCompleted(AddCartResponse addCartResponse);
+    void onRemoveCartCompleted(RemoveCartResponse removeCartResponse);
+
 }

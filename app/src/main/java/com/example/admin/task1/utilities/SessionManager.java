@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.example.admin.task1.home.MainActivity;
 import com.example.admin.task1.login.LoginActivity;
 import com.example.admin.task1.product.activity.ProductDescriptionActivity;
 import com.google.gson.Gson;
@@ -113,16 +112,16 @@ public class SessionManager {
         editor.clear();
         editor.commit();
 
-        // After logout redirect user to Loing Activity
-        Intent i = new Intent(mContext, MainActivity.class);
-        // Closing all the Activities
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        /* // After logout redirect user to Loing Activity
+            Intent i = new Intent(mActivity, MainActivity.class);
+            // Closing all the Activities
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        // Add new Flag to start new Activity
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            // Add new Flag to start new Activity
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        // Staring Login Activity
-        mContext.startActivity(i);
+            // Staring Login Activity
+            mActivity.startActivity(i);*/
     }
 
     // Get Login State , Quick check for login

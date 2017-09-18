@@ -8,16 +8,19 @@ import com.example.admin.task1.api.event.LoginAPI;
 import com.example.admin.task1.api.event.ProductAPI;
 import com.example.admin.task1.api.event.RegistrationAPI;
 import com.example.admin.task1.api.event.SettingsAPI;
+import com.example.admin.task1.api.event.WhishlistAPI;
 import com.example.admin.task1.api.request.CartRequest;
 import com.example.admin.task1.api.request.FirebaseLoginRequest;
 import com.example.admin.task1.api.request.LoginRequest;
 import com.example.admin.task1.api.request.RegistrationRequest;
+import com.example.admin.task1.api.request.WishlistRequest;
 import com.example.admin.task1.api.subscriber.CartEventSubscriber;
 import com.example.admin.task1.api.subscriber.FirebaseLoginEventSubscriber;
 import com.example.admin.task1.api.subscriber.LoginEventSubscriber;
 import com.example.admin.task1.api.subscriber.ProductEventSubscriber;
 import com.example.admin.task1.api.subscriber.RegistrationEventSubscriber;
 import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
+import com.example.admin.task1.api.subscriber.WishlistProductEventSubscriber;
 
 /**
  * Created by Admin on 9/4/2017.
@@ -66,5 +69,14 @@ public class CommunicationManager {
     }
     public void postRemoveCart(CartRequest request, Activity activity){
         CartAPI.postRemoveCart(request,(CartEventSubscriber) activity);
+    }
+    public void getWhishlistProducts( Activity activity, int userId){
+        WhishlistAPI.getWhishlistProducts(userId, (WishlistProductEventSubscriber) activity);
+    }
+    public void postAddProductsToWhishlist(WishlistRequest request, Activity activity){
+        WhishlistAPI.postAddProductsToWhishlist(request,(WishlistProductEventSubscriber) activity);
+    }
+    public void postRemoveFromWhishlist(WishlistRequest request, Activity activity){
+        WhishlistAPI.postRemoveFromWhishlist(request,(WishlistProductEventSubscriber) activity);
     }
 }

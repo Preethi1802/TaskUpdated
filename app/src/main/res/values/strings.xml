@@ -38,6 +38,7 @@
     <string name="offer">70% off</string>
 
     <string name="cart">My Cart</string>
+    <string name="whishList">My Whishlist</string>
 
 
     <string-array name="mobileName">
@@ -108,6 +109,7 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="unknown_error">An unknown error occurred</string>
     <string name="unknown_sign_in_response">Unknown response from AuthUI sign-in</string>
+    <string name="server_msg_unable_process">server_msg_unable_process</string>
 
     <!--profile-->
     <string name="sign_out">Sign out</string>

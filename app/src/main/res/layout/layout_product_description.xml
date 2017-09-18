@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.admin.task1.product.activity.ProductDescriptionActivity">
 
     <LinearLayout
@@ -29,7 +29,7 @@
                 android:layout_height="280dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:src="@mipmap/ic_launcher" />
+                tools:src="@mipmap/ic_launcher" />
 
         </LinearLayout>
 
@@ -175,14 +175,24 @@
 
             <TextView
                 android:id="@+id/ratingInWords"
-                android:layout_width="match_parent"
+                android:layout_width="186dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="120 ratings &amp; 29 reviews"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black" />
+            <ImageView
+                android:id="@+id/favourite_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:gravity="center_vertical"
+                android:src="@drawable/ic_favourite_product_icon"
+                android:background="@drawable/button_background"/>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

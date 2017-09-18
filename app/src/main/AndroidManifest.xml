@@ -71,7 +71,7 @@
             android:name=".login.LoginActivity"
             android:label="@string/title_activity_login"/>
         <activity android:name=".firebase.FirebaseActivity" />
-        <activity android:name=".firebase.UserProfileActivity" />
+        <activity android:name=".login.UserProfileActivity" />
 
         <activity
             android:name="com.facebook.CustomTabActivity"
@@ -86,6 +86,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".cart.activity.CartActivity" />
+        <activity android:name=".wishlist.activity.WishlistActivity" />
     </application>
 
 </manifest>

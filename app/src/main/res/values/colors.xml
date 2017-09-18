@@ -16,4 +16,8 @@
     <color name="material_green_700">#388E3C</color>
     <color name="material_green_300">#AED581</color>
     <color name="material_red_a200">#FF5252</color>
+
+    <color name="button_pressed">#f10b07</color>
+    <color name="button_focused">#faf7f4</color>
+    <color name="button_default">#1c76bb</color>
 </resources>

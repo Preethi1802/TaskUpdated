@@ -12,7 +12,8 @@
     tools:context="com.example.admin.task1.login.LoginActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/root">
 
     <!-- Login progress -->
     <ProgressBar
@@ -101,6 +102,13 @@
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 tools:singleLine="true" />
+
+          <!--  <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Login"
+                android:theme="@style/ButtonBlue"/>-->
             <Button
                 android:id="@+id/firebase_login"
                 android:layout_width="match_parent"
@@ -111,6 +119,7 @@
                 android:textColor="@color/black"
                 android:background="@drawable/registration_button_background"
                 android:textSize="15dp"
+                android:onClick="onBtnLogin"
                 tools:singleLine="true"/>
 
         </LinearLayout>

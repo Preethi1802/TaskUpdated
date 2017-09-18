@@ -2,68 +2,58 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:id="@+id/offers"
-        android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="Offers"></item>
-
-    <item android:id="@+id/brands"
+    <item android:id="@+id/navi_brands"
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Brands"></item>
 
-    <item android:id="@+id/electronics"
+    <item android:id="@+id/navi_electronics"
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Electronics"></item>
 
-    <item android:id="@+id/fashion"
+    <item android:id="@+id/navi_fashion"
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Fashion"></item>
 
-    <item android:id="@+id/mobile"
+    <item android:id="@+id/navi_mobile"
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Mobiles"></item>
 
-    <item android:id="@+id/TV"
+    <item android:id="@+id/navi_book"
         android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="TV"></item>
+        android:title="Books and More"></item>
 
-    <item android:id="@+id/book"
+    <item android:id="@+id/navi_empty"
+        android:title="---------------------------"></item>
+
+    <item android:id="@+id/navi_offers"
         android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="Books"></item>
+        android:title="Offer Zone"></item>
 
-    <item android:id="@+id/notify"
+    <item android:id="@+id/navi_notification"
         android:icon="@drawable/ic_local_offer_black_24dp"
         android:title="Notifications"></item>
 
-    <item android:id="@+id/rewards"
-        android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="rewards"></item>
-
-    <item android:id="@+id/settings"
-        android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="Settings"></item>
-
-    <item android:id="@+id/wishlist"
-        android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="Whislist"></item>
-
-    <item android:id="@+id/wishlist1"
-        android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="Whislist"></item>
-
-    <item android:id="@+id/wishlist2"
-        android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="Whislist"></item>
-
-    <item android:id="@+id/wishlist3"
-        android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="Whislist"></item>
-
-    <item android:id="@+id/line"
+    <item android:id="@+id/navi_empty2"
         android:title="---------------------------"></item>
 
-    <item android:id="@+id/signIn"
-        android:icon="@drawable/ic_account_circle_black_24dp"
-        android:title="Login"></item>
+    <item android:id="@+id/navi_rewards"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="My Rewards"></item>
 
+    <item android:id="@+id/navi_cart"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="My Cart"></item>
+
+    <item android:id="@+id/navi_whishlist"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="My Whislist"></item>
+
+    <item android:id="@+id/navi_myOrders"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="My Orders"></item>
+
+    <item android:id="@+id/navi_myAccount"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="My Account"></item>
 
 </menu>
