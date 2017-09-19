@@ -9,6 +9,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.admin.task1.api.util.APIUtil.getGenericResponseErr;
+import static com.example.admin.task1.api.util.APIUtil.processUnSuccessResponce;
+
 /**
  * Created by Admin on 8/28/2017.
  */
@@ -29,13 +32,13 @@ public class SettingsAPI extends APIAbstact {
                 if (response.isSuccessful()) {
                     subscriber.onSettingsCompleted(response.body());
                 } else {
-                    //  subscriber.onSettingsCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+                      subscriber.onSettingsCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
                 }
             }
 
             @Override
             public void onFailure(Call<SettingsResponse> call, Throwable t) {
-                //  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
+                  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
             }
         });
 
@@ -52,13 +55,13 @@ public class SettingsAPI extends APIAbstact {
 
                     subscriber.onSettingsCompleted(response.body());
                 } else {
-                    //  subscriber.onSettingsCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+                      subscriber.onSettingsCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
                 }
             }
 
             @Override
             public void onFailure(Call<SettingsResponse> call, Throwable t) {
-                //  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
+                  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
             }
         });
 

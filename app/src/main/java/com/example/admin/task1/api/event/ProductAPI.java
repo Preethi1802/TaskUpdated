@@ -8,6 +8,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.admin.task1.api.util.APIUtil.getGenericResponseErr;
+import static com.example.admin.task1.api.util.APIUtil.processUnSuccessResponce;
+
 /**
  * Created by Admin on 8/28/2017.
  */
@@ -26,13 +29,13 @@ public class ProductAPI extends APIAbstact {
                 if (response.isSuccessful()) {
                     subscriber.onProductCompleted(response.body());
                 } else {
-                    //  subscriber.onSettingsCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+                      subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), ProductResponse.class));
                 }
             }
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
-                //  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
+                  subscriber.onProductCompleted(getGenericResponseErr(ProductResponse.class, t ));
             }
         });
 
@@ -46,13 +49,13 @@ public class ProductAPI extends APIAbstact {
                 if (response.isSuccessful()) {
                     subscriber.onProductCompleted(response.body());
                 } else {
-                    //  subscriber.onSettingsCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+                      subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), ProductResponse.class));
                 }
             }
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
-                //  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
+                  subscriber.onProductCompleted(getGenericResponseErr(ProductResponse.class, t ));
             }
         });
 
@@ -66,12 +69,12 @@ public class ProductAPI extends APIAbstact {
                 if (response.isSuccessful()) {
                     subscriber.onProductCompleted(response.body());
                 } else {
-                    //   subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), ProductResponse.class));
+                       subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), ProductResponse.class));
                 }
             }
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
-                //  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
+                  subscriber.onProductCompleted(getGenericResponseErr(ProductResponse.class, t ));
             }
         });
     }

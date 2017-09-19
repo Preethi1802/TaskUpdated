@@ -43,16 +43,20 @@ public class BrandsActivity extends AppActivity implements SettingsEventSubscrib
         setContentView(R.layout.layout_brands);
         ButterKnife.bind(this);
 
+        setToolbar();
+        //api call to getAllCategories categories by brand
+        showProgress();
+        CommunicationManager.getInstance().getCategoryListByBrand(mActivity);
+      //  SettingsAPI.getCategoryListByBrand(this);
+    }
+
+    public void setToolbar()
+    {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle(R.string.brand);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
         Log.i(TAG, "hiiiiii");
-
-        //api call to getAllCategories categories by brand
-        showProgress();
-        CommunicationManager.getInstance().getCategoryListByBrand(mActivity);
-      //  SettingsAPI.getCategoryListByBrand(this);
     }
     @Override
     public void onSettingsCompleted(SettingsResponse settingsResponse) {

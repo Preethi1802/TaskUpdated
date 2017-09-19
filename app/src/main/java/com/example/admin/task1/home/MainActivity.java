@@ -53,6 +53,7 @@ public class MainActivity extends AppActivity {
     // Session Manager Class
     SessionManager session;
     Gson gson;
+    User user;
 
     private android.support.v7.app.ActionBarDrawerToggle toggle;
 
@@ -63,23 +64,17 @@ public class MainActivity extends AppActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mActivity= this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
         ButterKnife.bind(this);
-        mActivity= this;
+
+        setToolbar();
 
         session = new SessionManager(getApplicationContext());
         gson = new Gson();
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.appTitle);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
-
-        // setting navigation drawer in home page
-        toggle = new android.support.v7.app.ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        setDrawerLayout();
 
         // providing action with on click listnener for items in navigation drawer
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -118,11 +113,10 @@ public class MainActivity extends AppActivity {
         });
 
 
-
-        User user= gson.fromJson(session.getUserObject(),User.class);
-
         if (session.isLoggedIn())
         {
+            user= gson.fromJson(session.getUserObject(),User.class);
+
             tvLoginUser.setText(user.getName());
             btnLogout.setText("Logout");
 
@@ -131,6 +125,19 @@ public class MainActivity extends AppActivity {
             tvLoginUser.setText("Welcome to Flipkart");
             btnLogout.setText("Login");
         }
+    }
+
+    public void setToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.appTitle);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
+    }
+    // setting navigation drawer in home page
+    public void setDrawerLayout() {
+        toggle = new android.support.v7.app.ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     // intent to allcategories ctivity
@@ -178,7 +185,22 @@ public class MainActivity extends AppActivity {
         {
             // redirect user to LoginActivity
             session.checkLogin();
-            finish();
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (session.isLoggedIn())
+        {
+            user= gson.fromJson(session.getUserObject(),User.class);
+            tvLoginUser.setText(user.getName());
+            btnLogout.setText("Logout");
+        }
+        else {
+            tvLoginUser.setText("Welcome to Flipkart");
+            btnLogout.setText("Login");
         }
     }
 

@@ -15,18 +15,25 @@ import java.util.HashMap;
  */
 
 public class SessionManager {
+
+    private static final SessionManager ourInstance = new SessionManager();
+    private String APIToken;
+    private String serverURL;
+
+    public static SessionManager getInstance() {
+        return ourInstance;
+    }
+
+    private SessionManager() {
+    }
     // Shared Preferences
     SharedPreferences pref;
-
     // Editor for Shared preferences
     SharedPreferences.Editor editor;
-
     // Context
     Context mContext;
-
     // Shared pref mode
     int PRIVATE_MODE = 0;
-
     // Sharedpref file name
     private static final String PREF_NAME = "FlipkartPref";
 
@@ -43,6 +50,14 @@ public class SessionManager {
 
 
     Gson gson;
+
+    public String getAPIToken() {
+        return APIToken;
+    }
+
+    public String getServerURL() {
+        return serverURL;
+    }
 
     // Constructor
     public SessionManager(Context context){
@@ -162,4 +177,5 @@ public class SessionManager {
         // Staring Login Activity
         mContext.startActivity(i);
     }
+
 }

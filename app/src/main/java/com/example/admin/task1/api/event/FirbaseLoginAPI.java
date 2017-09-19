@@ -10,6 +10,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.admin.task1.api.util.APIUtil.getGenericResponseErr;
+import static com.example.admin.task1.api.util.APIUtil.processUnSuccessResponce;
+
 /**
  * Created by Admin on 9/13/2017.
  */
@@ -30,14 +33,14 @@ public class FirbaseLoginAPI extends APIAbstact
                 if (response.isSuccessful()) {
                     subscriber.onFirebaseLoginCompleted(response.body());
                 } else {
-                    //  subscriber.onSettingsCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+                      subscriber.onFirebaseLoginCompleted(processUnSuccessResponce(response.code(), response.errorBody(), FirebaseLoginResponse.class));
                 }
             }
 
             @Override
             public void onFailure(Call<FirebaseLoginResponse> call, Throwable t) {
                 Log.getStackTraceString(t);
-                //  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
+                  subscriber.onFirebaseLoginCompleted(getGenericResponseErr(FirebaseLoginResponse.class, t ));
             }
         });
 

@@ -92,6 +92,10 @@ public class Product implements Parcelable {
         this.images = images;
     }
 
+    public Product() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -124,11 +128,11 @@ public class Product implements Parcelable {
         this.spec = spec;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

@@ -1,8 +1,8 @@
 package com.example.admin.task1.api.subscriber;
 
-import com.example.admin.task1.api.response.AddWishListResponse;
-import com.example.admin.task1.api.response.GetWishListResponse;
-import com.example.admin.task1.api.response.RemoveWishListResponse;
+import com.example.admin.task1.api.response.WishListPostAddResponse;
+import com.example.admin.task1.api.response.WishListGetResponse;
+import com.example.admin.task1.api.response.WishListPostRemoveResponse;
 
 /**
  * Created by Admin on 9/15/2017.
@@ -10,7 +10,7 @@ import com.example.admin.task1.api.response.RemoveWishListResponse;
 
 public interface WishlistProductEventSubscriber
 {
-    void onGetWhishlistCompleted(GetWishListResponse getWishListResponse);
-    void onAddWishListCompleted(AddWishListResponse addWishListResponse);
-    void onRemoveWishListCompleted(RemoveWishListResponse removeWishListResponse);
+    void onGetWhishlistCompleted(WishListGetResponse wishListGetResponse);
+    void onAddWishListCompleted(WishListPostAddResponse wishListPostAddResponse);
+    void onRemoveWishListCompleted(WishListPostRemoveResponse wishListPostRemoveResponse);
 }

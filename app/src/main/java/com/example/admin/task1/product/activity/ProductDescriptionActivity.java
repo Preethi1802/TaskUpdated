@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,12 +18,12 @@ import com.bumptech.glide.Glide;
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.request.CartRequest;
 import com.example.admin.task1.api.request.WishlistRequest;
-import com.example.admin.task1.api.response.AddCartResponse;
-import com.example.admin.task1.api.response.AddWishListResponse;
-import com.example.admin.task1.api.response.GetCartResponse;
-import com.example.admin.task1.api.response.GetWishListResponse;
-import com.example.admin.task1.api.response.RemoveCartResponse;
-import com.example.admin.task1.api.response.RemoveWishListResponse;
+import com.example.admin.task1.api.response.CartPostAddResponse;
+import com.example.admin.task1.api.response.WishListPostAddResponse;
+import com.example.admin.task1.api.response.CartGetResponse;
+import com.example.admin.task1.api.response.WishListGetResponse;
+import com.example.admin.task1.api.response.CartPostRemoveResponse;
+import com.example.admin.task1.api.response.WishListPostRemoveResponse;
 import com.example.admin.task1.api.subscriber.CartEventSubscriber;
 import com.example.admin.task1.api.subscriber.WishlistProductEventSubscriber;
 import com.example.admin.task1.api.util.CommunicationManager;
@@ -47,19 +46,30 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProductDescriptionActivity extends AppActivity implements CartEventSubscriber, WishlistProductEventSubscriber{
+public class ProductDescriptionActivity extends AppActivity implements CartEventSubscriber, WishlistProductEventSubscriber {
 
-    @BindView(R.id.toolAction)              Toolbar toolbar;
-    @BindView(R.id.product1)                TouchImageView ivFeaturedImage;
-    @BindView(R.id.productName1)            TextView tvMobName;
-    @BindView(R.id.modelName)               TextView tvMobVersion;
-    @BindView(R.id.prize)                   TextView tvMobPrize;
-    @BindView(R.id.rating)                  TextView tvMobRating;
-    @BindView(R.id.ratingInWords)           TextView tvRatingInWords;
-    @BindView(R.id.allDetails)              TextView tvAllDetails;
-    @BindView(R.id.linear_layout_gallery)   LinearLayout galleryLayout;
-    @BindView(R.id.et_quantity)             EditText etQuantity;
-    @BindView(R.id.btn_add_to_cart)         Button btnAddToCart;
+    @BindView(R.id.toolAction)
+    Toolbar toolbar;
+    @BindView(R.id.product1)
+    TouchImageView ivFeaturedImage;
+    @BindView(R.id.productName1)
+    TextView tvMobName;
+    @BindView(R.id.modelName)
+    TextView tvMobVersion;
+    @BindView(R.id.prize)
+    TextView tvMobPrize;
+    @BindView(R.id.rating)
+    TextView tvMobRating;
+    @BindView(R.id.ratingInWords)
+    TextView tvRatingInWords;
+    @BindView(R.id.allDetails)
+    TextView tvAllDetails;
+    @BindView(R.id.linear_layout_gallery)
+    LinearLayout galleryLayout;
+    @BindView(R.id.tv_quantity)
+    TextView tvQuantity;
+    @BindView(R.id.btn_add_to_cart)
+    Button btnAddToCart;
 
 
     private ProductDescriptionActivity mActivity;
@@ -71,14 +81,15 @@ public class ProductDescriptionActivity extends AppActivity implements CartEvent
     int position;
     SessionManager session;
     Gson gson;
+    int mQuantity = 1;
 
     public static void start(Context context, Product product) {
         Intent starter = new Intent(context, ProductDescriptionActivity.class);
-        starter.putExtra(Constants.KEY_EXTRA_PRODUCT,product);
+        starter.putExtra(Constants.KEY_EXTRA_PRODUCT, product);
         context.startActivity(starter);
     }
 
-    private Product getProduct(){
+    private Product getProduct() {
         return getIntent().getParcelableExtra(Constants.KEY_EXTRA_PRODUCT);
     }
 
@@ -102,7 +113,7 @@ public class ProductDescriptionActivity extends AppActivity implements CartEvent
         }
 
 
-        String imageUrl= getProduct().getFeaturedImages().getFeaturedImageURL();
+        String imageUrl = getProduct().getFeaturedImages().getFeaturedImageURL();
 
         Glide.with(this)
                 .load(imageUrl)
@@ -132,17 +143,61 @@ public class ProductDescriptionActivity extends AppActivity implements CartEvent
             });
         }
 
-            tvMobName.setText(getProduct().getName());
-            tvMobVersion.setText(Html.fromHtml(getProduct().getSpec()).toString());
-            tvMobPrize.setText(getProduct().getRegularPrice());
+        tvMobName.setText(getProduct().getName());
+        tvMobVersion.setText(Html.fromHtml(getProduct().getSpec()).toString());
+        tvMobPrize.setText(getProduct().getRegularPrice());
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-        return true;
+    @OnClick(R.id.increase)
+    public void increaseInt(View view) {
+        cart();
+        mQuantity = mQuantity + 1;
+        display(mQuantity);
     }
+
+    @OnClick(R.id.decrease)
+    public void decreaseInt(View view) {
+        if (mQuantity <= 1) {
+        } else {
+            cart();
+            mQuantity = mQuantity - 1;
+            display(mQuantity);
+        }
+
+    }
+
+    private void display(int num) {
+        tvQuantity.setText(String.valueOf(num));
+    }
+
+    @OnClick(R.id.btn_add_to_cart)
+    public void onAddCartClicked() {
+        cart();
+    }
+
+    public void cart()
+    {
+        if (session.isLoggedIn()) {
+            User user = gson.fromJson(session.getUserObject(), User.class);
+
+            CartRequest cartRequest = new CartRequest();
+            cartRequest.setUser_id(user.getId());
+            cartRequest.setProduct_id(getProduct().getId());
+            cartRequest.setQuantity(TextUtil.cleanupString(tvQuantity.getText().toString().trim()));
+
+            Log.i(TAG, "" + user.getId());
+            showProgress();
+            CommunicationManager.getInstance().postAddCart(cartRequest, mActivity);
+
+        } else {
+            ToastUtil.showCenterToast(getApplicationContext(), "Login or SignUp to Continue");
+            Intent intent = new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
 
     @OnClick(R.id.allDetails)
     public void onAllDetailsClicked(View v) {
@@ -152,61 +207,44 @@ public class ProductDescriptionActivity extends AppActivity implements CartEvent
         v.getContext().startActivity(intent);
     }
 
-    @OnClick(R.id.btn_add_to_cart)
-    public void onAddCartClicked() {
-        if (session.isLoggedIn()) {
-            User user= gson.fromJson(session.getUserObject(),User.class);
-
-            CartRequest cartRequest = new CartRequest();
-            cartRequest.setUser_id(user.getId());
-            cartRequest.setProduct_id(getProduct().getId());
-            cartRequest.setQuantity(TextUtil.cleanupString(etQuantity.getText().toString().trim()));
-            Log.i(TAG,""+user.getId());
-            showProgress();
-            CommunicationManager.getInstance().postAddCart(cartRequest,mActivity);
-
-        } else {
-            ToastUtil.showCenterToast(getApplicationContext(),"Login or SignUp to Continue");
-            Intent intent= new Intent(mActivity, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
     @OnClick(R.id.favourite_icon)
-    public void onFavouriteIconClicked()
-    {
+    public void onFavouriteIconClicked() {
         if (session.isLoggedIn()) {
 
 
-            User user= gson.fromJson(session.getUserObject(),User.class);
+            User user = gson.fromJson(session.getUserObject(), User.class);
 
             WishlistRequest wishlistRequest = new WishlistRequest();
             wishlistRequest.setUser_id(user.getId());
             wishlistRequest.setProduct_id(getProduct().getId());
 
-            Log.i(TAG,""+user.getId());
+            Log.i(TAG, "" + user.getId());
 
             showProgress();
-            CommunicationManager.getInstance().postAddProductsToWhishlist(wishlistRequest,mActivity);
+            CommunicationManager.getInstance().postAddProductsToWhishlist(wishlistRequest, mActivity);
 
         } else {
-            ToastUtil.showCenterToast(getApplicationContext(),"Login or SignUp to Continue");
-            Intent intent= new Intent(mActivity, LoginActivity.class);
+            ToastUtil.showCenterToast(getApplicationContext(), "Login or SignUp to Continue");
+            Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             finish();
         }
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id= item.getItemId();
+        int id = item.getItemId();
         if (id == android.R.id.home) {
             this.finish();
         }
-        if (id== R.id.cart_toolbar)
-        {
-            Intent intent= new Intent(this, CartActivity.class);
+        if (id == R.id.cart_toolbar) {
+            Intent intent = new Intent(this, CartActivity.class);
             startActivity(intent);
 
         }
@@ -214,51 +252,48 @@ public class ProductDescriptionActivity extends AppActivity implements CartEvent
     }
 
     @Override
-    public void onGetCartCompleted(GetCartResponse getCartResponse) {
+    public void onGetCartCompleted(CartGetResponse cartGetResponse) {
 
     }
 
     @Override
-    public void onAddCartCompleted(AddCartResponse addCartResponse) {
+    public void onAddCartCompleted(CartPostAddResponse cartPostAddResponse) {
 
         hideProgress();
-        if (addCartResponse.isSuccess())
-        {
+        if (cartPostAddResponse.isSuccess()) {
             btnAddToCart.setText("GO TO CART");
-            ToastUtil.showCenterToast(getApplicationContext(), addCartResponse.getMessage());
+            ToastUtil.showCenterToast(getApplicationContext(), cartPostAddResponse.getMessage());
 
-        }else {
-            ToastUtil.showCenterToast(getApplicationContext(), addCartResponse.getMessage());
+        } else {
+            ToastUtil.showCenterToast(getApplicationContext(), cartPostAddResponse.getMessage());
         }
 
     }
 
     @Override
-    public void onRemoveCartCompleted(RemoveCartResponse removeCartResponse) {
+    public void onRemoveCartCompleted(CartPostRemoveResponse cartPostRemoveResponse) {
 
     }
 
 
     @Override
-    public void onGetWhishlistCompleted(GetWishListResponse getWishListResponse) {
+    public void onGetWhishlistCompleted(WishListGetResponse wishListGetResponse) {
 
     }
 
     @Override
-    public void onAddWishListCompleted(AddWishListResponse addWishListResponse) {
+    public void onAddWishListCompleted(WishListPostAddResponse wishListPostAddResponse) {
         hideProgress();
-        if (addWishListResponse.isSuccess())
-        {
-            ToastUtil.showCenterToast(mActivity, addWishListResponse.getMessage());
+        if (wishListPostAddResponse.isSuccess()) {
+            ToastUtil.showCenterToast(mActivity, wishListPostAddResponse.getMessage());
 
-        }
-        else {
-            ToastUtil.showCenterToast(getApplicationContext(), addWishListResponse.getMessage());
+        } else {
+            ToastUtil.showCenterToast(getApplicationContext(), wishListPostAddResponse.getMessage());
         }
     }
 
     @Override
-    public void onRemoveWishListCompleted(RemoveWishListResponse removeWishListResponse) {
+    public void onRemoveWishListCompleted(WishListPostRemoveResponse wishListPostRemoveResponse) {
 
     }
 }

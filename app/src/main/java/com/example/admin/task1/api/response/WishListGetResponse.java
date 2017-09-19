@@ -8,24 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Admin on 9/14/2017.
+ * Created by Admin on 9/15/2017.
  */
 
-public class GetCartResponse extends GenericResponse
+public class WishListGetResponse extends GenericResponse
 {
-    @SerializedName("cartCount")
+
+    @SerializedName("favoriteCount")
     @Expose
-    private int cartCount;
+    private int favoriteCount;
     @SerializedName("products")
     @Expose
     private List<Product> products = new ArrayList<>();
 
-    public Integer getCartCount() {
-        return cartCount;
+
+    public int getFavoriteCount() {
+        return favoriteCount;
     }
 
-    public void setCartCount(Integer cartCount) {
-        this.cartCount = cartCount;
+    public void setFavoriteCount(int favoriteCount) {
+        this.favoriteCount = favoriteCount;
     }
 
     public List<Product> getProducts() {
@@ -35,5 +37,4 @@ public class GetCartResponse extends GenericResponse
     public void setProducts(List<Product> products) {
         this.products = products;
     }
-
 }

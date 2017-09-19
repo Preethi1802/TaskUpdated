@@ -25,7 +25,6 @@ import com.example.admin.task1.api.subscriber.FirebaseLoginEventSubscriber;
 import com.example.admin.task1.api.subscriber.LoginEventSubscriber;
 import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.app.AppActivity;
-import com.example.admin.task1.home.MainActivity;
 import com.example.admin.task1.utilities.SessionManager;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -359,7 +358,8 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber, 
 
             ToastUtil.showCenterToast(getApplicationContext(), loginResponse.getMessage());
             session.createLoginSession(loginResponse.getUser());
-            MainActivity.start(LoginActivity.this);
+            finish();
+           // MainActivity.start(LoginActivity.this);
 
 
         } else {
@@ -373,7 +373,8 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber, 
         if (firebaseLoginResponse.isSuccess()) {
 
             session.createLoginSession(firebaseLoginResponse.getUser());
-            MainActivity.start(LoginActivity.this);
+            finish();
+          //  MainActivity.start(LoginActivity.this);
 
         }
         else {

@@ -25,7 +25,7 @@ public class APIUtil {
     public static final String API_REGISTRATION = "/projects/learning/laravel/e-commerce-portal/api/v1/registration";
     public static final String API_FIREBASE_LOGIN = "/projects/learning/laravel/e-commerce-portal/api/v1/loginSocial";
 
-    public static final String API_GET_CART = "/projects/learning/laravel/e-commerce-portal/api/v1/getCart";
+    public static final String API_GET_CART = "/projects/learning/laravel/e-commerce-portal/api/v1/getCartN";
     public static final String API_REMOVE_FROM_CART = "/projects/learning/laravel/e-commerce-portal/api/v1/removeFromCart";
     public static final String API_ADD_TO_CART = "/projects/learning/laravel/e-commerce-portal/api/v1/addToCart";
 

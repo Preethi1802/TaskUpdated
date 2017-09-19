@@ -20,9 +20,9 @@ import com.example.admin.task1.api.subscriber.SettingsEventSubscriber;
 import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.api.util.Constants;
 import com.example.admin.task1.app.AppActivity;
+import com.example.admin.task1.category.adapter.AdapterAllCategories;
 import com.example.admin.task1.model.Category;
 import com.example.admin.task1.product.activity.ProductActivity;
-import com.example.admin.task1.category.adapter.AdapterAllCategories;
 
 import java.util.ArrayList;
 
@@ -61,24 +61,33 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
         setContentView(R.layout.layout_all_categories_list);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
+        setToolbar();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.allCategories);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
-
-        //setting navigation drawer in all categories layout
-        toggle = new android.support.v7.app.ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        setDrawerLayout();
 
         categoryList = new ArrayList<>();
 
+        //api call to get all categories from settings api...
         showProgress();
         CommunicationManager.getInstance().getAllCategories(mActivity);
         SettingsAPI.getAllCategories(this);
     }
 
+    public void setToolbar(){
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.allCategories);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fe295aec")));
+    }
+
+    //setting navigation drawer in all categories layout
+    public void setDrawerLayout()
+    {
+        toggle = new android.support.v7.app.ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {

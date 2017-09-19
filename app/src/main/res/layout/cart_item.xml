@@ -13,10 +13,11 @@
 
         <LinearLayout
             android:id="@+id/linear_layout_card"
-            android:layout_width="match_parent"
+            android:layout_width="330dp"
             android:layout_height="match_parent"
             android:background="@drawable/image_border"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <ImageView
                 android:id="@+id/s1_mob1"
@@ -32,9 +33,12 @@
                 android:weightSum="10"
                 android:layout_marginLeft="10dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
                 <TextView
                     android:id="@+id/mobileName"
-                    android:layout_width="match_parent"
+                    android:layout_width="250dp"
                     android:layout_height="match_parent"
                     android:text="@string/s1_mob1"
                     android:textColor="@color/black"
@@ -43,9 +47,11 @@
                     android:textSize="17dp"
                     android:layout_weight="5"/>
 
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:orientation="horizontal"
                     android:weightSum="10"
                     android:layout_weight="5">
@@ -65,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@+id/mobileName"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:gravity="center"
                         android:text="Type_s1"
                         android:textAlignment="viewStart"
@@ -74,6 +80,41 @@
                 </LinearLayout>
             </LinearLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            >
+
+            <Button
+                android:id="@+id/decrease_at_getCart"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/tv_quantity_at_getCart"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="1"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/increase_at_getCart"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:text="+"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

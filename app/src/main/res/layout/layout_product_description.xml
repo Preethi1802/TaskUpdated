@@ -216,24 +216,37 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp">
 
-            <EditText
-                android:id="@+id/et_quantity"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="4.5"
+            <Button
+                android:id="@+id/decrease"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:hint="Quantity"
-                android:inputType="number"
-                android:textAlignment="viewStart" />
+                android:text="1"
+                android:textStyle="bold" />
 
-
+            <Button
+                android:id="@+id/increase"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="+"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
         </LinearLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"

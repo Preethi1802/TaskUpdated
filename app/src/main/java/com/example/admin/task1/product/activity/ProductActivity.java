@@ -67,13 +67,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         setContentView(R.layout.layout_product);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.electronics);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
-        }
+        setToolbar();
 
         productList = new ArrayList<>();
         adapter = new AdapterListProduct(mActivity, productList);
@@ -130,8 +124,6 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             }
         }
 
-
-
         new RecyclerTouchListener(mActivity, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(final View view, final int position) {
@@ -151,6 +143,16 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             }
         });
 
+    }
+
+    public void setToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.electronics);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+        }
     }
 
     @Override
@@ -175,9 +177,6 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
     @Override
     public void onProductCompleted(ProductResponse productResponse) {
-        Log.d(TAG, "onProductCompleted() called with: productResponse = [" + productResponse.isSuccess() + "]");
-        Log.d(TAG, "onProductCompleted() called with: productResponse = [" + productResponse.getMessage() + "]");
-
         hideProgress();
 
         if (productResponse.isSuccess()) {

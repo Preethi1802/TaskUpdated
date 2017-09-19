@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -21,14 +20,17 @@ import com.example.admin.task1.utilities.OneFragement;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AllDetailsActivity extends AppActivity {
 
+    @BindView(R.id.toolAction)      Toolbar toolbar;
+    @BindView(R.id.tabs)            TabLayout tabLayout;
+    @BindView(R.id.viewpager)       ViewPager viewPager;
+    @BindView(R.id.fragement)       TextView tvSpec;
     private static final String TAG = "AllDetailsAct";
 
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    TextView tvSpec;
     int position;
     ArrayList<Product> productList= new ArrayList<>();
 
@@ -36,9 +38,24 @@ public class AllDetailsActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_all_details);
-        tvSpec = (TextView)this.findViewById(R.id.fragement);
 
-        toolbar = (Toolbar) findViewById(R.id.toolAction);
+        ButterKnife.bind(this);
+
+        setToolbar();
+
+        setupViewPager(viewPager);
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        Intent intent = getIntent();
+
+        position = intent.getIntExtra(Constants.KEY_POSITION, 0);
+
+        productList = intent.getParcelableArrayListExtra(Constants.STORED_ITEMS);
+
+    }
+
+    public void setToolbar(){
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -48,25 +65,7 @@ public class AllDetailsActivity extends AppActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-
-        Intent intent = getIntent();
-        Log.i(TAG, "hiiiiii");
-
-        position = intent.getIntExtra(Constants.KEY_POSITION, 0);
-        Log.i(TAG, "...............position........." + position);
-
-        productList = intent.getParcelableArrayListExtra(Constants.STORED_ITEMS);
-        Log.i(TAG, "..........size............." + productList.size());
-
-     //   tvSpec.setText(productList.get(position).getName());
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

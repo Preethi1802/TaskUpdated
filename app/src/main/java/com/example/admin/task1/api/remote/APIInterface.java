@@ -6,17 +6,17 @@ import com.example.admin.task1.api.request.FirebaseLoginRequest;
 import com.example.admin.task1.api.request.LoginRequest;
 import com.example.admin.task1.api.request.RegistrationRequest;
 import com.example.admin.task1.api.request.WishlistRequest;
-import com.example.admin.task1.api.response.AddCartResponse;
-import com.example.admin.task1.api.response.AddWishListResponse;
-import com.example.admin.task1.api.response.GetCartResponse;
+import com.example.admin.task1.api.response.CartPostAddResponse;
+import com.example.admin.task1.api.response.WishListPostAddResponse;
+import com.example.admin.task1.api.response.CartGetResponse;
 import com.example.admin.task1.api.response.FirebaseLoginResponse;
 import com.example.admin.task1.api.response.LoginResponse;
 import com.example.admin.task1.api.response.ProductResponse;
 import com.example.admin.task1.api.response.RegistrationResponse;
-import com.example.admin.task1.api.response.RemoveCartResponse;
-import com.example.admin.task1.api.response.RemoveWishListResponse;
+import com.example.admin.task1.api.response.CartPostRemoveResponse;
+import com.example.admin.task1.api.response.WishListPostRemoveResponse;
 import com.example.admin.task1.api.response.SettingsResponse;
-import com.example.admin.task1.api.response.GetWishListResponse;
+import com.example.admin.task1.api.response.WishListGetResponse;
 import com.example.admin.task1.api.util.APIUtil;
 
 import retrofit2.Call;
@@ -55,20 +55,20 @@ public interface APIInterface {
     Call<FirebaseLoginResponse> postFirebaseLoginDetails(@Body FirebaseLoginRequest request);
 
     @GET(APIUtil.API_GET_CART)
-    Call<GetCartResponse> getCart(@Query("user_id") int userID);
+    Call<CartGetResponse> getCart(@Query("user_id") int userID);
 
     @POST(APIUtil.API_ADD_TO_CART)
-    Call<AddCartResponse> postAddCart(@Body CartRequest request);
+    Call<CartPostAddResponse> postAddCart(@Body CartRequest request);
 
     @POST(APIUtil.API_REMOVE_FROM_CART)
-    Call<RemoveCartResponse> postRemoveCart(@Body CartRequest request);
+    Call<CartPostRemoveResponse> postRemoveCart(@Body CartRequest request);
 
     @GET(APIUtil.API_GET_WHISHLIST)
-    Call<GetWishListResponse> getWhishlistProducts(@Query("user_id") int userID);
+    Call<WishListGetResponse> getWhishlistProducts(@Query("user_id") int userID);
 
     @POST(APIUtil.API_ADD_TO_WHISHLIST)
-    Call<AddWishListResponse> postAddProductsToWhishlist(@Body WishlistRequest request);
+    Call<WishListPostAddResponse> postAddProductsToWhishlist(@Body WishlistRequest request);
 
     @POST(APIUtil.API_REMOVE_FROM_WHISHLIST)
-    Call<RemoveWishListResponse> postRemoveFromWhishlist(@Body WishlistRequest request);
+    Call<WishListPostRemoveResponse> postRemoveFromWhishlist(@Body WishlistRequest request);
 }

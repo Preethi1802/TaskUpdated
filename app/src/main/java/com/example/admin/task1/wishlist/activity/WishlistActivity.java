@@ -11,12 +11,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.admin.task1.api.response.AddWishListResponse;
-import com.example.admin.task1.api.response.RemoveWishListResponse;
+import com.example.admin.task1.api.response.WishListPostAddResponse;
+import com.example.admin.task1.api.response.WishListPostRemoveResponse;
 import com.example.admin.task1.wishlist.adapter.AdapterWishlist;
 import com.example.admin.task1.R;
 import com.example.admin.task1.api.request.WishlistRequest;
-import com.example.admin.task1.api.response.GetWishListResponse;
+import com.example.admin.task1.api.response.WishListGetResponse;
 import com.example.admin.task1.api.subscriber.WishlistProductEventSubscriber;
 import com.example.admin.task1.api.util.CommunicationManager;
 import com.example.admin.task1.app.AppActivity;
@@ -37,8 +37,7 @@ import butterknife.ButterKnife;
  * Created by Admin on 9/15/2017.
  */
 
-public class WishlistActivity extends AppActivity implements WishlistProductEventSubscriber
-{
+public class WishlistActivity extends AppActivity implements WishlistProductEventSubscriber {
     @BindView(R.id.toolAction)
     Toolbar toolbar;
     @BindView(R.id.recycler_view)
@@ -68,37 +67,32 @@ public class WishlistActivity extends AppActivity implements WishlistProductEven
 
         ButterKnife.bind(this);
 
+        setToolbar();
+
         session = new SessionManager(getApplicationContext());
         gson = new Gson();
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.whishList);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
-        }
-
         wishList = new ArrayList<>();
 
-        adapter= new AdapterWishlist(mActivity, wishList, new AdapterWishlist.WhishlistListener() {
+        adapter = new AdapterWishlist(mActivity, wishList, new AdapterWishlist.WhishlistListener() {
             @Override
             public void onRemoveWhishlist(int position) {
                 if (session.isLoggedIn()) {
 
                     mRecentlyRemovedPosition = position;
-                    User user= gson.fromJson(session.getUserObject(),User.class);
+                    User user = gson.fromJson(session.getUserObject(), User.class);
 
                     WishlistRequest wishlistRequest = new WishlistRequest();
                     wishlistRequest.setUser_id(user.getId());
                     wishlistRequest.setProduct_id(wishList.get(position).getId());
 
-                    Log.i(TAG,""+user.getId());
+                    Log.i(TAG, "" + user.getId());
 
                     showProgress();
-                    CommunicationManager.getInstance().postRemoveFromWhishlist(wishlistRequest,mActivity);
+                    CommunicationManager.getInstance().postRemoveFromWhishlist(wishlistRequest, mActivity);
                 }
             }
+
             @Override
             public void onViewItem(View view, int position) {
                 ProductDescriptionActivity.start(view.getContext(), wishList.get(position));
@@ -109,20 +103,30 @@ public class WishlistActivity extends AppActivity implements WishlistProductEven
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        User user= gson.fromJson(session.getUserObject(),User.class);
+        User user = gson.fromJson(session.getUserObject(), User.class);
         //call api to get wishlist products
         if (session.isLoggedIn()) {
             showProgress();
             CommunicationManager.getInstance().getWhishlistProducts(mActivity, user.getId());
+        } else {
+            ToastUtil.showCenterToast(getApplicationContext(), "Your Cart Is Empty");
         }
-        else {
-            ToastUtil.showCenterToast(getApplicationContext(),"Your Cart Is Empty");
+    }
+
+    public void setToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.whishList);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id= item.getItemId();
+        int id = item.getItemId();
         if (id == android.R.id.home) {
             this.finish();
         }
@@ -131,33 +135,30 @@ public class WishlistActivity extends AppActivity implements WishlistProductEven
     }
 
     @Override
-    public void onGetWhishlistCompleted(GetWishListResponse getWishListResponse) {
+    public void onGetWhishlistCompleted(WishListGetResponse wishListGetResponse) {
         hideProgress();
-        if (getWishListResponse.isSuccess())
-        {
-            wishList.addAll(getWishListResponse.getProducts());
+        if (wishListGetResponse.isSuccess()) {
+            wishList.addAll(wishListGetResponse.getProducts());
             adapter.notifyDataSetChanged();
-        }
-        else {
-            ToastUtil.showCenterToast(getApplicationContext(), getWishListResponse.getMessage());
+        } else {
+            ToastUtil.showCenterToast(getApplicationContext(), wishListGetResponse.getMessage());
         }
     }
+
     @Override
-    public void onAddWishListCompleted(AddWishListResponse addWishListResponse) {
+    public void onAddWishListCompleted(WishListPostAddResponse wishListPostAddResponse) {
 
     }
 
     @Override
-    public void onRemoveWishListCompleted(RemoveWishListResponse removeWishListResponse) {
+    public void onRemoveWishListCompleted(WishListPostRemoveResponse wishListPostRemoveResponse) {
         hideProgress();
-        if (removeWishListResponse.isSuccess())
-        {
-        wishList.remove(mRecentlyRemovedPosition);
-        adapter.notifyDataSetChanged();
-        ToastUtil.showCenterToast(mActivity, removeWishListResponse.getMessage());
-        }
-        else {
-            ToastUtil.showCenterToast(getApplicationContext(), removeWishListResponse.getMessage());
+        if (wishListPostRemoveResponse.isSuccess()) {
+            wishList.remove(mRecentlyRemovedPosition);
+            adapter.notifyDataSetChanged();
+            ToastUtil.showCenterToast(mActivity, wishListPostRemoveResponse.getMessage());
+        } else {
+            ToastUtil.showCenterToast(getApplicationContext(), wishListPostRemoveResponse.getMessage());
         }
     }
 }

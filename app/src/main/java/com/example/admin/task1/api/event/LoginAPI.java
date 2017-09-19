@@ -10,6 +10,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.admin.task1.api.util.APIUtil.getGenericResponseErr;
+import static com.example.admin.task1.api.util.APIUtil.processUnSuccessResponce;
+
 /**
  * Created by Admin on 9/5/2017.
  */
@@ -29,14 +32,14 @@ public class LoginAPI extends APIAbstact {
                 if (response.isSuccessful()) {
                     subscriber.onLoginCompleted(response.body());
                 } else {
-                    //  subscriber.onSettingsCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+                      subscriber.onLoginCompleted(processUnSuccessResponce(response.code(), response.errorBody(), LoginResponse.class));
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Log.getStackTraceString(t);
-                //  subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
+                  subscriber.onLoginCompleted(getGenericResponseErr(LoginResponse.class, t ));
             }
         });
 
